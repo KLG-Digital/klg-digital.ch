@@ -259,16 +259,19 @@
     }
 
     .spec-item {
-      display: flex;
-      gap: 8px;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 10px;
       font-size: 0.78em;
       color: #9d9db5;
+      align-items: start;
     }
 
     .spec-label {
       color: #6b6b8a;
-      min-width: 60px;
+      min-width: 80px;
       flex-shrink: 0;
+      display: inline-block;
     }
 
     .spec-value { color: #c4b5fd; }
