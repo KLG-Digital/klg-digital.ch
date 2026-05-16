@@ -1,7 +1,11 @@
 // ===================== CANVAS ÉTOILES PARTAGÉ =====================
 // Modifier ce fichier met à jour les étoiles sur toutes les pages.
+// En mode clair, le canvas est géré par theme.js (lune + cratères).
 
 (function () {
+
+  // Ne pas lancer les étoiles en mode clair
+  if (document.documentElement.getAttribute('data-theme') === 'light') return;
 
   // Créer et injecter le canvas
   const canvas = document.createElement('canvas');

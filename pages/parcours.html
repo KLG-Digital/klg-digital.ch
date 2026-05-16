@@ -34,7 +34,24 @@
       font-weight: 800;
       line-height: 1.1;
       margin-bottom: 56px;
-      color: white;
+      color: var(--text, white);
+    }
+
+    /* Mode clair */
+    [data-theme="light"] h1 { color: #1a1a2e; }
+    [data-theme="light"] .timeline-title { color: #1a1a2e; }
+    [data-theme="light"] .timeline-date { color: #3a3a5a; }
+    [data-theme="light"] .timeline-desc { color: #3a3a5a; }
+    [data-theme="light"] .timeline-card {
+      background: rgba(255,255,255,0.75);
+      border-color: rgba(124,58,237,0.2);
+    }
+    [data-theme="light"] .timeline-item:hover .timeline-card {
+      background: rgba(255,255,255,0.9);
+      border-color: rgba(124,58,237,0.4);
+    }
+    [data-theme="light"] .timeline-dot {
+      border-color: #909090;
     }
 
     /* ================= TIMELINE ================= */
@@ -232,6 +249,10 @@
   </style>
 </head>
 <body>
+
+  <!-- ===================== THEME JS ================== -->
+  <script src="../js/theme.js"></script>
+  <!-- ================================================= -->
 
   <!-- ===================== NAVBAR JS ================= -->
   <script src="../js/navbar.js"></script>

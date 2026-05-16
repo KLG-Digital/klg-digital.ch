@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
+
     /* ── PLANÈTES EN CERCLE — spécifique à cette page ── */
     :root {
       --radius:        clamp(90px, 22vmin, 160px);
@@ -23,10 +24,66 @@
       --planet-offset: calc(var(--planet-size) / 2);
     }
 
+    /* Hero flex : texte en haut, planètes centrées dans l'espace restant */
+    .hero {
+      height: 100vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    /* Texte d'accroche — haut de page */
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      width: 100%;
+      padding: clamp(16px, 4vh, 40px) 24px 0;
+      flex-shrink: 0;
+    }
+
+    .hero-slogan {
+      font-size: clamp(0.7em, 1.8vw, 0.9em);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #a855f7;
+      margin-bottom: 8px;
+    }
+
+    .hero-h1 {
+      font-size: clamp(1.3em, 3.5vw, 2.2em);
+      font-weight: 800;
+      color: white;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .hero-desc {
+      font-size: clamp(0.75em, 1.6vw, 0.9em);
+      color: #6b6b8a;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* Mode clair — adaptation couleurs texte hero */
+    [data-theme="light"] .hero-h1   { color: #1a1a2e; }
+    [data-theme="light"] .hero-desc { color: #5a5a7a; }
+
+    /* Wrapper planètes — prend l'espace restant et centre */
+    .orbit-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* Conteneur du cercle — taille fixe calculée */
     .orbit-container {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
+      position: relative;
       width:  calc(var(--radius) * 2 + var(--planet-size));
       height: calc(var(--radius) * 2 + var(--planet-size));
     }
@@ -51,8 +108,7 @@
       animation: float 6s ease-in-out infinite;
       animation-delay: calc(var(--i) * 1.5s);
       transition: box-shadow 0.3s, filter 0.3s;
-      left: calc(50% + var(--radius) * cos(calc(var(--i) * 90deg - 90deg)) - var(--planet-offset));
-      top:  calc(50% + var(--radius) * sin(calc(var(--i) * 90deg - 90deg)) - var(--planet-offset));
+      /* Position calculée par JS ci-dessous */
     }
 
     .planet i { font-size: 1.3em; }
@@ -67,44 +123,13 @@
       50%       { transform: translateY(clamp(-6px, -2vmin, -12px)); }
     }
 
-    /* ── HERO TEXTE ── */
-    .hero-content {
-      position: absolute;
-      top: clamp(20px, 5vmin, 48px);
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      width: 100%;
-      padding: 0 24px;
-      z-index: 1;
-    }
-
-    .hero-slogan {
-      font-size: clamp(0.75em, 2vw, 0.95em);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: #a855f7;
-      margin-bottom: 10px;
-    }
-
-    .hero-h1 {
-      font-size: clamp(1.4em, 4vw, 2.2em);
-      font-weight: 800;
-      color: white;
-      margin-bottom: 12px;
-      line-height: 1.2;
-    }
-
-    .hero-desc {
-      font-size: clamp(0.8em, 1.8vw, 0.95em);
-      color: #6b6b8a;
-      max-width: 480px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
   </style>
 </head>
 <body>
+
+  <!-- ===================== THEME JS ================== -->
+  <script src="js/theme.js"></script>
+  <!-- ================================================= -->
 
   <!-- ===================== NAVBAR JS ================= -->
   <script src="js/navbar.js"></script>
@@ -126,19 +151,21 @@
     </div>
 
     <!-- PLANÈTES EN CERCLE FIXE -->
-    <div class="orbit-container">
-      <a href="pages/it.html" class="planet" style="--i:0">
-        <i class="fa-solid fa-laptop-code"></i>IT
-      </a>
-      <a href="pages/video.html" class="planet" style="--i:1">
-        <i class="fa-solid fa-film"></i>Vidéo
-      </a>
-      <a href="pages/photo.html" class="planet" style="--i:2">
-        <i class="fa-solid fa-camera"></i>Photo
-      </a>
-      <a href="pages/acting.html" class="planet" style="--i:3">
-        <i class="fa-solid fa-masks-theater"></i>Acting
-      </a>
+    <div class="orbit-wrapper">
+      <div class="orbit-container">
+        <a href="pages/it.html" class="planet" style="--i:0">
+          <i class="fa-solid fa-laptop-code"></i>IT
+        </a>
+        <a href="pages/video.html" class="planet" style="--i:1">
+          <i class="fa-solid fa-film"></i>Vidéo
+        </a>
+        <a href="pages/photo.html" class="planet" style="--i:2">
+          <i class="fa-solid fa-camera"></i>Photo
+        </a>
+        <a href="pages/acting.html" class="planet" style="--i:3">
+          <i class="fa-solid fa-masks-theater"></i>Acting
+        </a>
+      </div>
     </div>
 
   </header>
@@ -147,6 +174,31 @@
 
   <!-- ===================== FOOTER JS ================= -->
   <script src="js/footer.js"></script>
+  <!-- ================================================= -->
+
+  <!-- ===================== SCRIPT ==================== -->
+  <script>
+    // Positionner les planètes en cercle via JS (plus compatible que CSS cos/sin)
+    function positionPlanets() {
+      const planets = document.querySelectorAll('.planet');
+      const container = document.querySelector('.orbit-container');
+      if (!container || !planets.length) return;
+
+      const size   = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--planet-size')) || 90;
+      const radius = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--radius'))      || 130;
+      const offset = size / 2;
+
+      planets.forEach((planet, i) => {
+        const angle = (i * 90 - 90) * (Math.PI / 180);
+        planet.style.left = `calc(50% + ${radius * Math.cos(angle)}px - ${offset}px)`;
+        planet.style.top  = `calc(50% + ${radius * Math.sin(angle)}px - ${offset}px)`;
+      });
+    }
+
+    // Exécuter après chargement et au redimensionnement
+    document.addEventListener('DOMContentLoaded', positionPlanets);
+    window.addEventListener('resize', positionPlanets);
+  </script>
   <!-- ================================================= -->
 
 </body>

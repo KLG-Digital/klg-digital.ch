@@ -315,23 +315,57 @@
       .languages-grid { grid-template-columns: 1fr; }
     }
 
-  </style>
+  
+    /* ── MODE CLAIR ── */
+    [data-theme="light"] h1,
+    [data-theme="light"] h2             { color: #1a1a2e; }
+    [data-theme="light"] .heading-tag   { color: #7c3aed; }
+    [data-theme="light"] .subtitle,
+    [data-theme="light"] .cta-sub       { color: #3a3a5a; }
+    [data-theme="light"] .cta-text      { color: #1a1a2e; }
+    [data-theme="light"] .service-name,
+    [data-theme="light"] .service-desc  { color: #1a1a2e; }
+    [data-theme="light"] .service-card  {
+      background: rgba(255,255,255,0.7);
+      border-color: rgba(124,58,237,0.2);
+    }
+    [data-theme="light"] .service-card:hover {
+      background: rgba(255,255,255,0.9);
+      border-color: rgba(124,58,237,0.4);
+    }
+    [data-theme="light"] .cta-contact {
+      background: rgba(255,255,255,0.4);
+      border-color: rgba(124,58,237,0.25);
+    }
+
+    [data-theme="light"] .profile-name      { color: #1a1a2e; }
+    [data-theme="light"] .profile-bio       { color: #3a3a5a; }
+    [data-theme="light"] .skill-group-title { color: #1a1a2e; }
+    [data-theme="light"] .skill-group       { background: rgba(255,255,255,0.6); border-color: rgba(124,58,237,0.2); }
+    [data-theme="light"] .lang-item         { background: rgba(255,255,255,0.6); border-color: rgba(124,58,237,0.2); }
+    [data-theme="light"] .lang-name         { color: #1a1a2e; }
+    [data-theme="light"] .lang-level        { color: #3a3a5a; }
+    [data-theme="light"] .award-item        { background: rgba(255,255,255,0.6); border-color: rgba(124,58,237,0.2); }
+    [data-theme="light"] .award-title       { color: #1a1a2e; }
+    [data-theme="light"] .lang-bar          { background: rgba(0,0,0,0.1); }
+
+</style>
 </head>
 <body>
 
-  
+  <!-- ===================== THEME JS ================== -->
+  <script src="../js/theme.js"></script>
+  <!-- ================================================= -->
+
   <!-- ===================== NAVBAR JS ===================== -->
   <script src="../js/navbar.js"></script>
   <!-- ================================================= -->
-
-
   
   <!-- ===================== STARS JS ===================== -->
   <script src="../js/stars.js"></script>
   <!-- ================================================= -->
 
 
-  
   <!-- ===================== CONTENU ===================== -->
   <main>
     <p class="heading-tag">✦ Qui suis-je</p>

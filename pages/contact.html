@@ -7,20 +7,24 @@
   <title>Contact — KLG Digital | Chablais, Vaud</title>
   <meta name="description" content="Contactez Kevin Lemos Graça pour un projet IT, vidéo, photo ou acting. Basé dans le Chablais vaudois, réponse sous 48h.">
   <meta name="author" content="Kevin Lemos Graça">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
 
     /* ================= RESET ================= */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* ================= VARIABLES ================= */
-    :root {
-      --bg:      #07071a;
-      --surface: rgba(255,255,255,0.04);
-      --border:  rgba(168,85,247,0.25);
-      --purple:  #a855f7;
-      --text:    #e8e8f0;
-      --muted:   #6b6b8a;
+    /* Variables gérées par style.css */
+
+    /* Variables mode clair */
+    [data-theme="light"] {
+      /* via style.css */
+      --surface: rgba(0,0,0,0.04);
+      --border:  rgba(124,58,237,0.2);
+      --purple:  #7c3aed;
+      --text:    #1a1a2e;
+      --muted:   #5a5a7a;
     }
 
     /* ================= BASE ================= */
@@ -32,7 +36,7 @@
       overflow-x: hidden;
     }
 
-    /* Canvas étoiles — géré par stars.js */
+    /* Canvas étoiles / lune — géré par stars.js et theme.js */
     #starCanvas {
       position: fixed;
       inset: 0;
@@ -52,20 +56,26 @@
       width: 100%;
       background: rgba(7,7,26,0.7);
       backdrop-filter: blur(12px);
-      /* pas de border-bottom — effet immersif comme l'index */
     }
 
-    /* ── Logo image ── */
+    /* Mode clair navbar */
+    [data-theme="light"] .navbar {
+      background: rgba(144,144,144,0.85);
+    }
+
     .logo { text-decoration: none; display: flex; align-items: center; }
     .logo-img { height: 40px; width: auto; display: block; }
 
     .navbar a { color: white; text-decoration: none; }
     .navbar a:hover { color: var(--purple); }
 
-    .nav-links { display: flex; gap: 25px; list-style: none; }
+    [data-theme="light"] .navbar a { color: #1a1a2e; }
+    [data-theme="light"] .navbar a:hover { color: #7c3aed; }
 
-    /* ── Lien actif (page courante) ── */
+    .nav-links { display: flex; gap: 25px; list-style: none; }
     .nav-links .active { color: var(--purple); }
+
+    [data-theme="light"] .nav-links .active { color: #7c3aed; }
 
     /* ================= HAMBURGER ================= */
     .menu-toggle {
@@ -90,10 +100,39 @@
       transform-origin: center;
     }
 
-    /* ── Animation hamburger → croix ── */
+    [data-theme="light"] .menu-toggle span { background: #1a1a2e; }
+
     .menu-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .menu-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .menu-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ================= BOUTON THÈME ================= */
+    .theme-toggle {
+      background: none;
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 8px;
+      color: white;
+      cursor: pointer;
+      padding: 6px 10px;
+      font-size: 0.9em;
+      display: flex;
+      align-items: center;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(168,85,247,0.15);
+      border-color: rgba(168,85,247,0.6);
+    }
+
+    [data-theme="light"] .theme-toggle {
+      color: #1a1a2e;
+      border-color: rgba(124,58,237,0.3);
+    }
+
+    [data-theme="light"] .theme-toggle:hover {
+      background: rgba(124,58,237,0.1);
+    }
 
     /* ================= CONTENU PRINCIPAL ================= */
     main {
@@ -117,6 +156,7 @@
       font-weight: 800;
       line-height: 1.1;
       margin-bottom: 16px;
+      color: var(--text);
     }
 
     .subtitle {
@@ -137,7 +177,7 @@
       overflow: hidden;
     }
 
-    /* ── Ligne lumineuse en haut de la carte ── */
+    /* Ligne lumineuse en haut de la carte */
     .form-card::before {
       content: '';
       position: absolute;
@@ -179,13 +219,32 @@
       width: 100%;
     }
 
+    /* Mode clair — carte formulaire */
+    [data-theme="light"] .form-card {
+      background: rgba(255,255,255,0.55);
+      border-color: rgba(124,58,237,0.3);
+    }
+
+    /* Mode clair — champs de formulaire */
+    [data-theme="light"] input,
+    [data-theme="light"] select,
+    [data-theme="light"] textarea {
+      background: rgba(255,255,255,0.7);
+      border-color: rgba(124,58,237,0.25);
+      color: #1a1a2e;
+    }
+
+    [data-theme="light"] input::placeholder,
+    [data-theme="light"] textarea::placeholder {
+      color: #8a8aaa;
+    }
+
     input:focus, select:focus, textarea:focus {
       border-color: var(--purple);
       background: rgba(168,85,247,0.07);
       box-shadow: 0 0 0 3px rgba(168,85,247,0.12);
     }
 
-    /* ── Flèche personnalisée du select ── */
     select {
       appearance: none;
       cursor: pointer;
@@ -196,6 +255,7 @@
     }
 
     select option { background: #0f0f2a; }
+    [data-theme="light"] select option { background: #f0eff5; }
 
     textarea {
       resize: vertical;
@@ -229,7 +289,8 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 30px rgba(168,85,247,0.4);
     }
-    .btn-submit:active  { transform: translateY(0); }
+
+    .btn-submit:active   { transform: translateY(0); }
     .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
     /* ================= MESSAGES RETOUR ================= */
@@ -268,7 +329,7 @@
         position: fixed;
         top: 0; left: 0;
         width: 100%; height: 100vh;
-        background-color: #0f0f1ad3;
+        background-color: rgba(7,7,26,0.95);
         backdrop-filter: blur(10px);
         flex-direction: column;
         justify-content: center;
@@ -276,6 +337,12 @@
         transform: translateX(-100%);
         transition: transform 0.5s ease;
       }
+
+      [data-theme="light"] .nav-links {
+        background-color: rgba(144,144,144,0.97);
+      }
+
+      [data-theme="light"] .nav-links a { color: #1a1a2e; }
 
       .nav-links.mobile-menu { transform: translateX(0); }
       .nav-links li { margin: 20px 0; font-size: 1.5em; }
@@ -294,6 +361,8 @@
       border-top: 1px solid rgba(168,85,247,0.15);
       padding: clamp(20px, 3vw, 32px) clamp(16px, 4vw, 40px);
     }
+
+    [data-theme="light"] .site-footer { border-top-color: rgba(124,58,237,0.2); }
 
     .footer-inner {
       max-width: 960px;
@@ -314,6 +383,12 @@
     .footer-links a:hover { color: #a855f7; }
     .footer-sep { color: #3d3d5c; }
 
+    [data-theme="light"] .footer-copy,
+    [data-theme="light"] .footer-location { color: #5a5a7a; }
+    [data-theme="light"] .footer-links a  { color: #5a5a7a; }
+    [data-theme="light"] .footer-links a:hover { color: #7c3aed; }
+    [data-theme="light"] .footer-sep { color: #b0afc0; }
+
     @media (max-width: 600px) {
       .footer-inner { flex-direction: column; align-items: flex-start; }
     }
@@ -322,10 +397,13 @@
 </head>
 <body>
 
+  <!-- ===================== THEME JS ================== -->
+  <script src="../js/theme.js"></script>
+  <!-- ================================================= -->
+
   <!-- ===================== NAVBAR JS ================= -->
   <script src="../js/navbar.js"></script>
   <!-- ================================================= -->
-
 
   <!-- ===================== STARS JS ================= -->
   <script src="../js/stars.js"></script>
@@ -344,7 +422,6 @@
 
         <!-- Web3Forms — clé d'accès -->
         <input type="hidden" name="access_key" value="b9a8ac78-d85d-471d-9bc3-a86e7e2b9e34">
-        <input type="hidden" name="subject"    value="Nouveau message — KLG Digital">
         <!-- Honeypot anti-spam (invisible) -->
         <input type="checkbox" name="botcheck" style="display:none">
 
@@ -371,11 +448,11 @@
           <label for="categorie">Catégorie</label>
           <select id="categorie" name="categorie" required>
             <option value="" disabled selected>Choisir une catégorie…</option>
-            <option value="IT"><i class="fa-solid fa-laptop-code"></i> IT</option>
-            <option value="Vidéo"><i class="fa-solid fa-film"></i> Vidéo</option>
-            <option value="Photo"><i class="fa-solid fa-camera"></i> Photo</option>
-            <option value="Acting"><i class="fa-solid fa-masks-theater"></i> Acting</option>
-            <option value="Autre">✦ Autre</option>
+            <option value="IT">IT</option>
+            <option value="Vidéo">Vidéo</option>
+            <option value="Photo">Photo</option>
+            <option value="Acting">Acting</option>
+            <option value="Autre">Autre</option>
           </select>
         </div>
 
@@ -412,7 +489,7 @@
   <!-- ===================== SCRIPTS =================== -->
   <script>
 
-    // --- Envoi du formulaire via Web3Forms ---
+    // Envoi du formulaire via Web3Forms
     const form       = document.getElementById('contactForm');
     const btn        = document.getElementById('submitBtn');
     const successMsg = document.getElementById('successMsg');
@@ -426,7 +503,7 @@
 
       const data = Object.fromEntries(new FormData(form));
 
-      // Objet dynamique : [Catégorie] Prénom Nom — KLG Digital
+      // Objet dynamique : KLG Digital - Catégorie - Prénom Nom
       const categorie = data.categorie || 'Autre';
       const prenom    = data.prenom    || '';
       const nom       = data.nom       || '';
@@ -451,13 +528,6 @@
         btn.disabled    = false;
         btn.textContent = 'Envoyer le message →';
       }
-    });
-  navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('mobile-menu');
-        toggle.classList.remove('open');
-        toggle.setAttribute('aria-expanded', false);
-      });
     });
 
   </script>
