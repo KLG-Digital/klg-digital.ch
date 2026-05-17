@@ -48,15 +48,25 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
-    /* Padding fluide : réduit automatiquement sur petit écran */
     padding: 20px clamp(16px, 4vw, 40px);
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     width: 100%;
     background: rgba(7, 7, 26, 0.7);
     backdrop-filter: blur(10px);
 }
+
+/* Logo à gauche */
+.navbar .logo { justify-self: start; }
+
+/* Liens centrés */
+.nav-links {
+    justify-self: center;
+}
+
+/* Bouton thème à droite */
+.theme-toggle { justify-self: end; }
 
 .navbar a {
     color: white;
@@ -83,8 +93,8 @@ body {
 
 .nav-links {
     display: flex;
-    /* Gap fluide entre les liens */
     gap: clamp(12px, 2vw, 25px);
+    list-style: none;
 }
 
 /* Lien actif (page courante) */
@@ -250,14 +260,15 @@ body {
 }
 
 [data-theme="light"] body {
-    background-color: #909090;
+    background-color: #c8c8d0; /* Fond géré par le canvas */
     color: #1a1a2e;
 }
 
 /* Navbar en mode clair */
 [data-theme="light"] .navbar {
-    background: rgba(144, 144, 144, 0.85);
-    backdrop-filter: blur(12px);
+    background: rgba(200, 200, 208, 0.6);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(124,58,237,0.1);
 }
 
 [data-theme="light"] .navbar a { color: #1a1a2e; }
@@ -269,7 +280,7 @@ body {
 
 /* Menu mobile en mode clair */
 [data-theme="light"] .nav-links {
-    background-color: rgba(144, 144, 144, 0.97);
+    background-color: rgba(200, 200, 208, 0.97);
 }
 
 [data-theme="light"] .nav-links a { color: #1a1a2e; }
@@ -312,4 +323,167 @@ body {
 
 [data-theme="light"] .theme-toggle:hover {
     background: rgba(124,58,237,0.1);
+}
+
+/* Tags tarifaires en mode clair */
+[data-theme="light"] .price-fixed {
+    background: rgba(34,197,94,0.1);
+    border-color: rgba(34,197,94,0.4);
+    color: #15803d;
+}
+
+[data-theme="light"] .price-demand {
+    background: rgba(124,58,237,0.1);
+    border-color: rgba(124,58,237,0.3);
+    color: #6d28d9;
+}
+
+[data-theme="light"] .card-lang {
+    background: rgba(124,58,237,0.1);
+    border-color: rgba(124,58,237,0.3);
+    color: #6d28d9;
+}
+
+[data-theme="light"] .config-badge,
+[data-theme="light"] .badge,
+[data-theme="light"] .gaming-tier {
+    opacity: 0.9;
+}
+
+[data-theme="light"] .badge-amd {
+    background: rgba(237,67,37,0.1);
+    border-color: rgba(237,67,37,0.4);
+    color: #b91c1c;
+}
+
+[data-theme="light"] .badge-intel {
+    background: rgba(0,113,197,0.1);
+    border-color: rgba(0,113,197,0.4);
+    color: #1d4ed8;
+}
+
+[data-theme="light"] .badge-formation {
+    background: rgba(59,130,246,0.1);
+    border-color: rgba(59,130,246,0.4);
+    color: #1d4ed8;
+}
+
+[data-theme="light"] .badge-pro {
+    background: rgba(34,197,94,0.1);
+    border-color: rgba(34,197,94,0.4);
+    color: #15803d;
+}
+
+[data-theme="light"] .badge-autre {
+    background: rgba(251,191,36,0.1);
+    border-color: rgba(251,191,36,0.5);
+    color: #92400e;
+}
+
+[data-theme="light"] .badge-current {
+    background: rgba(124,58,237,0.1);
+    border-color: rgba(124,58,237,0.3);
+    color: #6d28d9;
+}
+
+[data-theme="light"] .tier-starter {
+    background: rgba(34,197,94,0.1);
+    border-color: rgba(34,197,94,0.4);
+    color: #15803d;
+}
+
+[data-theme="light"] .tier-performance {
+    background: rgba(59,130,246,0.1);
+    border-color: rgba(59,130,246,0.4);
+    color: #1d4ed8;
+}
+
+[data-theme="light"] .tier-enthusiast {
+    background: rgba(124,58,237,0.1);
+    border-color: rgba(124,58,237,0.3);
+    color: #6d28d9;
+}
+
+[data-theme="light"] .skill-tag {
+    background: rgba(124,58,237,0.1);
+    border-color: rgba(124,58,237,0.25);
+    color: #6d28d9;
+}
+
+[data-theme="light"] .interest-tag {
+    background: rgba(124,58,237,0.08);
+    border-color: rgba(124,58,237,0.2);
+    color: #6d28d9;
+}
+
+[data-theme="light"] .rate-banner {
+    background: rgba(124,58,237,0.08);
+    border-color: rgba(124,58,237,0.25);
+    color: #4a1d96;
+}
+
+[data-theme="light"] .rate-banner strong { color: #1a1a2e; }
+
+/* ── BOUTON THÈME MOBILE (dernier item menu) ── */
+.theme-toggle-mobile { margin-top: 8px; }
+
+.theme-toggle-mobile-btn {
+    background: none;
+    border: 1px solid rgba(168,85,247,0.3);
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    padding: 8px 20px;
+    font-size: 0.95em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.theme-toggle-mobile-btn:hover {
+    background: rgba(168,85,247,0.15);
+}
+
+[data-theme="light"] .theme-toggle-mobile-btn {
+    color: #1a1a2e;
+    border-color: rgba(124,58,237,0.3);
+}
+
+[data-theme="light"] .theme-toggle-mobile-btn:hover {
+    background: rgba(124,58,237,0.1);
+}
+
+/* Masquer le bouton desktop sur mobile */
+@media (max-width: 768px) {
+    .theme-toggle { display: none; }
+    .theme-toggle-mobile { display: block; }
+}
+
+/* Masquer le bouton mobile sur desktop */
+@media (min-width: 769px) {
+    .theme-toggle-mobile { display: none; }
+}
+
+/* ── BOUTON THÈME — intégré dans le flux de la navbar ── */
+.navbar {
+    gap: 16px;
+}
+
+/* Sur desktop, le bouton est après les liens */
+.theme-toggle {
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+/* Sur desktop, cacher le bouton mobile */
+@media (min-width: 769px) {
+    .theme-toggle { display: flex; }
+    .theme-toggle-mobile { display: none !important; }
+}
+
+/* Sur mobile, cacher le bouton desktop */
+@media (max-width: 768px) {
+    .theme-toggle { display: none !important; }
+    .theme-toggle-mobile { display: block !important; }
 }

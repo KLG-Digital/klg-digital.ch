@@ -71,19 +71,33 @@
     [data-theme="light"] .gallery-item { background: rgba(255,255,255,0.5); color: rgba(124,58,237,0.4); }
     [data-theme="light"] .gallery-label { color: #3a3a5a; }
 
+
+    /* Mode clair — icônes services */
+    [data-theme="light"] .service-icon { color: #1a1a2e; }
+    [data-theme="light"] .service-name { color: #1a1a2e; }
+    [data-theme="light"] .service-desc { color: #3a3a5a; }
+    [data-theme="light"] .service-card {
+      background: rgba(255,255,255,0.7);
+      border-color: rgba(124,58,237,0.2);
+    }
+    [data-theme="light"] .service-card:hover {
+      background: rgba(255,255,255,0.9);
+      border-color: rgba(124,58,237,0.4);
+    }
+
 </style>
 </head>
 <body>
 
-  <!-- ===================== THEME JS ================== -->
+  <!-- ===================== THEME JS ===================== -->
   <script src="../js/theme.js"></script>
   <!-- ================================================= -->
 
-  <!-- ===================== NAVBAR JS ================= -->
+  <!-- ===================== NAVBAR JS ===================== -->
   <script src="../js/navbar.js"></script>
   <!-- ================================================= -->
 
-  <!-- ===================== STARS JS ================== -->
+  <!-- ===================== STARS JS ===================== -->
   <script src="../js/stars.js"></script>
   <!-- ================================================= -->
 
@@ -96,19 +110,19 @@
     <div class="section-title">Services</div>
     <div class="services-grid">
       <a href="service-detail.html?id=montage-photo" class="service-card">
-        <div class="service-header"><span class="service-icon"><i class="fa-solid fa-palette"></i></span><span class="service-price">Sur demande</span></div>
+        <div class="service-header"><span class="service-icon"><i class="fa-solid fa-palette"></i></span><span class="service-price price-demand">Sur demande</span></div>
         <div class="service-name">Retouche photo</div>
         <p class="service-desc">Correction colorimétrique, suppression d'éléments, traitement de lots.</p>
         <span class="service-more">Voir le détail →</span>
       </a>
       <a href="service-detail.html?id=logo" class="service-card">
-        <div class="service-header"><span class="service-icon"><i class="fa-solid fa-pen-nib"></i></span><span class="service-price">Sur demande</span></div>
+        <div class="service-header"><span class="service-icon"><i class="fa-solid fa-pen-nib"></i></span><span class="service-price price-demand">Sur demande</span></div>
         <div class="service-name">Création logo</div>
         <p class="service-desc">Identité visuelle adaptée à votre image et vos supports.</p>
         <span class="service-more">Voir le détail →</span>
       </a>
       <a href="service-detail.html?id=media" class="service-card">
-        <div class="service-header"><span class="service-icon"><i class="fa-solid fa-image"></i></span><span class="service-price">Sur demande</span></div>
+        <div class="service-header"><span class="service-icon"><i class="fa-solid fa-image"></i></span><span class="service-price price-demand">Sur demande</span></div>
         <div class="service-name">Création média</div>
         <p class="service-desc">Affiches, visuels réseaux sociaux, bannières selon vos besoins.</p>
         <span class="service-more">Voir le détail →</span>

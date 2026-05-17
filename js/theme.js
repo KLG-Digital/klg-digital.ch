@@ -1,128 +1,154 @@
 // ===================== THÈME SOMBRE / CLAIR =====================
-// Détection automatique du système + bouton de bascule dans la navbar.
 // Mode sombre : étoiles animées (stars.js)
-// Mode clair  : lune avec cratères statiques dessinés en canvas
+// Mode clair  : surface lunaire — fond clair avec texture de cratères subtils
+// Bouton thème : dernier lien navbar (desktop) + dernier item menu mobile
 
 (function () {
 
   const STORAGE_KEY = 'klg-theme';
 
-  // ─── Préférence système ou sauvegardée ──────────────────────
+  // ── Préférence système ou sauvegardée ──────────────────────
   function getPreferredTheme() {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) return saved;
     return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   }
 
-  // ─── Appliquer le thème sur <html> ──────────────────────────
+  // ── Appliquer le thème sur <html> ──────────────────────────
   function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem(STORAGE_KEY, theme);
   }
 
-  // ─── Créer le canvas lune et le dessiner ────────────────────
+  // ── Canvas lune : fond clair avec micro-cratères ───────────
   function createMoonCanvas() {
-    // Créer le canvas et l'injecter (stars.js ne le fait pas en mode clair)
     let canvas = document.getElementById('starCanvas');
     if (!canvas) {
       canvas = document.createElement('canvas');
       canvas.id = 'starCanvas';
       document.body.insertAdjacentElement('afterbegin', canvas);
     }
-
     drawMoon(canvas);
-
     window.addEventListener('resize', () => drawMoon(canvas), { passive: true });
   }
 
-  // ─── Dessiner la surface lunaire ────────────────────────────
   function drawMoon(canvas) {
     const ctx = canvas.getContext('2d');
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const W = canvas.width  = window.innerWidth;
+    const H = canvas.height = window.innerHeight;
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Fond clair uniforme
+    ctx.fillStyle = '#c8c8d0';
+    ctx.fillRect(0, 0, W, H);
 
-    // Générateur pseudo-aléatoire stable — même résultat à chaque redraw
+    // Générateur pseudo-aléatoire stable
     let seed = 42;
     function rand() {
       seed = (seed * 9301 + 49297) % 233280;
       return seed / 233280;
     }
 
-    // Cratères (cercle + intérieur sombre)
-    for (let i = 0; i < 60; i++) {
-      const x = rand() * canvas.width;
-      const y = rand() * canvas.height;
-      const r = rand() * 18 + 4;
+    // Micro-cratères — très petits et très subtils
+    for (let i = 0; i < 80; i++) {
+      const x = rand() * W;
+      const y = rand() * H;
+      const r = rand() * 6 + 2;
 
-      // Bord
+      // Ombre portée (bas-droite)
       ctx.beginPath();
-      ctx.arc(x, y, r, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(80, 75, 95, ${rand() * 0.5 + 0.25})`;
-      ctx.lineWidth   = rand() * 1.5 + 0.5;
-      ctx.stroke();
+      ctx.arc(x + 1, y + 1, r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(90, 85, 105, ${rand() * 0.12 + 0.04})`;
+      ctx.fill();
 
-      // Intérieur
+      // Bord éclairé (haut-gauche)
       ctx.beginPath();
-      ctx.arc(x, y, r * 0.75, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(70, 65, 85, ${rand() * 0.3 + 0.1})`;
+      ctx.arc(x - 0.5, y - 0.5, r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(220, 220, 230, ${rand() * 0.15 + 0.05})`;
+      ctx.fill();
+
+      // Intérieur légèrement plus sombre
+      ctx.beginPath();
+      ctx.arc(x, y, r * 0.6, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(100, 95, 115, ${rand() * 0.08 + 0.03})`;
       ctx.fill();
     }
 
-    // Poussière lunaire (petits points)
-    for (let i = 0; i < 120; i++) {
-      const x = rand() * canvas.width;
-      const y = rand() * canvas.height;
-      const r = rand() * 1.5 + 0.3;
-
+    // Très petits points (poussière lunaire)
+    for (let i = 0; i < 150; i++) {
+      const x = rand() * W;
+      const y = rand() * H;
+      const r = rand() * 0.8 + 0.2;
       ctx.beginPath();
       ctx.arc(x, y, r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(75, 70, 90, ${rand() * 0.4 + 0.15})`;
+      ctx.fillStyle = `rgba(90, 85, 110, ${rand() * 0.15 + 0.05})`;
       ctx.fill();
     }
   }
 
-  // ─── Bouton thème dans la navbar ────────────────────────────
+  // ── Injecter le bouton dans la navbar ──────────────────────
+  // Position : fin des liens (comme Dracula Theme)
   function injectToggleButton() {
     const navbar = document.querySelector('.navbar');
     if (!navbar) return;
 
+    const theme = getPreferredTheme();
+
+    // Créer le bouton
     const btn = document.createElement('button');
     btn.className = 'theme-toggle';
     btn.setAttribute('aria-label', 'Changer de thème');
-
-    function updateIcon(theme) {
-      btn.innerHTML = theme === 'dark'
-        ? '<i class="fa-solid fa-sun"></i>'
-        : '<i class="fa-solid fa-moon"></i>';
-    }
-
-    updateIcon(getPreferredTheme());
+    btn.innerHTML = theme === 'dark'
+      ? '<i class="fa-solid fa-sun"></i>'
+      : '<i class="fa-solid fa-moon"></i>';
 
     btn.addEventListener('click', () => {
       const current = document.documentElement.getAttribute('data-theme') || 'dark';
-      const next    = current === 'dark' ? 'light' : 'dark';
-      applyTheme(next);
+      applyTheme(current === 'dark' ? 'light' : 'dark');
       location.reload();
     });
 
-    // Insérer avant le bouton hamburger
-    const menuToggle = navbar.querySelector('.menu-toggle');
-    navbar.insertBefore(btn, menuToggle);
+    // Desktop : insérer après les nav-links (fin de navbar)
+    const navLinks = navbar.querySelector('.nav-links');
+    if (navLinks) {
+      navLinks.after(btn);
+    } else {
+      // Fallback : avant le menu-toggle
+      const menuToggle = navbar.querySelector('.menu-toggle');
+      navbar.insertBefore(btn, menuToggle);
+    }
+
+    // Mobile : ajouter comme dernier item du menu
+    if (navLinks) {
+      const li = document.createElement('li');
+      li.className = 'theme-toggle-mobile';
+
+      const mobileBtn = document.createElement('button');
+      mobileBtn.className = 'theme-toggle-mobile-btn';
+      mobileBtn.innerHTML = theme === 'dark'
+        ? '<i class="fa-solid fa-sun"></i> Mode clair'
+        : '<i class="fa-solid fa-moon"></i> Mode sombre';
+
+      mobileBtn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || 'dark';
+        applyTheme(current === 'dark' ? 'light' : 'dark');
+        location.reload();
+      });
+
+      li.appendChild(mobileBtn);
+      navLinks.appendChild(li);
+    }
   }
 
-  // ─── Point d'entrée ─────────────────────────────────────────
+  // ── Point d'entrée ─────────────────────────────────────────
   const theme = getPreferredTheme();
   applyTheme(theme);
 
   document.addEventListener('DOMContentLoaded', () => {
     injectToggleButton();
-    // En mode clair : créer le canvas lune
     if (theme === 'light') createMoonCanvas();
   });
 
-  // Changement système en temps réel (sans override manuel)
+  // Changement système sans override manuel
   window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
     if (!localStorage.getItem(STORAGE_KEY)) {
       applyTheme(e.matches ? 'light' : 'dark');
