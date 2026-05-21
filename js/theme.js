@@ -140,8 +140,11 @@
       navbar.style.background     = navBg;
       navbar.style.backdropFilter = 'blur(10px)';
 
-      // Liens navbar
-      navLinks.forEach(a => { a.style.color = textColor; });
+      // Liens navbar — sur mobile toujours blanc (menu fond sombre)
+      const isMobile = window.innerWidth <= 768;
+      navLinks.forEach(a => {
+        a.style.color = isMobile ? 'white' : textColor;
+      });
 
       // Hamburger
       document.querySelectorAll('.menu-toggle span')
@@ -162,14 +165,30 @@
       }
 
       // Titres et textes — blanc dans le ciel, foncé sur la surface
-      document.querySelectorAll('h1, h2, .heading-tag, .subtitle, .profile-name, .profile-bio, .timeline-title, .timeline-desc, .service-name, .service-desc, .card-title, .card-desc, .cta-text, .cta-sub, .award-title, .lang-name, .skill-group-title, .hero-h1, .hero-desc, .profile-title, .last-updated, .privacy-section p, .privacy-section li, .privacy-section h2').forEach(el => {
+      document.querySelectorAll('h1, h2, .subtitle, .profile-name, .profile-bio, .timeline-title, .timeline-desc, .service-name, .service-desc, .card-title, .card-desc, .cta-text, .cta-sub, .award-title, .lang-name, .skill-group-title, .hero-h1, .hero-desc, .profile-title, .last-updated, .privacy-section p, .privacy-section li, .privacy-section h2').forEach(el => {
+        if (el.closest('.planet') || el.closest('.heading-tag')) return;
         const rect    = el.getBoundingClientRect();
         const elMid   = rect.top + rect.height / 2;
-        // Comparer position écran vs horizon écran (pas besoin d'ajouter scrollY)
         const onLunar = elMid > horizonY;
-        el.style.color = onLunar ? '#1a1a2e' : '';
+        el.style.color = onLunar ? '#1a1a2e' : 'white';
+      });
+
+      // Icônes FA — même logique mais avec exclusions
+      document.querySelectorAll('.fa-solid, .fa-regular, .fa-brands').forEach(el => {
+        if (el.closest('.planet') || el.closest('.heading-tag')) return;
+        const rect    = el.getBoundingClientRect();
+        const elMid   = rect.top + rect.height / 2;
+        const onLunar = elMid > horizonY;
+        el.style.color = onLunar ? '#1a1a2e' : 'white';
       });
     }
+
+    // Forcer les icônes en noir au chargement en mode clair
+    // Exclure : icônes dans .planet (blanches) et dans .heading-tag (violettes)
+    document.querySelectorAll('.fa-solid, .fa-regular, .fa-brands').forEach(el => {
+      if (el.closest('.planet') || el.closest('.heading-tag')) return;
+      el.style.color = '#1a1a2e';
+    });
 
     updateNavColor();
     window.addEventListener('scroll', updateNavColor, { passive: true });
