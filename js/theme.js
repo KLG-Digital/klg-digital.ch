@@ -9,6 +9,8 @@
 
   // ── Préférence système ou sauvegardée ──────────────────────
   function getPreferredTheme() {
+    // 404 toujours en mode sombre
+    if (window.location.pathname.includes('404')) return 'dark';
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved) return saved;
     return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
