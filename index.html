@@ -125,6 +125,40 @@
 
     .planet i { font-size: 1.3em; }
 
+    /* Planète avec illustration — remplace le cercle violet */
+    .planet-img {
+      background: none;
+      border-radius: 0;
+      box-shadow: none;
+      background-image: var(--bg-img);
+      background-size: contain;
+      background-position: center top;
+      background-repeat: no-repeat;
+      justify-content: flex-end;
+      align-items: center;
+      padding-bottom: 0;
+      height: calc(var(--planet-size) * 1.6);
+      width: calc(var(--planet-size) * 1.6);
+      filter: drop-shadow(0 0 0px rgba(168,85,247,0));
+      transition: filter 0.3s, transform 0.3s;
+    }
+
+    .planet-img:hover {
+      box-shadow: none !important;
+      filter: drop-shadow(0 0 12px rgba(168,85,247,0.7)) brightness(1.1);
+    }
+
+    .planet-img .planet-label {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      font-size: clamp(0.7em, 2vmin, 0.9em);
+      font-weight: 700;
+      color: white;
+    }
+
     .planet:hover {
       box-shadow: 0 0 25px #9333ea;
       filter: brightness(1.15);
@@ -184,11 +218,11 @@
         <a href="pages/it.html" class="planet" style="--i:0">
           <i class="fa-solid fa-laptop-code"></i>IT
         </a>
-        <a href="pages/video.html" class="planet" style="--i:1">
-          <i class="fa-solid fa-film"></i>Vidéo
+        <a href="pages/video.html" class="planet planet-img" style="--i:1; --bg-img: url('images/Video-sombre.png')">
+          <span class="planet-label">Vidéo</span>
         </a>
-        <a href="pages/photo.html" class="planet" style="--i:2">
-          <i class="fa-solid fa-camera"></i>Photo
+        <a href="pages/photo.html" class="planet planet-img" style="--i:2; --bg-img: url('images/Photo-sombre.png')">
+          <span class="planet-label">Photo</span>
         </a>
         <a href="pages/acting.html" class="planet" style="--i:3">
           <i class="fa-solid fa-masks-theater"></i>Acting
