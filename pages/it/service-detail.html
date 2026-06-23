@@ -6,8 +6,8 @@
   <title>Service — KLG Digital</title>
   <meta name="description" content="Détail d'un service proposé par KLG Digital — IT, vidéo, photo et création média dans le Chablais vaudois.">
   <meta name="author" content="Kevin Lemos Graça">
-  <link rel="icon" type="image/png" href="../images/KLG-Digital-blanc.png">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/png" href="../../images/KLG-Digital-blanc.png">
+  <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 
@@ -214,19 +214,35 @@
     [data-theme="light"] .back-link      { color: #3a3a5a; }
 
 </style>
+  <script>
+    (function() {
+      const favicon = document.querySelector('link[rel="icon"]');
+      if (!favicon) return;
+      const isPages = window.location.pathname.includes('/pages/');
+      const base = isPages ? '../../images/' : 'images/';
+      const update = (dark) => favicon.href = base + (dark ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png');
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      update(mq.matches);
+      mq.addEventListener('change', e => update(e.matches));
+    })();
+  </script>
 </head>
 <body>
 
   <!-- ===================== THEME JS ===================== -->
-  <script src="../js/theme.js"></script>
+  <script src="../../js/theme.js"></script>
   <!-- ================================================= -->
 
   <!-- ===================== NAVBAR JS ===================== -->
-  <script src="../js/navbar.js"></script>
+  <script src="../../js/navbar.js"></script>
   <!-- ================================================= -->
 
   <!-- ===================== STARS JS ===================== -->
-  <script src="../js/stars.js"></script>
+    <!-- ===================== MOON JS ================== -->
+  <script src="../../js/moon.js"></script>
+  <!-- ================================================= -->
+
+  <script src="../../js/stars.js"></script>
   <!-- ================================================= -->
 
   
@@ -239,14 +255,14 @@
         <div class="cta-text">Intéressé par ce service ?</div>
         <div class="cta-sub">Un souci ? Me voici. Je réponds sous 48h.</div>
       </div>
-      <a href="contact.html" class="btn-cta">Me contacter →</a>
+      <a href="../contact/" class="btn-cta">Me contacter →</a>
     </div>
   </main>
   <!-- ================================================= -->
 
 
   <!-- ===================== FOOTER JS ===================== -->
-  <script src="../js/footer.js"></script>
+  <script src="../../js/footer.js"></script>
   <!-- ================================================= -->
 
 
@@ -333,37 +349,38 @@
         ],
         note: 'Devis personnalisé selon le nombre de postes et la complexité.'
       },
-      "conseils": {
+      'conseils': {
         tag: '<i class="fa-solid fa-lightbulb"></i> IT & Infrastructure',
         title: 'Conseils & accompagnement',
         price: '55.- CHF / heure',
         priceClass: 'price-fixed',
-        description: "Vous avez un projet ou une décision technique à prendre ? Je vous accompagne avec un regard professionnel et des conseils concrets.",
+        description: 'Vous avez un projet ou une décision technique à prendre ? Je vous accompagne avec un regard professionnel et des conseils concrets.',
         includes: [
-          'Audit de sécurité Active Directory ou réseau',
+          'Audit de votre infrastructure existante',
           'Recommandations personnalisées et documentées',
-          'Aide au choix de matériel électronique — trouver le meilleur rapport qualité/prix selon vos besoins',
-          'Aide au choix de logiciels',
-          'Accompagnement dans la mise en place de solutions'
+          'Aide au choix de matériel ou de logiciels',
+          'Accompagnement dans la mise en place de solutions',
+          'Suivi disponible après intervention',
         ],
         note: 'Première consultation de 30 minutes offerte.'
       },
-      "cours": {
+      'cours': {
         tag: '<i class="fa-solid fa-book-open"></i> IT & Infrastructure',
         title: 'Cours informatique',
         price: '50.- CHF / heure',
         priceClass: 'price-fixed',
-        description: 'Vous voulez mieux maîtriser votre ordinateur ou apprendre à utiliser un logiciel du quotidien ? Je vous accompagne sur les sujets que je connais, à votre rythme.',
+        description: 'Vous voulez mieux maîtriser votre ordinateur ou apprendre à utiliser un logiciel ? Des cours adaptés à votre niveau et à votre rythme.',
         includes: [
-          'Utilisation de Windows / macOS',
-          'Logiciels bureautiques (Word, Excel, etc.)',
+          'Initiation à l\'utilisation de Windows / macOS',
+          'Maîtrise des logiciels bureautiques (Word, Excel, etc.)',
           'Navigation internet sécurisée',
           'Gestion des fichiers et sauvegardes',
-          'Notions de base en cybersécurité'
+          'Introduction à la cybersécurité',
+          'Cours personnalisés selon vos besoins',
         ],
-        note: 'Cours limités aux domaines listés ci-dessus. À domicile ou à distance, rythme adapté à votre niveau.'
+        note: 'Cours à domicile ou à distance. Rythme adapté à votre niveau.'
       },
-      "montage-photo": {
+      'montage-photo': {
         tag: '<i class="fa-solid fa-camera"></i> Création & Média',
         title: 'Montage photo',
         price: 'Sur demande',
@@ -378,7 +395,7 @@
         ],
         note: 'Tarif selon volume et complexité. Devis gratuit sur demande.'
       },
-      "montage-video": {
+      'montage-video': {
         tag: '<i class="fa-solid fa-film"></i> Création & Média',
         title: 'Montage vidéo',
         price: 'Sur demande',
@@ -393,7 +410,7 @@
         ],
         note: 'Tarif selon durée et complexité du projet. Devis gratuit sur demande.'
       },
-      "logo": {
+      'logo': {
         tag: '<i class="fa-solid fa-pen-nib"></i> Création & Média',
         title: 'Création logo',
         price: 'Sur demande',
@@ -408,7 +425,7 @@
         ],
         note: 'Devis personnalisé selon la complexité du projet.'
       },
-      "media": {
+      'media': {
         tag: '<i class="fa-solid fa-masks-theater"></i> Création & Média',
         title: 'Création média',
         price: 'Sur demande',

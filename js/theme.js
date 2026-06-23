@@ -193,6 +193,11 @@
       el.style.color = '#1a1a2e';
     });
 
+    // Labels des planètes en noir en mode clair
+    document.querySelectorAll('.planet-label').forEach(el => {
+      el.style.color = '#1a1a2e';
+    });
+
     updateNavColor();
     window.addEventListener('scroll', updateNavColor, { passive: true });
     window.addEventListener('resize', updateNavColor, { passive: true });

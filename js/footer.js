@@ -17,7 +17,7 @@
         <div class="footer-links">
           <a href="mailto:kevin@klg-digital.ch">kevin@klg-digital.ch</a>
           <span class="footer-sep">·</span>
-          <a href="${root}pages/privacy.html">Politique de confidentialité</a>
+          <a href="${root}pages/privacy/">Politique de confidentialité</a>
         </div>
       </div>
     </footer>

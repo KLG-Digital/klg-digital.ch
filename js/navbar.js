@@ -9,25 +9,29 @@
   // Fonctionne depuis racine ET depuis pages/
   const path    = window.location.pathname;
   const inPages = path.includes('/pages/');
+  // Nouvelle structure : pages/nom/index.html — remonter de 2 niveaux
   const root    = inPages
     ? path.substring(0, path.indexOf('/pages/')) + '/'
     : path.substring(0, path.lastIndexOf('/') + 1);
 
   // ── Détecter la page courante ─────────────────────────────
-  const currentPage = path.split('/').pop() || 'index.html';
+  // Nouvelle structure : /pages/it/ → currentPage = 'it'
+  // Ancienne structure : /pages/it.html → currentPage = 'it.html'
+  const pathParts   = path.split('/').filter(Boolean);
+  const currentPage = pathParts[pathParts.length - 1] || 'index';
 
   // ── Liens de navigation ───────────────────────────────────
   const links = [
     { label: 'Accueil',      href: root + 'index.html' },
-    { label: 'Mon parcours', href: root + 'pages/parcours.html' },
-    { label: 'Programmes',   href: root + 'pages/programmes.html' },
-    { label: 'Services',     href: root + 'pages/services.html' },
-    { label: 'À propos',     href: root + 'pages/apropos.html' },
-    { label: 'Contact',      href: root + 'pages/contact.html' },
+    { label: 'Mon parcours', href: root + 'pages/parcours/' },
+    { label: 'Programmes',   href: root + 'pages/programmes/' },
+    { label: 'Services',     href: root + 'pages/services/' },
+    { label: 'À propos',     href: root + 'pages/apropos/' },
+    { label: 'Contact',      href: root + 'pages/contact/' },
   ];
 
-  // ── Logo : blanc en mode sombre, noir en mode clair ──────
-  const imgRoot  = inPages ? '../' : '';
+  // ── Logo : suit le thème actuel (data-theme) ──────────────
+  const imgRoot  = inPages ? '../../' : '';
   const isDark   = document.documentElement.getAttribute('data-theme') !== 'light';
   const logoFile = isDark ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png';
 
@@ -44,7 +48,7 @@
       </button>
       <ul class="nav-links">
         ${links.map(link => {
-          const isActive = link.href.endsWith(currentPage);
+          const isActive = link.href.includes('/' + currentPage + '/') || link.href.endsWith(currentPage) || link.href.endsWith(currentPage + '/');
           return `<li><a href="${link.href}"${isActive ? ' class="active"' : ''}>${link.label}</a></li>`;
         }).join('\n        ')}
       </ul>
@@ -70,6 +74,16 @@
       toggle.classList.remove('open');
       toggle.setAttribute('aria-expanded', false);
     });
+  });
+
+  // ── Logo dynamique selon couleur système ──────────────────
+  // Si pas de thème sauvegardé, on suit la préférence système en temps réel
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    if (localStorage.getItem('klg-theme')) return; // thème manuel → ignorer
+    const logoImg = document.querySelector('.logo-img');
+    if (logoImg) {
+      logoImg.src = imgRoot + 'images/' + (e.matches ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png');
+    }
   });
 
 })();

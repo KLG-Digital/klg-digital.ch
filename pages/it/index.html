@@ -6,8 +6,8 @@
   <title>IT & Infrastructure — KLG Digital | Chablais, Vaud</title>
   <meta name="description" content="Support informatique, maintenance PC, montage sur mesure et conseils IT dans le Chablais vaudois.">
   <meta name="author" content="Kevin Lemos Graça">
-  <link rel="icon" type="image/png" href="../images/KLG-Digital-blanc.png">
-  <link rel="stylesheet" href="../style.css">
+  <link rel="icon" type="image/png" href="../../images/KLG-Digital-blanc.png">
+  <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
@@ -227,19 +227,35 @@
     [data-theme="light"] .service-icon { color: #1a1a2e; }
 
 </style>
+  <script>
+    (function() {
+      const favicon = document.querySelector('link[rel="icon"]');
+      if (!favicon) return;
+      const isPages = window.location.pathname.includes('/pages/');
+      const base = isPages ? '../../images/' : 'images/';
+      const update = (dark) => favicon.href = base + (dark ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png');
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      update(mq.matches);
+      mq.addEventListener('change', e => update(e.matches));
+    })();
+  </script>
 </head>
 <body>
 
   <!-- ===================== THEME JS ===================== -->
-  <script src="../js/theme.js"></script>
+  <script src="../../js/theme.js"></script>
   <!-- ================================================= -->
 
   <!-- ===================== NAVBAR ===================== -->
-  <script src="../js/navbar.js"></script>
+  <script src="../../js/navbar.js"></script>
   <!-- ================================================= -->
 
   <!-- ===================== ÉTOILES ===================== -->
-  <script src="../js/stars.js"></script>
+    <!-- ===================== MOON JS ================== -->
+  <script src="../../js/moon.js"></script>
+  <!-- ================================================= -->
+
+  <script src="../../js/stars.js"></script>
   <!-- ================================================= -->
 
   <!-- ===================== CONTENU ===================== -->
@@ -338,14 +354,14 @@
         <div class="cta-text">Un projet IT en tête ?</div>
         <div class="cta-sub">Un souci ? Me voici. Je réponds sous 48h.</div>
       </div>
-      <a href="contact.html" class="btn-cta">Me contacter →</a>
+      <a href="../contact/" class="btn-cta">Me contacter →</a>
     </div>
 
   </main>
   <!-- ================================================= -->
 
   <!-- ===================== FOOTER ===================== -->
-  <script src="../js/footer.js"></script>
+  <script src="../../js/footer.js"></script>
   <!-- ================================================= -->
 
 </body>
