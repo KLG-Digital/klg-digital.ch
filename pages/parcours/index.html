@@ -21,6 +21,10 @@
       padding: 80px 24px 120px;
     }
 
+    @media (min-width: 1200px) {
+      [data-theme="light"] main { padding-top: 120px; }
+    }
+
     .heading-tag {
       font-size: 0.75em;
       letter-spacing: 0.2em;
@@ -80,25 +84,14 @@
       margin-bottom: 48px;
       padding-left: 32px;
       opacity: 0;
-      transform: translateX(-20px);
-      animation: slideIn 0.5s ease forwards;
+      transform: translateY(32px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .timeline-item:nth-child(1)  { animation-delay: 0.1s; }
-    .timeline-item:nth-child(2)  { animation-delay: 0.2s; }
-    .timeline-item:nth-child(3)  { animation-delay: 0.3s; }
-    .timeline-item:nth-child(4)  { animation-delay: 0.4s; }
-    .timeline-item:nth-child(5)  { animation-delay: 0.5s; }
-    .timeline-item:nth-child(6)  { animation-delay: 0.6s; }
-    .timeline-item:nth-child(7)  { animation-delay: 0.7s; }
-    .timeline-item:nth-child(8)  { animation-delay: 0.8s; }
-    .timeline-item:nth-child(9)  { animation-delay: 0.9s; }
-    .timeline-item:nth-child(10) { animation-delay: 1.0s; }
-    .timeline-item:nth-child(11) { animation-delay: 1.1s; }
-    .timeline-item:nth-child(12) { animation-delay: 1.2s; }
-
-    @keyframes slideIn {
-      to { opacity: 1; transform: translateX(0); }
+    .timeline-item.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* Point sur la ligne */
@@ -290,9 +283,9 @@
 
     <div class="timeline">
 
-      <!-- ITEM 12 : ORIF Aigle (en cours) -->
+      <!-- ITEM 12 : ORIF Aigle -->
       <div class="timeline-item">
-        <div class="timeline-dot current"></div>
+        <div class="timeline-dot"></div>
         <div class="timeline-card">
           <div class="timeline-logo">
             <img src="https://www.orif.ch/fileadmin/user_upload/orif/Media/ORIF_logo_big.jpg"
@@ -302,7 +295,7 @@
           <div class="timeline-content">
             <div class="timeline-meta">
               <span class="badge badge-current">En cours</span>
-              <span class="timeline-date">Août 2022 — aujourd'hui</span>
+              <span class="timeline-date">Août 2022 — Juillet 2026</span>
             </div>
             <div class="timeline-title">Apprenti Informaticien – Infrastructure</div>
             <div class="timeline-place">ORIF — Aigle</div>
@@ -313,9 +306,9 @@
         </div>
       </div>
 
-      <!-- ITEM 11 : EPSIC (en cours) -->
+      <!-- ITEM 11 : EPSIC -->
       <div class="timeline-item">
-        <div class="timeline-dot current"></div>
+        <div class="timeline-dot"></div>
         <div class="timeline-card">
           <div class="timeline-logo">
             <img src="https://www.epsic.ch/wp-content/uploads/2022/05/Logo-EPSIC.png"
@@ -324,8 +317,8 @@
           </div>
           <div class="timeline-content">
             <div class="timeline-meta">
-              <span class="badge badge-current">En cours</span>
-              <span class="timeline-date">Août 2022 — aujourd'hui</span>
+              <span class="badge badge-formation">Diplômé</span>
+              <span class="timeline-date">Août 2022 — Juin 2026</span>
             </div>
             <div class="timeline-title">CFC Informaticien en infrastructure</div>
             <div class="timeline-place">EPSIC — Lausanne</div>
@@ -431,7 +424,7 @@
               <span class="timeline-date">Février 2023 · 3 mois</span>
             </div>
             <div class="timeline-title">Stage Informaticien</div>
-            <div class="timeline-place">Service IT ORIF — Péveranges</div>
+            <div class="timeline-place">Service IT ORIF — Préverenges</div>
           </div>
         </div>
       </div>
@@ -539,6 +532,22 @@
   </main>
   <!-- ================================================= -->
 
+
+  <!-- ===================== SCROLL REVEAL ===================== -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = Array.from(document.querySelectorAll('.timeline-item')).indexOf(entry.target);
+          setTimeout(() => entry.target.classList.add('visible'), index * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.timeline-item').forEach(el => observer.observe(el));
+  </script>
+  <!-- ================================================= -->
 
   <!-- ===================== FOOTER JS ===================== -->
   <script src="../../js/footer.js"></script>

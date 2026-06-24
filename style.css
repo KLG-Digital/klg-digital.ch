@@ -34,6 +34,15 @@ body {
     pointer-events: none;
 }
 
+/* Tout le contenu au-dessus du canvas */
+main, .navbar, .site-footer,
+.service-card, .card, .timeline-card,
+.profile-card, .cta-contact, .form-card,
+.services-grid, .cards-grid, .timeline {
+    position: relative;
+    z-index: 1;
+}
+
 /* ================= HEADER ================= */
 
 .hero {
