@@ -14,6 +14,11 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
+  <script>
+    // Forcer mode sombre sur 404 — override localStorage
+    document.documentElement.setAttribute('data-theme', 'dark');
+    localStorage.setItem('klg-theme', 'dark');
+  </script>
 
   <!-- FONT AWESOME -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -386,9 +391,6 @@
 
 <body>
 
-  <!-- Force mode sombre sur 404 -->
-  <script>document.documentElement.setAttribute('data-theme', 'dark');</script>
-
   <!-- ===================== THEME JS ===================== -->
   <script src="js/theme.js"></script>
   <!-- ================================================= -->
@@ -448,6 +450,10 @@
           Un souci ? Me voici. Je réponds sous 48h.
         </div>
       </div>
+
+      <!-- IMPORTANT :
+           Comme 404.html est dans /pages/
+           il faut remonter d'un dossier -->
 
       <a href="/klg-digital.ch/" class="btn-cta">
         ← Retour à l'accueil
