@@ -198,61 +198,7 @@
     ctx.fillRect(fcx-armH/2, fcy-armW/2, armH, armW);
     ctx.restore();
 
-    // ── Horizon bas — bord inférieur de la lune ──────────
-    const docH           = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-    const maxScroll      = docH - window.innerHeight;
-    const scrollDown     = maxScroll > 0 ? scrollY / maxScroll : 0;
-    const bottomProgress = maxScroll > window.innerHeight * 2
-      ? Math.max(0, (scrollDown - 0.75) / 0.25)
-      : 0;
 
-    if (bottomProgress > 0) {
-      const bHY = H - bottomProgress * H * 0.85;
-      const bCD = H * 0.05;
-
-      // Fond étoilé — zone noire qui monte par le bas
-      // Courbe convexe vers le bas (inverse du haut)
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(0, bHY - bCD);
-      ctx.bezierCurveTo(
-        W * 0.25, bHY + bCD * 0.2,
-        W * 0.75, bHY + bCD * 0.2,
-        W,        bHY - bCD
-      );
-      ctx.lineTo(W, H);
-      ctx.lineTo(0, H);
-      ctx.closePath();
-      ctx.fillStyle = '#07071a';
-      ctx.fill();
-      ctx.restore();
-
-      // Étoiles avec fondu progressif
-      stars.forEach(({ sx, sy, sr, sa, purple }) => {
-        const ey = H - sy * 0.8;
-        if (ey < bHY) return;
-        ctx.beginPath();
-        ctx.arc(sx, ey, sr, 0, Math.PI * 2);
-        ctx.fillStyle = purple
-          ? `rgba(168,85,247,${sa * bottomProgress})`
-          : `rgba(255,255,255,${sa * bottomProgress})`;
-        ctx.fill();
-      });
-
-      // Ligne d'horizon bas violette
-      ctx.save();
-      ctx.beginPath();
-      ctx.moveTo(0, bHY - bCD);
-      ctx.bezierCurveTo(
-        W * 0.25, bHY + bCD * 0.2,
-        W * 0.75, bHY + bCD * 0.2,
-        W,        bHY - bCD
-      );
-      ctx.strokeStyle = 'rgba(168,85,247,0.3)';
-      ctx.lineWidth   = 1.5;
-      ctx.stroke();
-      ctx.restore();
-    }
   }
 
   // ── Init ─────────────────────────────────────────────
