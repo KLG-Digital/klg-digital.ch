@@ -488,3 +488,54 @@ main, .navbar, .site-footer,
     .theme-toggle { display: none !important; }
     .theme-toggle-mobile { display: block !important; }
 }
+
+/* ================= ACCESSIBILITÉ (a11y) ================= */
+
+/* Focus visible — contour clavier sur tous les éléments interactifs */
+:focus-visible {
+    outline: 2px solid #a855f7;
+    outline-offset: 2px;
+    border-radius: inherit;
+}
+
+/* Bouton thème — focus centré */
+.theme-toggle:focus-visible {
+    outline-offset: 3px;
+    border-radius: 10px;
+}
+
+/* Supprimer outline souris mais garder clavier */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* Taille minimale des zones cliquables — sauf navbar et boutons UI */
+.btn-cta, .btn-submit, .btn, .btn-github, .btn-download {
+    min-height: 44px;
+}
+
+/* Liens inline — pas de taille minimale */
+p a, .inline-link, .navbar a, .theme-toggle, .theme-toggle-mobile-btn {
+    min-height: unset;
+    min-width: unset;
+}
+
+/* Contraste texte muted amélioré */
+[data-theme="dark"] .subtitle,
+[data-theme="dark"] .hero-desc,
+[data-theme="dark"] .card-desc,
+[data-theme="dark"] .timeline-desc,
+[data-theme="dark"] .service-desc,
+[data-theme="dark"] .cta-sub {
+    color: #a0a0b8;
+}
+
+
+/* Réduction des animations si demandée */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

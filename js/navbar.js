@@ -10,9 +10,13 @@
   const path    = window.location.pathname;
   const inPages = path.includes('/pages/');
   // Nouvelle structure : pages/nom/index.html — remonter de 2 niveaux
+  // Depuis pages/nom/ on remonte 2 niveaux pour trouver la racine
   const root    = inPages
     ? path.substring(0, path.indexOf('/pages/')) + '/'
     : path.substring(0, path.lastIndexOf('/') + 1);
+
+  // Vérification : si on est dans pages/nom/, root doit finir par /
+  // ex: /klg-digital.ch/pages/parcours/ → root = /klg-digital.ch/
 
   // ── Détecter la page courante ─────────────────────────────
   // Nouvelle structure : /pages/it/ → currentPage = 'it'
@@ -37,8 +41,8 @@
 
   // ── Générer le HTML de la navbar ──────────────────────────
   const navHTML = `
-    <nav class="navbar">
-      <a href="${root}index.html" class="logo">
+    <nav class="navbar" role="navigation" aria-label="Navigation principale">
+      <a href="${root}index.html" class="logo" aria-label="KLG Digital — Accueil">
         <img src="${imgRoot}images/${logoFile}" alt="KLG Digital" class="logo-img">
       </a>
       <button class="menu-toggle" aria-label="Ouvrir le menu" aria-expanded="false">
@@ -46,7 +50,7 @@
         <span></span>
         <span></span>
       </button>
-      <ul class="nav-links">
+      <ul class="nav-links" role="list">
         ${links.map(link => {
           const isActive = link.href.includes('/' + currentPage + '/') || link.href.endsWith(currentPage) || link.href.endsWith(currentPage + '/');
           return `<li><a href="${link.href}"${isActive ? ' class="active"' : ''}>${link.label}</a></li>`;

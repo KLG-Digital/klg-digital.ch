@@ -201,6 +201,7 @@
     updateNavColor();
     window.addEventListener('scroll', updateNavColor, { passive: true });
     window.addEventListener('resize', updateNavColor, { passive: true });
+
   }
 
 
