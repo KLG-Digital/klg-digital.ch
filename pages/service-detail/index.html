@@ -13,14 +13,6 @@
 
   <style>
 
-    /* ================= CANVAS ÉTOILES ================= */
-    #starCanvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
     /* ================= CONTENU ================= */
     main {
       position: relative;
@@ -184,34 +176,16 @@
       .cta-contact { flex-direction: column; align-items: flex-start; }
     }
 
-  
-    /* ── MODE CLAIR ── */
-    [data-theme="light"] h1,
-    [data-theme="light"] h2             { color: #1a1a2e; }
-    [data-theme="light"] .heading-tag   { color: #7c3aed; }
-    [data-theme="light"] .subtitle,
-    [data-theme="light"] .cta-sub       { color: #3a3a5a; }
-    [data-theme="light"] .cta-text      { color: #1a1a2e; }
-    [data-theme="light"] .service-name,
-    [data-theme="light"] .service-desc  { color: #1a1a2e; }
-    [data-theme="light"] .service-card  {
-      background: rgba(255,255,255,0.7);
+
+    /* ── MODE CLAIR — fonds/bordures (pas géré par theme.js) ── */
+    [data-theme="light"] .detail-card {
+      background: rgba(255,255,255,0.6);
       border-color: rgba(124,58,237,0.2);
-    }
-    [data-theme="light"] .service-card:hover {
-      background: rgba(255,255,255,0.9);
-      border-color: rgba(124,58,237,0.4);
     }
     [data-theme="light"] .cta-contact {
       background: rgba(255,255,255,0.4);
       border-color: rgba(124,58,237,0.25);
     }
-
-    [data-theme="light"] .detail-card    { background: rgba(255,255,255,0.6); border-color: rgba(124,58,237,0.2); }
-    [data-theme="light"] .detail-card h2 { color: #1a1a2e; }
-    [data-theme="light"] .detail-card p,
-    [data-theme="light"] .detail-card li { color: #3a3a5a; }
-    [data-theme="light"] .back-link      { color: #3a3a5a; }
 
 </style>
   <script>

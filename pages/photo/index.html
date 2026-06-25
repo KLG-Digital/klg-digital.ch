@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    #starCanvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
     main { position: relative; z-index: 1; max-width: 960px; margin: 0 auto; padding: 80px 24px 120px; }
     .heading-tag { font-size: 0.75em; letter-spacing: 0.2em; text-transform: uppercase; color: #a855f7; margin-bottom: 16px; }
     h1 { font-size: clamp(2em,5vw,3.2em); font-weight: 800; color: white; margin-bottom: 16px; }
@@ -45,37 +44,8 @@
     .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(168,85,247,0.4); }
 
     @media (max-width: 600px) { main { padding: 48px 16px 80px; } .services-grid, .gallery-grid { grid-template-columns: 1fr; } .cta-contact { flex-direction: column; align-items: flex-start; } }
-  
-    /* ── MODE CLAIR ── */
-    [data-theme="light"] h1,
-    [data-theme="light"] h2             { color: #1a1a2e; }
-    [data-theme="light"] .heading-tag   { color: #7c3aed; }
-    [data-theme="light"] .subtitle,
-    [data-theme="light"] .cta-sub       { color: #3a3a5a; }
-    [data-theme="light"] .cta-text      { color: #1a1a2e; }
-    [data-theme="light"] .service-name,
-    [data-theme="light"] .service-desc  { color: #1a1a2e; }
-    [data-theme="light"] .service-card  {
-      background: rgba(255,255,255,0.7);
-      border-color: rgba(124,58,237,0.2);
-    }
-    [data-theme="light"] .service-card:hover {
-      background: rgba(255,255,255,0.9);
-      border-color: rgba(124,58,237,0.4);
-    }
-    [data-theme="light"] .cta-contact {
-      background: rgba(255,255,255,0.4);
-      border-color: rgba(124,58,237,0.25);
-    }
 
-    [data-theme="light"] .gallery-item { background: rgba(255,255,255,0.5); color: rgba(124,58,237,0.4); }
-    [data-theme="light"] .gallery-label { color: #3a3a5a; }
-
-
-    /* Mode clair — icônes services */
-    [data-theme="light"] .service-icon { color: #1a1a2e; }
-    [data-theme="light"] .service-name { color: #1a1a2e; }
-    [data-theme="light"] .service-desc { color: #3a3a5a; }
+    /* ── MODE CLAIR — fonds/bordures (pas géré par theme.js) ── */
     [data-theme="light"] .service-card {
       background: rgba(255,255,255,0.7);
       border-color: rgba(124,58,237,0.2);
@@ -84,6 +54,8 @@
       background: rgba(255,255,255,0.9);
       border-color: rgba(124,58,237,0.4);
     }
+    [data-theme="light"] .cta-contact  { background: rgba(255,255,255,0.4); border-color: rgba(124,58,237,0.25); }
+    [data-theme="light"] .gallery-item { background: rgba(255,255,255,0.5); color: rgba(124,58,237,0.4); }
 
 </style>
   <script>
@@ -125,19 +97,19 @@
 
     <div class="section-title">Services</div>
     <div class="services-grid">
-      <a href="service-detail.html?id=montage-photo" class="service-card">
+      <a href="../service-detail/?id=montage-photo" class="service-card">
         <div class="service-header"><span class="service-icon"><i class="fa-solid fa-palette"></i></span><span class="service-price price-demand">Sur demande</span></div>
         <div class="service-name">Retouche photo</div>
         <p class="service-desc">Correction colorimétrique, suppression d'éléments, traitement de lots.</p>
         <span class="service-more">Voir le détail →</span>
       </a>
-      <a href="service-detail.html?id=logo" class="service-card">
+      <a href="../service-detail/?id=logo" class="service-card">
         <div class="service-header"><span class="service-icon"><i class="fa-solid fa-pen-nib"></i></span><span class="service-price price-demand">Sur demande</span></div>
         <div class="service-name">Création logo</div>
         <p class="service-desc">Identité visuelle adaptée à votre image et vos supports.</p>
         <span class="service-more">Voir le détail →</span>
       </a>
-      <a href="service-detail.html?id=media" class="service-card">
+      <a href="../service-detail/?id=media" class="service-card">
         <div class="service-header"><span class="service-icon"><i class="fa-solid fa-image"></i></span><span class="service-price price-demand">Sur demande</span></div>
         <div class="service-name">Création média</div>
         <p class="service-desc">Affiches, visuels réseaux sociaux, bannières selon vos besoins.</p>

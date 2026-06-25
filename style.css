@@ -311,6 +311,30 @@ main, .navbar, .site-footer,
 [data-theme="light"] .footer-links a:hover { color: #7c3aed; }
 [data-theme="light"] .footer-sep { color: #707070; }
 
+/* ── MODE CLAIR — texte dans les cartes (toujours sur la surface) ── */
+[data-theme="light"] .service-card *,
+[data-theme="light"] .detail-card *,
+[data-theme="light"] .timeline-card *,
+[data-theme="light"] .skill-group *,
+[data-theme="light"] .lang-item *,
+[data-theme="light"] .award-item *,
+[data-theme="light"] .card *,
+[data-theme="light"] .project-card *,
+[data-theme="light"] .cta-contact *,
+[data-theme="light"] .form-card * {
+  color: #1a1a2e !important;
+}
+
+/* Exceptions — gardent leur couleur d'accentuation */
+[data-theme="light"] .service-more       { color: #a855f7 !important; }
+[data-theme="light"] .btn-cta,
+[data-theme="light"] .btn-cta *          { color: white !important; }
+[data-theme="light"] .btn-submit         { color: white !important; }
+[data-theme="light"] .btn-github         { color: #1a1a2e !important; background: rgba(0,0,0,0.08) !important; border-color: rgba(0,0,0,0.15) !important; }
+[data-theme="light"] .section-title      { color: #a855f7 !important; }
+[data-theme="light"] .heading-tag        { color: #7c3aed !important; }
+[data-theme="light"] .inline-link        { color: #a855f7 !important; }
+
 /* ===================== BOUTON THÈME =================== */
 
 .theme-toggle {
@@ -337,19 +361,19 @@ main, .navbar, .site-footer,
 [data-theme="light"] .price-fixed {
     background: rgba(34,197,94,0.1);
     border-color: rgba(34,197,94,0.4);
-    color: #15803d;
+    color: #15803d !important;
 }
 
 [data-theme="light"] .price-demand {
     background: rgba(124,58,237,0.1);
     border-color: rgba(124,58,237,0.3);
-    color: #6d28d9;
+    color: #6d28d9 !important;
 }
 
 [data-theme="light"] .card-lang {
     background: rgba(124,58,237,0.1);
     border-color: rgba(124,58,237,0.3);
-    color: #6d28d9;
+    color: #6d28d9 !important;
 }
 
 [data-theme="light"] .config-badge,
@@ -359,78 +383,79 @@ main, .navbar, .site-footer,
 }
 
 [data-theme="light"] .badge-amd {
-    background: rgba(237,67,37,0.1);
-    border-color: rgba(237,67,37,0.4);
-    color: #b91c1c;
+    background: rgba(237,67,37,0.1) !important;
+    border-color: rgba(237,67,37,0.4) !important;
+    color: #b91c1c !important;
 }
 
 [data-theme="light"] .badge-intel {
-    background: rgba(0,113,197,0.1);
-    border-color: rgba(0,113,197,0.4);
-    color: #1d4ed8;
+    background: rgba(0,113,197,0.1) !important;
+    border-color: rgba(0,113,197,0.4) !important;
+    color: #1d4ed8 !important;
 }
 
 [data-theme="light"] .badge-formation {
-    background: rgba(59,130,246,0.1);
-    border-color: rgba(59,130,246,0.4);
-    color: #1d4ed8;
+    background: rgba(59,130,246,0.1) !important;
+    border-color: rgba(59,130,246,0.4) !important;
+    color: #1d4ed8 !important;
 }
 
 [data-theme="light"] .badge-pro {
     background: rgba(34,197,94,0.1);
     border-color: rgba(34,197,94,0.4);
-    color: #15803d;
+    color: #15803d !important;
 }
 
 [data-theme="light"] .badge-autre {
-    background: rgba(251,191,36,0.1);
-    border-color: rgba(251,191,36,0.5);
-    color: #92400e;
+    background: rgba(251,191,36,0.1) !important;
+    border-color: rgba(251,191,36,0.5) !important;
+    color: #92400e !important;
 }
 
 [data-theme="light"] .badge-current {
     background: rgba(124,58,237,0.1);
     border-color: rgba(124,58,237,0.3);
-    color: #6d28d9;
+    color: #6d28d9 !important;
 }
 
 [data-theme="light"] .tier-starter {
     background: rgba(34,197,94,0.1);
     border-color: rgba(34,197,94,0.4);
-    color: #15803d;
+    color: #15803d !important;
 }
 
 [data-theme="light"] .tier-performance {
-    background: rgba(59,130,246,0.1);
-    border-color: rgba(59,130,246,0.4);
-    color: #1d4ed8;
+    background: rgba(59,130,246,0.1) !important;
+    border-color: rgba(59,130,246,0.4) !important;
+    color: #1d4ed8 !important;
 }
 
 [data-theme="light"] .tier-enthusiast {
     background: rgba(124,58,237,0.1);
     border-color: rgba(124,58,237,0.3);
-    color: #6d28d9;
+    color: #6d28d9 !important;
 }
 
 [data-theme="light"] .skill-tag {
     background: rgba(124,58,237,0.1);
     border-color: rgba(124,58,237,0.25);
-    color: #6d28d9;
+    color: #6d28d9 !important;
 }
 
 [data-theme="light"] .interest-tag {
     background: rgba(124,58,237,0.08);
     border-color: rgba(124,58,237,0.2);
-    color: #6d28d9;
+    color: #6d28d9 !important;
 }
 
 [data-theme="light"] .rate-banner {
-    background: rgba(124,58,237,0.08);
-    border-color: rgba(124,58,237,0.25);
-    color: #4a1d96;
+    background: rgba(124,58,237,0.08) !important;
+    border-color: rgba(124,58,237,0.25) !important;
+    color: #4a1d96 !important;
 }
 
-[data-theme="light"] .rate-banner strong { color: white; }
+[data-theme="light"] .rate-banner strong { color: #1a1a2e !important; }
+[data-theme="light"] .rate-banner i      { color: #7c3aed !important; }
 
 /* ── BOUTON THÈME MOBILE (dernier item menu) ── */
 .theme-toggle-mobile { margin-top: 8px; }
@@ -509,16 +534,6 @@ main, .navbar, .site-footer,
     outline: none;
 }
 
-/* Taille minimale des zones cliquables — sauf navbar et boutons UI */
-.btn-cta, .btn-submit, .btn, .btn-github, .btn-download {
-    min-height: 44px;
-}
-
-/* Liens inline — pas de taille minimale */
-p a, .inline-link, .navbar a, .theme-toggle, .theme-toggle-mobile-btn {
-    min-height: unset;
-    min-width: unset;
-}
 
 /* Contraste texte muted amélioré */
 [data-theme="dark"] .subtitle,

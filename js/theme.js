@@ -169,11 +169,13 @@
       }
 
       // Titres et textes — blanc dans le ciel, foncé sur la surface
+      // On compare la position absolue (rect.top + scrollY) vs horizon absolu (horizonY + scrollY)
+      const absHorizon = horizonY + scrollY;
       document.querySelectorAll('h1, h2, .subtitle, .profile-name, .profile-bio, .timeline-title, .timeline-desc, .service-name, .service-desc, .card-title, .card-desc, .cta-text, .cta-sub, .award-title, .lang-name, .skill-group-title, .hero-h1, .hero-desc, .profile-title, .last-updated, .privacy-section p, .privacy-section li, .privacy-section h2').forEach(el => {
         if (el.closest('.planet') || el.closest('.heading-tag')) return;
         const rect    = el.getBoundingClientRect();
-        const elMid   = rect.top + rect.height / 2;
-        const onLunar = elMid > horizonY;
+        const elAbsMid = rect.top + rect.height / 2 + scrollY;
+        const onLunar  = elAbsMid > absHorizon;
         el.style.color = onLunar ? '#1a1a2e' : 'white';
       });
 
@@ -181,8 +183,8 @@
       document.querySelectorAll('.fa-solid, .fa-regular, .fa-brands').forEach(el => {
         if (el.closest('.planet') || el.closest('.heading-tag')) return;
         const rect    = el.getBoundingClientRect();
-        const elMid   = rect.top + rect.height / 2;
-        const onLunar = elMid > horizonY;
+        const elAbsMid = rect.top + rect.height / 2 + scrollY;
+        const onLunar  = elAbsMid > absHorizon;
         el.style.color = onLunar ? '#1a1a2e' : 'white';
       });
     }
@@ -201,14 +203,15 @@
 
     // Ajuster padding-top de main pour que le titre reste dans le ciel
     function adjustMainPadding() {
-      const main  = document.querySelector('main');
-      const nav   = document.querySelector('.navbar');
+      const main = document.querySelector('main');
+      const nav  = document.querySelector('.navbar');
       if (!main || !nav) return;
       const navH    = nav.offsetHeight;
       const H       = window.innerHeight;
       const horizon = H < 800 ? H * 0.20 : H * 0.25;
-      // On veut que le contenu commence juste sous la navbar, dans le ciel
-      const padding = Math.max(navH + 16, horizon * 0.3);
+      // Titre doit être dans le ciel — commencer à navHeight + petit espace
+      // Ne pas dépasser l'horizon
+      const padding = Math.min(horizon - 60, Math.max(navH + 16, 80));
       main.style.paddingTop = padding + 'px';
     }
 

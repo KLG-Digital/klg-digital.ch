@@ -21,10 +21,6 @@
       padding: 80px 24px 120px;
     }
 
-    @media (min-width: 1200px) {
-      [data-theme="light"] main { padding-top: 120px; }
-    }
-
     .heading-tag {
       font-size: 0.75em;
       letter-spacing: 0.2em;
@@ -38,14 +34,10 @@
       font-weight: 800;
       line-height: 1.1;
       margin-bottom: 56px;
-      color: var(--text, white);
+      color: white;
     }
 
-    /* Mode clair */
-    [data-theme="light"] h1 { color: #1a1a2e; }
-    [data-theme="light"] .timeline-title { color: #1a1a2e; }
-    [data-theme="light"] .timeline-date { color: #3a3a5a; }
-    [data-theme="light"] .timeline-desc { color: #3a3a5a; }
+    /* Mode clair — fond des cartes (visuel, pas géré par theme.js) */
     [data-theme="light"] .timeline-card {
       background: rgba(255,255,255,0.75);
       border-color: rgba(124,58,237,0.2);

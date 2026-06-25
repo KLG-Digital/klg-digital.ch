@@ -12,9 +12,6 @@
 
   <style>
 
-    /* Canvas étoiles fixe en arrière-plan */
-    #starCanvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-
     /* ─── LAYOUT ─── */
     main {
       position: relative;
@@ -199,17 +196,9 @@
       .cta-contact { flex-direction: column; align-items: flex-start; }
     }
 
-  
-    /* ── MODE CLAIR ── */
-    [data-theme="light"] h1,
-    [data-theme="light"] h2             { color: #1a1a2e; }
-    [data-theme="light"] .heading-tag   { color: #7c3aed; }
-    [data-theme="light"] .subtitle,
-    [data-theme="light"] .cta-sub       { color: #3a3a5a; }
-    [data-theme="light"] .cta-text      { color: #1a1a2e; }
-    [data-theme="light"] .service-name,
-    [data-theme="light"] .service-desc  { color: #1a1a2e; }
-    [data-theme="light"] .service-card  {
+
+    /* ── MODE CLAIR — fonds/bordures (pas géré par theme.js) ── */
+    [data-theme="light"] .service-card {
       background: rgba(255,255,255,0.7);
       border-color: rgba(124,58,237,0.2);
     }
@@ -217,14 +206,8 @@
       background: rgba(255,255,255,0.9);
       border-color: rgba(124,58,237,0.4);
     }
-    [data-theme="light"] .cta-contact {
-      background: rgba(255,255,255,0.4);
-      border-color: rgba(124,58,237,0.25);
-    }
-
-    [data-theme="light"] .rate-banner  { background: rgba(255,255,255,0.5); color: #3a3a5a; }
-    [data-theme="light"] .rate-banner strong { color: #1a1a2e; }
-    [data-theme="light"] .service-icon { color: #1a1a2e; }
+    [data-theme="light"] .cta-contact { background: rgba(255,255,255,0.4); border-color: rgba(124,58,237,0.25); }
+    [data-theme="light"] .rate-banner { background: rgba(255,255,255,0.5); }
 
 </style>
   <script>
@@ -276,7 +259,7 @@
 
     <div class="services-grid">
 
-      <a href="service-detail.html?id=support" class="service-card">
+      <a href="../service-detail/?id=support" class="service-card">
         <div class="service-header">
           <span class="service-icon"><i class="fa-solid fa-screwdriver-wrench"></i></span>
           <span class="service-price price-fixed">55.- / h</span>
@@ -286,7 +269,7 @@
         <span class="service-more">Voir le détail →</span>
       </a>
 
-      <a href="service-detail.html?id=maintenance" class="service-card">
+      <a href="../service-detail/?id=maintenance" class="service-card">
         <div class="service-header">
           <span class="service-icon"><i class="fa-solid fa-wrench"></i></span>
           <span class="service-price price-fixed">55.- / h</span>
@@ -296,7 +279,7 @@
         <span class="service-more">Voir le détail →</span>
       </a>
 
-      <a href="service-detail.html?id=montage-pc" class="service-card">
+      <a href="../service-detail/?id=montage-pc" class="service-card">
         <div class="service-header">
           <span class="service-icon"><i class="fa-solid fa-desktop"></i></span>
           <span class="service-price price-demand">Sur demande</span>
@@ -306,7 +289,7 @@
         <span class="service-more">Voir le détail →</span>
       </a>
 
-      <a href="service-detail.html?id=upgrade" class="service-card">
+      <a href="../service-detail/?id=upgrade" class="service-card">
         <div class="service-header">
           <span class="service-icon"><i class="fa-solid fa-bolt"></i></span>
           <span class="service-price price-fixed">55.- / h + matériel</span>
@@ -316,7 +299,7 @@
         <span class="service-more">Voir le détail →</span>
       </a>
 
-      <a href="service-detail.html?id=parc" class="service-card">
+      <a href="../service-detail/?id=parc" class="service-card">
         <div class="service-header">
           <span class="service-icon"><i class="fa-solid fa-building"></i></span>
           <span class="service-price price-demand">Sur demande</span>
@@ -326,7 +309,7 @@
         <span class="service-more">Voir le détail →</span>
       </a>
 
-      <a href="service-detail.html?id=conseils" class="service-card">
+      <a href="../service-detail/?id=conseils" class="service-card">
         <div class="service-header">
           <span class="service-icon"><i class="fa-solid fa-lightbulb"></i></span>
           <span class="service-price price-fixed">55.- / h</span>
@@ -336,7 +319,7 @@
         <span class="service-more">Voir le détail →</span>
       </a>
 
-      <a href="service-detail.html?id=cours" class="service-card">
+      <a href="../service-detail/?id=cours" class="service-card">
         <div class="service-header">
           <span class="service-icon"><i class="fa-solid fa-book-open"></i></span>
           <span class="service-price price-fixed">50.- / h</span>
