@@ -121,8 +121,9 @@
 
     // Hauteur de l'horizon : 25% de la fenêtre (comme dans moon.js)
     function getHorizonY() {
-      const base = window.innerHeight * 0.25;
-      return Math.max(-window.innerHeight, base - window.scrollY * 1.5);
+      const H    = window.innerHeight;
+      const base = H < 800 ? H * 0.20 : H * 0.25;
+      return Math.max(-H, base - window.scrollY * 1.5);
     }
 
     function updateNavColor() {
@@ -161,7 +162,7 @@
       const logoImg = document.querySelector('.logo-img');
       if (logoImg) {
         const isPages = window.location.pathname.includes('/pages/');
-        const base    = isPages ? '../images/' : 'images/';
+        const base    = isPages ? '../../images/' : 'images/';
         logoImg.src   = onSurface
           ? base + 'KLG-Digital-noir.png'
           : base + 'KLG-Digital-blanc.png';
@@ -197,6 +198,22 @@
     document.querySelectorAll('.planet-label').forEach(el => {
       el.style.color = '#1a1a2e';
     });
+
+    // Ajuster padding-top de main pour que le titre reste dans le ciel
+    function adjustMainPadding() {
+      const main  = document.querySelector('main');
+      const nav   = document.querySelector('.navbar');
+      if (!main || !nav) return;
+      const navH    = nav.offsetHeight;
+      const H       = window.innerHeight;
+      const horizon = H < 800 ? H * 0.20 : H * 0.25;
+      // On veut que le contenu commence juste sous la navbar, dans le ciel
+      const padding = Math.max(navH + 16, horizon * 0.3);
+      main.style.paddingTop = padding + 'px';
+    }
+
+    adjustMainPadding();
+    window.addEventListener('resize', adjustMainPadding, { passive: true });
 
     updateNavColor();
     window.addEventListener('scroll', updateNavColor, { passive: true });

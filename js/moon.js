@@ -89,7 +89,11 @@
     const H = canvas.height = window.innerHeight;
 
     // Horizon monte avec le scroll
-    const baseHorizon = H * 0.25;
+    // Horizon adaptatif — plus bas sur petits écrans pour éviter que la lune coupe le contenu
+    const baseHorizon = H < 800
+      ? H * 0.20   // petits écrans (MacBook 900px, mobile)
+      : H * 0.25;  // grands écrans
+    window._moonHorizonY = baseHorizon;
     const horizonY    = Math.max(-H, baseHorizon - scrollY * 1.5);
     const curveDrop   = H * 0.05;
 
