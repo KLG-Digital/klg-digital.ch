@@ -43,6 +43,112 @@ main, .navbar, .site-footer,
     z-index: 1;
 }
 
+
+/* ================= PAGES INTÉRIEURES (spécialité) ================= */
+
+/* Layout main commun */
+body:has(.back-link) main {
+    padding-top: 16px !important;
+}
+
+/* Bouton retour */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82em;
+    color: #6b6b8a;
+    margin-bottom: 24px;
+    transition: color 0.2s;
+}
+.back-link:hover { color: #a855f7; }
+[data-theme="light"] .back-link       { color: #5a5a7a; }
+[data-theme="light"] .back-link:hover { color: #7c3aed; }
+
+/* En-tête de page */
+.page-heading-tag {
+    font-size: 0.75em;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #a855f7;
+    margin-bottom: 12px;
+}
+
+.page-h1 {
+    font-size: clamp(2em, 5vw, 3.2em);
+    font-weight: 800;
+    line-height: 1.1;
+    color: white;
+    margin-bottom: 0;
+}
+
+.page-subtitle {
+    font-size: 1em;
+    color: #9d9db5;
+    line-height: 1.7;
+    max-width: 520px;
+    margin-top: 16px;
+    margin-bottom: 40px;
+}
+
+/* Séparateur de section */
+.section-title {
+    font-size: 0.72em;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #a855f7;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(168,85,247,0.2);
+}
+
+/* CTA contact */
+.cta-contact {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    background: rgba(168,85,247,0.06);
+    border: 1px solid rgba(168,85,247,0.25);
+    border-radius: 16px;
+    padding: 28px 32px;
+    flex-wrap: wrap;
+}
+.cta-text { font-size: 1em; font-weight: 700; color: white; margin-bottom: 4px; }
+.cta-sub  { font-size: 0.85em; color: #6b6b8a; }
+
+.btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    border-radius: 10px;
+    color: white;
+    font-size: 0.88em;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.btn-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(168,85,247,0.4);
+}
+
+[data-theme="light"] .cta-contact {
+    background: rgba(255,255,255,0.4);
+    border-color: rgba(124,58,237,0.25);
+}
+
 /* ================= HEADER ================= */
 
 .hero {
@@ -288,7 +394,7 @@ main, .navbar, .site-footer,
 }
 
 [data-theme="light"] .navbar a:hover { color: #7c3aed; }
-[data-theme="light"] .nav-links .active { color: #7c3aed; }
+[data-theme="light"] .nav-links .active { color: #a855f7; }
 
 /* Hamburger en mode clair */
 [data-theme="light"] .menu-toggle span { background: #1a1a2e; }
@@ -329,10 +435,12 @@ main, .navbar, .site-footer,
 [data-theme="light"] .service-more       { color: #a855f7 !important; }
 [data-theme="light"] .btn-cta,
 [data-theme="light"] .btn-cta *          { color: white !important; }
+[data-theme="light"] .btn-download,
+[data-theme="light"] .btn-download *     { color: white !important; }
 [data-theme="light"] .btn-submit         { color: white !important; }
 [data-theme="light"] .btn-github         { color: #1a1a2e !important; background: rgba(0,0,0,0.08) !important; border-color: rgba(0,0,0,0.15) !important; }
 [data-theme="light"] .section-title      { color: #a855f7 !important; }
-[data-theme="light"] .heading-tag        { color: #7c3aed !important; }
+[data-theme="light"] .heading-tag        { color: #a855f7 !important; }
 [data-theme="light"] .inline-link        { color: #a855f7 !important; }
 
 /* ===================== BOUTON THÈME =================== */

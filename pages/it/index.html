@@ -18,7 +18,7 @@
       z-index: 1;
       max-width: 960px;
       margin: 0 auto;
-      padding: 80px 24px 120px;
+      padding: 4px 24px 120px;
     }
 
     .heading-tag {
@@ -37,12 +37,13 @@
       color: white;
     }
 
-    .subtitle {
+    .subtitle { 
+      font-size: 1em; 
       color: #9d9db5;
-      font-size: 1em;
       line-height: 1.7;
-      margin-bottom: 48px;
       max-width: 520px;
+      margin-top: 40px;
+      margin-bottom: 40px; 
     }
 
     /* ─── TAUX HORAIRE ─── */
@@ -209,7 +210,21 @@
     [data-theme="light"] .cta-contact { background: rgba(255,255,255,0.4); border-color: rgba(124,58,237,0.25); }
     [data-theme="light"] .rate-banner { background: rgba(255,255,255,0.5); }
 
-</style>
+
+    /* ── BOUTON RETOUR ── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82em;
+      color: #6b6b8a;
+      margin-bottom: 32px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #a855f7; }
+    [data-theme="light"] .back-link { color: #5a5a7a; }
+    [data-theme="light"] .back-link:hover { color: #7c3aed; }
+  </style>
   <script>
     (function() {
       const favicon = document.querySelector('link[rel="icon"]');
@@ -244,6 +259,7 @@
   <!-- ===================== CONTENU ===================== -->
   <main>
 
+    <a href="../../index.html" class="back-link">← Accueil</a>
     <p class="heading-tag"><i class="fa-solid fa-laptop-code"></i> Spécialité</p>
     <h1>IT & Infrastructure</h1>
     <p class="subtitle">Support, maintenance, montage et conseils — des prestations IT adaptées à vos besoins, par un technicien certifié CFC.</p>
