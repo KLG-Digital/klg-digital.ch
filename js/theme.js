@@ -206,7 +206,7 @@
       if (!main || !nav) return;
       const navH = nav.offsetHeight;
       const isMobile = window.innerWidth <= 768;
-      main.style.paddingTop = Math.max(4, navH - (isMobile ? 16 : 48)) + 'px';
+      main.style.paddingTop = isMobile ? Math.max(4, navH + 16) + 'px' : Math.max(4, navH - 48) + 'px';
     }
 
     adjustMainPadding();
