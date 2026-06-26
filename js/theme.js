@@ -205,7 +205,8 @@
       const nav  = document.querySelector('.navbar');
       if (!main || !nav) return;
       const navH = nav.offsetHeight;
-      main.style.paddingTop = Math.max(4, navH - 32) + 'px';
+      const isMobile = window.innerWidth <= 768;
+      main.style.paddingTop = Math.max(4, navH - (isMobile ? 16 : 48)) + 'px';
     }
 
     adjustMainPadding();
