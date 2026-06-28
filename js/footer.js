@@ -13,7 +13,10 @@
   const footerHTML = `
     <footer class="site-footer">
       <div class="footer-inner">
-        <span class="footer-copy">© ${year} KLG Digital — Tous droits réservés</span>
+        <div class="footer-left">
+          <span class="footer-copy">© ${year} KLG Digital — Tous droits réservés</span>
+          <span class="footer-location"><i class="fa-solid fa-location-dot"></i> Yvorne, 1853 Chablais vaudois — Suisse</span>
+        </div>
         <div class="footer-links">
           <a href="mailto:kevin@klg-digital.ch">kevin@klg-digital.ch</a>
           <span class="footer-sep">·</span>

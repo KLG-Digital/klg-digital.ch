@@ -49,8 +49,8 @@
     /* ─── TAUX HORAIRE ─── */
     .rate-banner {
       display: inline-flex;
-      align-items: center;
-      gap: 10px;
+      flex-direction: column;
+      gap: 12px;
       background: rgba(168,85,247,0.08);
       border: 1px solid rgba(168,85,247,0.25);
       border-radius: 12px;
@@ -61,6 +61,36 @@
     }
 
     .rate-banner strong { color: white; }
+
+    .rate-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .rate-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .rate-slot {
+      background: rgba(100,50,180,0.3);
+      border-radius: 8px;
+      padding: 8px 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .rate-label { font-size: 0.7em; color: #c4b5fd; }
+    .rate-price { font-size: 0.85em; font-weight: 700; color: white; }
+
+    @media (max-width: 480px) {
+      .rate-grid { grid-template-columns: repeat(2, 1fr); }
+    }
 
     /* ─── SÉPARATEUR DE SECTION ─── */
     .section-title {
@@ -266,8 +296,18 @@
 
     <!-- Taux horaire -->
     <div class="rate-banner">
-      <i class="fa-solid fa-clock"></i>
-      Taux horaire : <strong>55.- CHF / heure</strong> · Déplacement selon distance
+      <div class="rate-top">
+        <i class="fa-solid fa-clock"></i>
+        Taux horaire : <strong>55.- CHF / heure</strong>
+        · Facturation par tranche de <strong>15 min</strong>
+        · Déplacement selon distance
+      </div>
+      <div class="rate-grid">
+        <div class="rate-slot"><span class="rate-label">1–15 min</span><span class="rate-price">13.75 CHF</span></div>
+        <div class="rate-slot"><span class="rate-label">16–30 min</span><span class="rate-price">27.50 CHF</span></div>
+        <div class="rate-slot"><span class="rate-label">31–45 min</span><span class="rate-price">41.25 CHF</span></div>
+        <div class="rate-slot"><span class="rate-label">46–60 min</span><span class="rate-price">55.00 CHF</span></div>
+      </div>
     </div>
 
     <!-- Services -->
