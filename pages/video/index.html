@@ -20,7 +20,6 @@
       padding: 4px 24px 120px;
     }
 
-    /* ─── EN-TÊTE ─── */
     .heading-tag {
       font-size: 0.75em;
       letter-spacing: 0.2em;
@@ -63,9 +62,9 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      text-decoration: none;
+      cursor: pointer;
       color: inherit;
-      transition: border-color 0.3s, background 0.3s, transform 0.3s;
+      transition: border-color 0.3s, background 0.3s;
       position: relative;
       overflow: hidden;
     }
@@ -80,13 +79,14 @@
       transition: opacity 0.3s;
     }
 
-    .service-card:hover {
+    .service-card:hover,
+    .service-card.open {
       border-color: rgba(168,85,247,0.4);
       background: rgba(168,85,247,0.04);
-      transform: translateY(-3px);
     }
 
-    .service-card:hover::before { opacity: 1; }
+    .service-card:hover::before,
+    .service-card.open::before { opacity: 1; }
 
     .service-header {
       display: flex;
@@ -105,8 +105,89 @@
       padding: 3px 10px;
     }
     .service-name  { font-size: 0.98em; font-weight: 700; color: white; }
-    .service-desc  { font-size: 0.83em; color: #9d9db5; line-height: 1.6; flex: 1; }
-    .service-more  { font-size: 0.78em; color: #a855f7; margin-top: 4px; }
+    .service-desc  { font-size: 0.83em; color: #9d9db5; line-height: 1.6; }
+
+    /* ─── TOGGLE ─── */
+    .service-toggle {
+      font-size: 0.78em;
+      color: #a855f7;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .service-toggle i {
+      transition: transform 0.3s;
+      font-size: 0.9em;
+    }
+
+    .service-card.open .service-toggle i { transform: rotate(180deg); }
+
+    /* ─── DÉTAILS ACCORDION ─── */
+    .service-details {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s ease, opacity 0.3s ease, padding-top 0.3s ease, border-color 0.3s;
+      opacity: 0;
+      overflow: hidden;
+      border-top: 1px solid transparent;
+    }
+
+    .service-details-inner {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .service-card.open .service-details {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      padding-top: 12px;
+      border-top-color: rgba(168,85,247,0.15);
+    }
+
+    .service-details-title {
+      font-size: 0.72em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #a855f7;
+      margin-bottom: 4px;
+    }
+
+    .service-details ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .service-details ul li {
+      font-size: 0.82em;
+      color: #9d9db5;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .service-details ul li::before {
+      content: '✦';
+      color: #a855f7;
+      font-size: 0.7em;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .service-note {
+      font-size: 0.78em;
+      color: #6b6b8a;
+      font-style: italic;
+      padding: 8px 12px;
+      background: rgba(168,85,247,0.05);
+      border-radius: 8px;
+      border-left: 2px solid rgba(168,85,247,0.3);
+    }
 
     /* ─── GRILLE VIDÉO ─── */
     .video-grid {
@@ -142,21 +223,37 @@
       .cta-contact { flex-direction: column; align-items: flex-start; }
     }
 
-    /* ── MODE CLAIR — fonds/bordures (pas géré par theme.js) ── */
+    /* ── MODE CLAIR ── */
     [data-theme="light"] .service-card {
       background: rgba(255,255,255,0.7);
       border-color: rgba(124,58,237,0.2);
     }
-
-    [data-theme="light"] .service-card:hover {
+    [data-theme="light"] .service-card:hover,
+    [data-theme="light"] .service-card.open {
       background: rgba(255,255,255,0.9);
       border-color: rgba(124,58,237,0.4);
     }
-
+    [data-theme="light"] .service-card.open .service-details {
+      border-top-color: rgba(124,58,237,0.2);
+    }
     [data-theme="light"] .video-item {
       background: rgba(255,255,255,0.5);
       color: rgba(124,58,237,0.4);
     }
+
+    /* ── BOUTON RETOUR ── */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82em;
+      color: #6b6b8a;
+      margin-bottom: 32px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: #a855f7; }
+    [data-theme="light"] .back-link { color: #5a5a7a; }
+    [data-theme="light"] .back-link:hover { color: #7c3aed; }
 
   </style>
   <script>
@@ -174,24 +271,11 @@
 </head>
 <body>
 
-  <!-- ===================== THEME JS ===================== -->
   <script src="../../js/theme.js"></script>
-  <!-- ================================================= -->
-
-  <!-- ===================== NAVBAR JS ===================== -->
   <script src="../../js/navbar.js"></script>
-  <!-- ================================================= -->
-
-  <!-- ===================== STARS JS ===================== -->
-    <!-- ===================== MOON JS ================== -->
   <script src="../../js/moon.js"></script>
-  <!-- ================================================= -->
-
   <script src="../../js/stars.js"></script>
-  <!-- ================================================= -->
 
-  
-  <!-- ===================== CONTENU ===================== -->
   <main>
     <a href="../../index.html" class="back-link">← Accueil</a>
     <p class="heading-tag"><i class="fa-solid fa-film"></i> Spécialité</p>
@@ -200,18 +284,57 @@
 
     <div class="section-title">Services</div>
     <div class="services-grid">
-      <a href="../service-detail/?id=montage-video" class="service-card">
-        <div class="service-header"><span class="service-icon"><i class="fa-solid fa-scissors"></i></span><span class="service-price price-demand">Sur demande</span></div>
+
+      <div class="service-card">
+        <div class="service-header">
+          <span class="service-icon"><i class="fa-solid fa-scissors"></i></span>
+          <span class="service-price">Sur demande</span>
+        </div>
         <div class="service-name">Montage vidéo</div>
         <p class="service-desc">Cut, étalonnage, habillage sonore et export selon votre plateforme cible.</p>
-        <span class="service-more">Voir le détail →</span>
-      </a>
-      <a href="../service-detail/?id=media" class="service-card">
-        <div class="service-header"><span class="service-icon"><i class="fa-solid fa-clapperboard"></i></span><span class="service-price price-demand">Sur demande</span></div>
+        <div class="service-toggle"><i class="fa-solid fa-chevron-down"></i> Voir le détail</div>
+        <div class="service-details">
+          <div class="service-details-inner">
+            <div>
+              <div class="service-details-title">Ce qui est inclus</div>
+              <ul>
+                <li>Montage et cut du rush</li>
+                <li>Étalonnage colorimétrique</li>
+                <li>Ajout de textes, titres et transitions</li>
+                <li>Habillage sonore et mixage</li>
+                <li>Export selon la plateforme (YouTube, Instagram, etc.)</li>
+              </ul>
+            </div>
+            <div class="service-note">Tarif selon durée et complexité du projet. Devis gratuit sur demande.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-header">
+          <span class="service-icon"><i class="fa-solid fa-clapperboard"></i></span>
+          <span class="service-price">Sur demande</span>
+        </div>
         <div class="service-name">Création média</div>
         <p class="service-desc">Intros, outros, motion design basique et habillage graphique de vidéos.</p>
-        <span class="service-more">Voir le détail →</span>
-      </a>
+        <div class="service-toggle"><i class="fa-solid fa-chevron-down"></i> Voir le détail</div>
+        <div class="service-details">
+          <div class="service-details-inner">
+            <div>
+              <div class="service-details-title">Ce qui est inclus</div>
+              <ul>
+                <li>Affiches et flyers</li>
+                <li>Visuels pour réseaux sociaux</li>
+                <li>Bannières web</li>
+                <li>Supports de présentation</li>
+                <li>Tout autre support graphique sur demande</li>
+              </ul>
+            </div>
+            <div class="service-note">Tarif selon le nombre de visuels et la complexité. Devis gratuit.</div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <div class="section-title">Réalisations</div>
@@ -227,12 +350,12 @@
       <a href="../contact/" class="btn-cta">Me contacter →</a>
     </div>
   </main>
-  <!-- ================================================= -->
 
-
-  <!-- ===================== FOOTER JS ===================== -->
   <script src="../../js/footer.js"></script>
-  <!-- ================================================= -->
-  
+  <script>
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.addEventListener('click', () => card.classList.toggle('open'));
+    });
+  </script>
 </body>
 </html>

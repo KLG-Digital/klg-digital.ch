@@ -9,10 +9,9 @@
   <link rel="icon" type="image/png" href="../../images/KLG-Digital-blanc.png">
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
   <style>
 
-    /* ================= CONTENU ================= */
+    /* ─── LAYOUT ─── */
     main {
       position: relative;
       z-index: 1;
@@ -26,15 +25,15 @@
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: #a855f7;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     h1 {
       font-size: clamp(2em, 5vw, 3.2em);
       font-weight: 800;
       line-height: 1.1;
-      margin-bottom: 16px;
       color: white;
+      margin-bottom: 0;
     }
 
     .subtitle {
@@ -46,7 +45,7 @@
       margin-bottom: 40px;
     }
 
-    /* ================= BADGE TAUX HORAIRE ================= */
+    /* ─── TAUX HORAIRE ─── */
     .rate-banner {
       display: inline-flex;
       align-items: center;
@@ -60,15 +59,10 @@
       color: #c4b5fd;
     }
 
-    .rate-banner strong {
-      color: white;
-      font-size: 1.1em;
-    }
+    .rate-banner strong { color: white; font-size: 1.1em; }
 
-    /* ================= CATÉGORIE ================= */
-    .category {
-      margin-bottom: 56px;
-    }
+    /* ─── CATÉGORIE ─── */
+    .category { margin-bottom: 56px; }
 
     .category-title {
       font-size: 0.72em;
@@ -88,14 +82,14 @@
       background: rgba(168,85,247,0.2);
     }
 
-    /* ================= GRILLE SERVICES ================= */
+    /* ─── GRILLE SERVICES ─── */
     .services-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 20px;
     }
 
-    /* ================= CARTE SERVICE ================= */
+    /* ─── CARTE SERVICE ─── */
     .service-card {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(168,85,247,0.15);
@@ -104,27 +98,13 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      transition: border-color 0.3s, background 0.3s, transform 0.3s;
-      position: relative;
-      overflow: hidden;
-      text-decoration: none;
       cursor: pointer;
       color: inherit;
+      transition: border-color 0.3s, background 0.3s;
+      position: relative;
+      overflow: hidden;
     }
 
-    .service-more {
-      font-size: 0.78em;
-      color: #a855f7;
-      margin-top: 4px;
-    }
-
-    .service-card:hover {
-      border-color: rgba(168,85,247,0.4);
-      background: rgba(168,85,247,0.04);
-      transform: translateY(-3px);
-    }
-
-    /* Ligne lumineuse au hover */
     .service-card::before {
       content: '';
       position: absolute;
@@ -135,7 +115,14 @@
       transition: opacity 0.3s;
     }
 
-    .service-card:hover::before { opacity: 1; }
+    .service-card:hover,
+    .service-card.open {
+      border-color: rgba(168,85,247,0.4);
+      background: rgba(168,85,247,0.04);
+    }
+
+    .service-card:hover::before,
+    .service-card.open::before { opacity: 1; }
 
     .service-header {
       display: flex;
@@ -146,7 +133,6 @@
 
     .service-icon { font-size: 1.5em; flex-shrink: 0; }
 
-    /* Badge tarif */
     .service-price {
       font-size: 0.75em;
       font-weight: 700;
@@ -170,72 +156,110 @@
       padding: 3px 10px;
     }
 
-    .service-name {
-      font-size: 0.98em;
-      font-weight: 700;
-      color: white;
-    }
+    .service-name { font-size: 0.98em; font-weight: 700; color: white; }
+    .service-desc { font-size: 0.83em; color: #9d9db5; line-height: 1.6; }
 
-    .service-desc {
-      font-size: 0.83em;
-      color: #9d9db5;
-      line-height: 1.6;
-    }
-
-    /* ================= CTA ================= */
-    .cta-contact {
+    /* ─── TOGGLE ─── */
+    .service-toggle {
+      font-size: 0.78em;
+      color: #a855f7;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      background: rgba(168,85,247,0.06);
-      border: 1px solid rgba(168,85,247,0.25);
-      border-radius: 16px;
-      padding: 28px 32px;
-      margin-top: 64px;
-      flex-wrap: wrap;
+      gap: 6px;
     }
 
-    .cta-text { font-size: 1em; font-weight: 700; color: white; margin-bottom: 4px; }
-    .cta-sub  { font-size: 0.85em; color: #6b6b8a; }
+    .service-toggle i {
+      transition: transform 0.3s;
+      font-size: 0.9em;
+    }
 
-    .btn-cta {
-      display: inline-flex;
-      align-items: center;
+    .service-card.open .service-toggle i { transform: rotate(180deg); }
+
+    /* ─── DÉTAILS ACCORDION ─── */
+    .service-details {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s ease, opacity 0.3s ease, padding-top 0.3s ease, border-color 0.3s;
+      opacity: 0;
+      overflow: hidden;
+      border-top: 1px solid transparent;
+    }
+
+    .service-details-inner {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .service-card.open .service-details {
+      grid-template-rows: 1fr;
+      opacity: 1;
+      padding-top: 12px;
+      border-top-color: rgba(168,85,247,0.15);
+    }
+
+    .service-details-title {
+      font-size: 0.72em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #a855f7;
+      margin-bottom: 4px;
+    }
+
+    .service-details ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .service-details ul li {
+      font-size: 0.82em;
+      color: #9d9db5;
+      line-height: 1.5;
+      display: flex;
+      align-items: flex-start;
       gap: 8px;
-      padding: 12px 24px;
-      background: linear-gradient(135deg, #7c3aed, #a855f7);
-      border-radius: 10px;
-      color: white;
-      font-size: 0.88em;
-      font-weight: 700;
-      text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      white-space: nowrap;
+    }
+
+    .service-details ul li::before {
+      content: '✦';
+      color: #a855f7;
+      font-size: 0.7em;
+      margin-top: 2px;
       flex-shrink: 0;
     }
 
-    .btn-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(168,85,247,0.4);
+    .service-note {
+      font-size: 0.78em;
+      color: #6b6b8a;
+      font-style: italic;
+      padding: 8px 12px;
+      background: rgba(168,85,247,0.05);
+      border-radius: 8px;
+      border-left: 2px solid rgba(168,85,247,0.3);
     }
 
-    /* ================= MOBILE ================= */
+    /* ─── RESPONSIVE ─── */
     @media (max-width: 600px) {
       main { padding: 48px 16px 80px; }
       .services-grid { grid-template-columns: 1fr; }
       .cta-contact { flex-direction: column; align-items: flex-start; }
     }
 
-
-    /* ── MODE CLAIR — fonds/bordures (pas géré par theme.js) ── */
+    /* ── MODE CLAIR ── */
     [data-theme="light"] .service-card {
       background: rgba(255,255,255,0.7);
       border-color: rgba(124,58,237,0.2);
     }
-    [data-theme="light"] .service-card:hover {
+    [data-theme="light"] .service-card:hover,
+    [data-theme="light"] .service-card.open {
       background: rgba(255,255,255,0.9);
       border-color: rgba(124,58,237,0.4);
+    }
+    [data-theme="light"] .service-card.open .service-details {
+      border-top-color: rgba(124,58,237,0.2);
     }
     [data-theme="light"] .cta-contact {
       background: rgba(255,255,255,0.4);
@@ -243,7 +267,7 @@
     }
     [data-theme="light"] .rate-banner { background: rgba(255,255,255,0.5); }
 
-</style>
+  </style>
   <script>
     (function() {
       const favicon = document.querySelector('link[rel="icon"]');
@@ -259,161 +283,315 @@
 </head>
 <body>
 
-  <!-- ===================== THEME JS ===================== -->
   <script src="../../js/theme.js"></script>
-  <!-- ================================================= -->
-
-  <!-- ===================== NAVBAR JS ===================== -->
   <script src="../../js/navbar.js"></script>
-  <!-- ================================================= -->
-
-  <!-- ===================== STARS JS ===================== -->
-    <!-- ===================== MOON JS ================== -->
   <script src="../../js/moon.js"></script>
-  <!-- ================================================= -->
-
   <script src="../../js/stars.js"></script>
-  <!-- ================================================= -->
 
-  
-  <!-- ===================== CONTENU ===================== -->
   <main>
     <p class="heading-tag">✦ Ce que je propose</p>
     <h1>Services</h1>
     <p class="subtitle">Un souci ? Me voici. Des prestations adaptées à vos besoins, du dépannage rapide aux projets sur mesure.</p>
 
-    <!-- TAUX HORAIRE -->
     <div class="rate-banner">
-      <i class="fa-solid fa-clock"></i> Taux horaire IT : <strong>55.- CHF / heure</strong> · Déplacement selon distance
+      <i class="fa-solid fa-clock"></i> Taux horaire IT : <strong>55.- CHF / heure</strong> · Facturation par tranche de 15 min · Déplacement selon distance
     </div>
 
-    <!-- ── CATÉGORIE IT & INFRASTRUCTURE ── -->
+    <!-- ── IT & INFRASTRUCTURE ── -->
     <div class="category">
       <div class="category-title"><i class="fa-solid fa-laptop-code"></i> IT &amp; Infrastructure</div>
       <div class="services-grid">
 
-        <a href="../service-detail/?id=support" class="service-card">
+        <div class="service-card">
           <div class="service-header">
             <span class="service-icon"><i class="fa-solid fa-screwdriver-wrench"></i></span>
             <span class="service-price price-fixed">55.- / h</span>
           </div>
           <div class="service-name">Support informatique</div>
           <p class="service-desc">Dépannage N1 et N2, diagnostic et résolution de pannes logicielles ou matérielles.</p>
-          <span class="service-more">Voir le détail →</span>
-        </a>
+          <div class="service-toggle"><i class="fa-solid fa-chevron-down"></i> Voir le détail</div>
+          <div class="service-details">
+            <div class="service-details-inner">
+              <div>
+                <div class="service-details-title">Ce qui est inclus</div>
+                <ul>
+                  <li>Diagnostic complet du problème</li>
+                  <li>Résolution logicielle (virus, lenteurs, erreurs système)</li>
+                  <li>Résolution matérielle (périphériques, connexions, pannes)</li>
+                  <li>Support à distance disponible</li>
+                  <li>Rapport d'intervention sur demande</li>
+                </ul>
+              </div>
+              <div class="service-note">Facturation à la demi-heure. Déplacement selon distance.</div>
+            </div>
+          </div>
+        </div>
 
-        <a href="../service-detail/?id=maintenance" class="service-card">
+        <div class="service-card">
           <div class="service-header">
             <span class="service-icon"><i class="fa-solid fa-wrench"></i></span>
             <span class="service-price price-fixed">55.- / h</span>
           </div>
           <div class="service-name">Maintenance PC</div>
           <p class="service-desc">Nettoyage système, mise à jour, optimisation des performances et vérification matérielle.</p>
-          <span class="service-more">Voir le détail →</span>
-        </a>
+          <div class="service-toggle"><i class="fa-solid fa-chevron-down"></i> Voir le détail</div>
+          <div class="service-details">
+            <div class="service-details-inner">
+              <div>
+                <div class="service-details-title">Ce qui est inclus</div>
+                <ul>
+                  <li>Nettoyage des fichiers temporaires et du registre</li>
+                  <li>Mise à jour du système d'exploitation et des drivers</li>
+                  <li>Vérification de l'état des disques (SMART)</li>
+                  <li>Optimisation du démarrage</li>
+                  <li>Vérification thermique et nettoyage physique si nécessaire</li>
+                </ul>
+              </div>
+              <div class="service-note">Facturation à la demi-heure.</div>
+            </div>
+          </div>
+        </div>
 
-        <a href="../service-detail/?id=montage-pc" class="service-card">
+        <div class="service-card">
           <div class="service-header">
             <span class="service-icon"><i class="fa-solid fa-desktop"></i></span>
             <span class="service-price price-demand">Sur demande</span>
           </div>
           <div class="service-name">Montage PC sur mesure</div>
           <p class="service-desc">Sélection des composants, assemblage et configuration selon votre budget et vos besoins.</p>
-          <span class="service-more">Voir le détail →</span>
-        </a>
+          <div class="service-toggle"><i class="fa-solid fa-chevron-down"></i> Voir le détail</div>
+          <div class="service-details">
+            <div class="service-details-inner">
+              <div>
+                <div class="service-details-title">Ce qui est inclus</div>
+                <ul>
+                  <li>Analyse de vos besoins et de votre budget</li>
+                  <li>Sélection des composants compatibles et optimisés</li>
+                  <li>Assemblage complet du PC</li>
+                  <li>Installation du système d'exploitation</li>
+                  <li>Tests de stabilité et de performance</li>
+                  <li>Livraison et mise en service sur place</li>
+                </ul>
+              </div>
+              <div class="service-note">Le prix dépend des composants choisis. Devis gratuit sur demande.</div>
+            </div>
+          </div>
+        </div>
 
-        <a href="../service-detail/?id=upgrade" class="service-card">
+        <div class="service-card">
           <div class="service-header">
             <span class="service-icon"><i class="fa-solid fa-bolt"></i></span>
             <span class="service-price price-fixed">55.- / h + matériel</span>
           </div>
           <div class="service-name">Upgrade matériel</div>
           <p class="service-desc">Ajout de RAM, remplacement de disque, installation de carte graphique ou autre composant.</p>
-          <span class="service-more">Voir le détail →</span>
-        </a>
+          <div class="service-toggle"><i class="fa-solid fa-chevron-down"></i> Voir le détail</div>
+          <div class="service-details">
+            <div class="service-details-inner">
+              <div>
+                <div class="service-details-title">Ce qui est inclus</div>
+                <ul>
+                  <li>Ajout ou remplacement de RAM</li>
+                  <li>Remplacement du disque dur par un SSD</li>
+                  <li>Installation d'une carte graphique</li>
+                  <li>Remplacement du processeur</li>
+                  <li>Vérification de compatibilité avant intervention</li>
+                  <li>Tests post-installation</li>
+                </ul>
+              </div>
+              <div class="service-note">Le matériel est facturé séparément au prix d'achat. Conseil d'achat gratuit.</div>
+            </div>
+          </div>
+        </div>
 
-        <a href="../service-detail/?id=parc" class="service-card">
+        <div class="service-card">
           <div class="service-header">
             <span class="service-icon"><i class="fa-solid fa-building"></i></span>
             <span class="service-price price-demand">Sur demande</span>
           </div>
           <div class="service-name">Renouvellement parc informatique</div>
           <p class="service-desc">Audit, recommandation, migration et déploiement de nouveaux postes en entreprise.</p>
-          <span class="service-more">Voir le détail →</span>
-        </a>
+          <div class="service-toggle"><i class="fa-solid fa-chevron-down"></i> Voir le détail</div>
+          <div class="service-details">
+            <div class="service-details-inner">
+              <div>
+                <div class="service-details-title">Ce qui est inclus</div>
+                <ul>
+                  <li>Audit de l'existant</li>
+                  <li>Recommandation de matériel adapté à votre activité</li>
+                  <li>Déploiement des nouveaux postes</li>
+                  <li>Migration des données et des profils utilisateurs</li>
+                  <li>Configuration réseau et domaine</li>
+                  <li>Formation des utilisateurs sur demande</li>
+                </ul>
+              </div>
+              <div class="service-note">Devis personnalisé selon le nombre de postes et la complexité.</div>
+            </div>
+          </div>
+        </div>
 
-        <a href="../service-detail/?id=conseils" class="service-card">
+        <div class="service-card">
           <div class="service-header">
             <span class="service-icon"><i class="fa-solid fa-lightbulb"></i></span>
             <span class="service-price price-fixed">55.- / h</span>
           </div>
           <div class="service-name">Conseils &amp; accompagnement</div>
           <p class="service-desc">Aide à la décision, audit de votre infrastructure et recommandations personnalisées.</p>
-          <span class="service-more">Voir le détail →</span>
-        </a>
+          <div class="service-toggle"><i class="fa-solid fa-chevron-down"></i> Voir le détail</div>
+          <div class="service-details">
+            <div class="service-details-inner">
+              <div>
+                <div class="service-details-title">Ce qui est inclus</div>
+                <ul>
+                  <li>Audit de votre infrastructure existante</li>
+                  <li>Recommandations personnalisées et documentées</li>
+                  <li>Aide au choix de matériel ou de logiciels</li>
+                  <li>Accompagnement dans la mise en place de solutions</li>
+                  <li>Suivi disponible après intervention</li>
+                </ul>
+              </div>
+              <div class="service-note">Première consultation de 30 minutes offerte.</div>
+            </div>
+          </div>
+        </div>
 
-        <a href="../service-detail/?id=cours" class="service-card">
+        <div class="service-card">
           <div class="service-header">
             <span class="service-icon"><i class="fa-solid fa-book-open"></i></span>
             <span class="service-price price-fixed">50.- / h</span>
           </div>
           <div class="service-name">Cours informatique</div>
           <p class="service-desc">Formation personnalisée sur l'utilisation de votre ordinateur, logiciels ou outils bureautiques.</p>
-          <span class="service-more">Voir le détail →</span>
-        </a>
+          <div class="service-toggle"><i class="fa-solid fa-chevron-down"></i> Voir le détail</div>
+          <div class="service-details">
+            <div class="service-details-inner">
+              <div>
+                <div class="service-details-title">Ce qui est inclus</div>
+                <ul>
+                  <li>Initiation à l'utilisation de Windows / macOS</li>
+                  <li>Maîtrise des logiciels bureautiques (Word, Excel, etc.)</li>
+                  <li>Navigation internet sécurisée</li>
+                  <li>Gestion des fichiers et sauvegardes</li>
+                  <li>Introduction à la cybersécurité</li>
+                  <li>Cours personnalisés selon vos besoins</li>
+                </ul>
+              </div>
+              <div class="service-note">Cours à domicile ou à distance. Rythme adapté à votre niveau.</div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
 
-    <!-- ── CATÉGORIE CRÉATION & MÉDIA ── -->
+    <!-- ── CRÉATION & MÉDIA ── -->
     <div class="category">
       <div class="category-title"><i class="fa-solid fa-palette"></i> Création &amp; Média</div>
       <div class="services-grid">
 
-        <a href="../service-detail/?id=montage-photo" class="service-card">
+        <div class="service-card">
           <div class="service-header">
             <span class="service-icon"><i class="fa-solid fa-camera"></i></span>
             <span class="service-price price-demand">Sur demande</span>
           </div>
-          <div class="service-name">Montage photo</div>
+          <div class="service-name">Retouche photo</div>
           <p class="service-desc">Retouche, correction colorimétrique, compositing et traitement de lots d'images.</p>
-          <span class="service-more">Voir le détail →</span>
-        </a>
+          <div class="service-toggle"><i class="fa-solid fa-chevron-down"></i> Voir le détail</div>
+          <div class="service-details">
+            <div class="service-details-inner">
+              <div>
+                <div class="service-details-title">Ce qui est inclus</div>
+                <ul>
+                  <li>Retouche et correction colorimétrique</li>
+                  <li>Suppression d'éléments indésirables</li>
+                  <li>Traitement de lots d'images</li>
+                  <li>Export dans les formats souhaités</li>
+                  <li>Livrables en haute résolution</li>
+                </ul>
+              </div>
+              <div class="service-note">Tarif selon volume et complexité. Devis gratuit sur demande.</div>
+            </div>
+          </div>
+        </div>
 
-        <a href="../service-detail/?id=montage-video" class="service-card">
+        <div class="service-card">
           <div class="service-header">
             <span class="service-icon"><i class="fa-solid fa-film"></i></span>
             <span class="service-price price-demand">Sur demande</span>
           </div>
           <div class="service-name">Montage vidéo</div>
           <p class="service-desc">Montage, étalonnage, habillage et export selon vos formats et plateformes cibles.</p>
-          <span class="service-more">Voir le détail →</span>
-        </a>
+          <div class="service-toggle"><i class="fa-solid fa-chevron-down"></i> Voir le détail</div>
+          <div class="service-details">
+            <div class="service-details-inner">
+              <div>
+                <div class="service-details-title">Ce qui est inclus</div>
+                <ul>
+                  <li>Montage et cut du rush</li>
+                  <li>Étalonnage colorimétrique</li>
+                  <li>Ajout de textes, titres et transitions</li>
+                  <li>Habillage sonore et mixage</li>
+                  <li>Export selon la plateforme (YouTube, Instagram, etc.)</li>
+                </ul>
+              </div>
+              <div class="service-note">Tarif selon durée et complexité du projet. Devis gratuit sur demande.</div>
+            </div>
+          </div>
+        </div>
 
-        <a href="../service-detail/?id=logo" class="service-card">
+        <div class="service-card">
           <div class="service-header">
             <span class="service-icon"><i class="fa-solid fa-pen-nib"></i></span>
             <span class="service-price price-demand">Sur demande</span>
           </div>
           <div class="service-name">Création logo</div>
           <p class="service-desc">Conception d'identité visuelle adaptée à votre image et vos supports de communication.</p>
-          <span class="service-more">Voir le détail →</span>
-        </a>
+          <div class="service-toggle"><i class="fa-solid fa-chevron-down"></i> Voir le détail</div>
+          <div class="service-details">
+            <div class="service-details-inner">
+              <div>
+                <div class="service-details-title">Ce qui est inclus</div>
+                <ul>
+                  <li>Brief et analyse de vos besoins</li>
+                  <li>Propositions de concepts</li>
+                  <li>Révisions jusqu'à validation</li>
+                  <li>Livraison en formats vectoriels et PNG</li>
+                  <li>Charte graphique simplifiée sur demande</li>
+                </ul>
+              </div>
+              <div class="service-note">Devis personnalisé selon la complexité du projet.</div>
+            </div>
+          </div>
+        </div>
 
-        <a href="../service-detail/?id=media" class="service-card">
+        <div class="service-card">
           <div class="service-header">
             <span class="service-icon"><i class="fa-solid fa-masks-theater"></i></span>
             <span class="service-price price-demand">Sur demande</span>
           </div>
           <div class="service-name">Création média</div>
           <p class="service-desc">Affiches, visuels réseaux sociaux, bannières et tout support graphique selon la demande.</p>
-          <span class="service-more">Voir le détail →</span>
-        </a>
+          <div class="service-toggle"><i class="fa-solid fa-chevron-down"></i> Voir le détail</div>
+          <div class="service-details">
+            <div class="service-details-inner">
+              <div>
+                <div class="service-details-title">Ce qui est inclus</div>
+                <ul>
+                  <li>Affiches et flyers</li>
+                  <li>Visuels pour réseaux sociaux</li>
+                  <li>Bannières web</li>
+                  <li>Supports de présentation</li>
+                  <li>Tout autre support graphique sur demande</li>
+                </ul>
+              </div>
+              <div class="service-note">Tarif selon le nombre de visuels et la complexité. Devis gratuit.</div>
+            </div>
+          </div>
+        </div>
 
       </div>
     </div>
 
-    <!-- CTA -->
     <div class="cta-contact">
       <div>
         <div class="cta-text">Un projet en tête ?</div>
@@ -423,13 +601,13 @@
     </div>
 
   </main>
-  <!-- ================================================= -->
 
-
-  
-  <!-- ===================== FOOTER JS ===================== -->
   <script src="../../js/footer.js"></script>
-  <!-- ================================================= -->
+  <script>
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.addEventListener('click', () => card.classList.toggle('open'));
+    });
+  </script>
 
 </body>
 </html>
