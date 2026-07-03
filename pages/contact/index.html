@@ -3,16 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="../../images/KLG-Digital-blanc.png">
   <title>Contact — KLG Digital | Chablais, Vaud</title>
   <meta name="description" content="Contactez Kevin Lemos Graça pour un projet IT, vidéo, photo ou acting. Basé dans le Chablais vaudois, réponse sous 48h.">
   <meta name="author" content="Kevin Lemos Graça">
+  <link rel="icon" type="image/png" href="../../images/KLG-Digital-blanc.png">
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+  <!-- ======================== FAVICON ======================== -->
+  <script>
+    (function() {
+      // Favicon dynamique selon le thème système
+      const favicon = document.querySelector('link[rel="icon"]');
+      if (!favicon) return;
+      const isPages = window.location.pathname.includes('/pages/');
+      const base = isPages ? '../../images/' : 'images/';
+      const update = (dark) => favicon.href = base + (dark ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png');
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      update(mq.matches);
+      mq.addEventListener('change', e => update(e.matches));
+    })();
+  </script>
+  <!-- ================================================= -->
+
+  <!-- ======================== STYLES ======================== -->
   <style>
 
-    /* ================= CONTENU PRINCIPAL ================= */
+    /* --------------------- LAYOUT --------------------- */
     main {
       position: relative;
       z-index: 1;
@@ -33,7 +50,7 @@
       font-size: clamp(2.2em, 6vw, 3.5em);
       font-weight: 800;
       line-height: 1.1;
-      margin-bottom: 16px;
+      margin-bottom: 0;
       color: var(--text);
     }
 
@@ -45,7 +62,7 @@
       margin-bottom: 40px;
     }
 
-    /* ================= FORMULAIRE ================= */
+    /* --------------------- FORMULAIRE --------------------- */
     .form-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -56,7 +73,7 @@
       overflow: hidden;
     }
 
-    /* Ligne lumineuse en haut de la carte */
+    /* --- Ligne lumineuse --- */
     .form-card::before {
       content: '';
       position: absolute;
@@ -104,7 +121,7 @@
       box-shadow: 0 0 0 3px rgba(168,85,247,0.12);
     }
 
-    /* Flèche personnalisée du select */
+    /* --- Flèche select --- */
     select {
       appearance: none;
       cursor: pointer;
@@ -128,7 +145,7 @@
       margin: 28px 0;
     }
 
-    /* Mode clair — carte et champs */
+    /* --------------------- MODE CLAIR --------------------- */
     [data-theme="light"] .form-card {
       background: rgba(255,255,255,0.55);
       border-color: rgba(124,58,237,0.3);
@@ -147,7 +164,7 @@
 
     [data-theme="light"] select option { background: #c8c8d0; }
 
-    /* ================= BOUTON ENVOI ================= */
+    /* --------------------- BOUTON ENVOI --------------------- */
     .btn-submit {
       width: 100%;
       padding: 16px;
@@ -171,7 +188,7 @@
     .btn-submit:active   { transform: translateY(0); }
     .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-    /* ================= MESSAGES RETOUR ================= */
+    /* --------------------- MESSAGES RETOUR --------------------- */
     .msg {
       display: none;
       text-align: center;
@@ -196,7 +213,7 @@
       color: #fca5a5;
     }
 
-    /* ================= MOBILE ================= */
+    /* --------------------- RESPONSIVE --------------------- */
     @media (max-width: 600px) {
       main { padding: 48px 16px 80px; }
       .form-card { padding: 24px 20px; }
@@ -204,38 +221,26 @@
     }
 
   </style>
-  <script>
-    (function() {
-      const favicon = document.querySelector('link[rel="icon"]');
-      if (!favicon) return;
-      const isPages = window.location.pathname.includes('/pages/');
-      const base = isPages ? '../../images/' : 'images/';
-      const update = (dark) => favicon.href = base + (dark ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png');
-      const mq = window.matchMedia('(prefers-color-scheme: dark)');
-      update(mq.matches);
-      mq.addEventListener('change', e => update(e.matches));
-    })();
-  </script>
+  <!-- ================================================= -->
+
 </head>
 <body>
 
-  <!-- ===================== THEME JS ================== -->
+  <!-- ======================== SCRIPTS GLOBAUX ======================== -->
+
+  <!-- --- Thème sombre / clair --- -->
   <script src="../../js/theme.js"></script>
-  <!-- ================================================= -->
 
-  <!-- ===================== NAVBAR JS ================= -->
+  <!-- --- Navbar --- -->
   <script src="../../js/navbar.js"></script>
-  <!-- ================================================= -->
 
-  <!-- ===================== STARS JS ================== -->
-    <!-- ===================== MOON JS ================== -->
+  <!-- --- Fond (lune / étoiles) --- -->
   <script src="../../js/moon.js"></script>
-  <!-- ================================================= -->
-
   <script src="../../js/stars.js"></script>
+
   <!-- ================================================= -->
 
-  <!-- ===================== CONTENU =================== -->
+  <!-- ======================== CONTENU PRINCIPAL ======================== -->
   <main>
     <p class="heading-tag">✦ Parlons de ton projet</p>
     <h1>Me contacter</h1>
@@ -312,14 +317,14 @@
   </main>
   <!-- ================================================= -->
 
-  <!-- ===================== FOOTER JS ================= -->
+  <!-- ======================== FOOTER ======================== -->
   <script src="../../js/footer.js"></script>
   <!-- ================================================= -->
 
-  <!-- ===================== SCRIPTS =================== -->
+  <!-- ======================== SCRIPTS ======================== -->
   <script>
 
-    // Envoi du formulaire via Web3Forms
+    // --- Envoi du formulaire via Web3Forms ---
     const form       = document.getElementById('contactForm');
     const btn        = document.getElementById('submitBtn');
     const successMsg = document.getElementById('successMsg');
@@ -333,7 +338,7 @@
 
       const data = Object.fromEntries(new FormData(form));
 
-      // Objet dynamique : KLG Digital - Catégorie - Prénom Nom
+      // --- Objet dynamique : KLG Digital - Catégorie - Prénom Nom ---
       const categorie = data.categorie || 'Autre';
       const prenom    = data.prenom    || '';
       const nom       = data.nom       || '';

@@ -10,15 +10,32 @@
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+  <!-- ======================== FAVICON ======================== -->
+  <script>
+    (function() {
+      // Favicon dynamique selon le thème système
+      const favicon = document.querySelector('link[rel="icon"]');
+      if (!favicon) return;
+      const isPages = window.location.pathname.includes('/pages/');
+      const base = isPages ? '../../images/' : 'images/';
+      const update = (dark) => favicon.href = base + (dark ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png');
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      update(mq.matches);
+      mq.addEventListener('change', e => update(e.matches));
+    })();
+  </script>
+  <!-- ================================================= -->
+
+  <!-- ======================== STYLES ======================== -->
   <style>
 
-    /* ================= CONTENU PRINCIPAL ================= */
+    /* --------------------- LAYOUT --------------------- */
     main {
       position: relative;
       z-index: 1;
       max-width: 760px;
       margin: 0 auto;
-      padding: 80px 24px 120px;
+      padding: 4px 24px 120px;
     }
 
     .heading-tag {
@@ -37,7 +54,7 @@
       color: white;
     }
 
-    /* Mode clair — fond des cartes (visuel, pas géré par theme.js) */
+    /* --------------------- MODE CLAIR --------------------- */
     [data-theme="light"] .timeline-card {
       background: rgba(255,255,255,0.75);
       border-color: rgba(124,58,237,0.2);
@@ -54,7 +71,7 @@
     .timeline-logo.dark { background: white !important; }
     .timeline-logo.dark i { color: #a855f7; }
 
-    /* ================= TIMELINE ================= */
+    /* --------------------- TIMELINE --------------------- */
     .timeline {
       margin-top: 48px;
       position: relative;
@@ -71,7 +88,7 @@
       background: linear-gradient(180deg, #a855f7, rgba(168,85,247,0.1));
     }
 
-    /* ================= ITEM TIMELINE ================= */
+    /* --- Item --- */
     .timeline-item {
       position: relative;
       margin-bottom: 48px;
@@ -87,7 +104,7 @@
       transform: translateY(0);
     }
 
-    /* Point sur la ligne */
+    /* --- Point --- */
     .timeline-dot {
       position: absolute;
       left: -39px;
@@ -114,7 +131,7 @@
       50%       { box-shadow: 0 0 24px rgba(168,85,247,1); }
     }
 
-    /* ================= CARTE ================= */
+    /* --- Carte --- */
     .timeline-card {
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(168,85,247,0.15);
@@ -150,7 +167,7 @@
       object-fit: contain;
     }
 
-    /* Icône FA dans logo */
+    /* --- Icône FA dans logo --- */
     .timeline-logo i {
       font-size: 1.4em;
       color: #a855f7;
@@ -228,7 +245,7 @@
       line-height: 1.7;
     }
 
-    /* ================= MOBILE ================= */
+    /* --------------------- RESPONSIVE --------------------- */
     @media (max-width: 600px) {
       main { padding: 48px 16px 80px; }
       .timeline { padding-left: 20px; }
@@ -237,39 +254,27 @@
     }
 
   </style>
-  <script>
-    (function() {
-      const favicon = document.querySelector('link[rel="icon"]');
-      if (!favicon) return;
-      const isPages = window.location.pathname.includes('/pages/');
-      const base = isPages ? '../../images/' : 'images/';
-      const update = (dark) => favicon.href = base + (dark ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png');
-      const mq = window.matchMedia('(prefers-color-scheme: dark)');
-      update(mq.matches);
-      mq.addEventListener('change', e => update(e.matches));
-    })();
-  </script>
+  <!-- ================================================= -->
+
 </head>
 <body>
 
-  <!-- ===================== THEME JS ===================== -->
+  <!-- ======================== SCRIPTS GLOBAUX ======================== -->
+
+  <!-- --- Thème sombre / clair --- -->
   <script src="../../js/theme.js"></script>
-  <!-- ================================================= -->
 
-  <!-- ===================== NAVBAR JS ===================== -->
+  <!-- --- Navbar --- -->
   <script src="../../js/navbar.js"></script>
-  <!-- ================================================= -->
 
-  <!-- ===================== STARS JS ===================== -->
-    <!-- ===================== MOON JS ================== -->
+  <!-- --- Fond (lune / étoiles) --- -->
   <script src="../../js/moon.js"></script>
-  <!-- ================================================= -->
-
   <script src="../../js/stars.js"></script>
+
   <!-- ================================================= -->
 
 
-  <!-- ===================== CONTENU ===================== -->
+  <!-- ======================== CONTENU PRINCIPAL ======================== -->
   <main>
     <p class="heading-tag">✦ Qui suis-je</p>
     <h1>Mon parcours</h1>
@@ -526,7 +531,8 @@
   <!-- ================================================= -->
 
 
-  <!-- ===================== SCROLL REVEAL ===================== -->
+  <!-- ======================== SCRIPTS ======================== -->
+  <!-- --- Scroll reveal timeline --- -->
   <script>
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -542,7 +548,7 @@
   </script>
   <!-- ================================================= -->
 
-  <!-- ===================== FOOTER JS ===================== -->
+  <!-- ======================== FOOTER ======================== -->
   <script src="../../js/footer.js"></script>
   <!-- ================================================= -->
 

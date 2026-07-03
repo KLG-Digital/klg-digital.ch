@@ -1,4 +1,4 @@
-// ===================== SURFACE LUNAIRE =====================
+// ======================== SURFACE LUNAIRE ========================
 // Mode clair uniquement — ciel étoilé + surface lunaire avec cratères.
 // En mode sombre, stars.js prend le relais.
 
@@ -6,25 +6,31 @@
 
   if (document.documentElement.getAttribute('data-theme') !== 'light') return;
 
+  // --- Création du canvas ---
   const canvas = document.createElement('canvas');
   canvas.id = 'starCanvas';
   document.body.insertAdjacentElement('afterbegin', canvas);
   const ctx = canvas.getContext('2d');
 
+  // --------------------- Générateur pseudo-aléatoire ---------------------
+  // Seed fixe pour des cratères stables entre les frames
+
   const initialSeed = Math.floor(Math.random() * 0xffffffff);
   let seed = initialSeed;
+
   function rand() {
     seed = (seed * 1664525 + 1013904223) & 0xffffffff;
     return (seed >>> 0) / 0xffffffff;
   }
+
   function resetSeed() { seed = initialSeed; }
 
-  // Données générées une seule fois
-  let stars  = [];
-  let placed = [];
+  // --------------------- Données générées une fois ---------------------
+
+  let stars    = [];
+  let placed   = [];
   let isMobile = false;
 
-  // ── Générer étoiles et cratères (une fois au chargement/resize) ──
   function generateData() {
     resetSeed();
 
@@ -32,19 +38,19 @@
     const H = window.innerHeight;
     isMobile = W < 768;
 
-    // Étoiles — positions fixes
+    // --- Étoiles — positions fixes ---
     stars = [];
     for (let i = 0; i < 160; i++) {
       stars.push({
-        sx: rand() * W,
-        sy: rand() * H * 0.9,
-        sr: rand() * 1.2 + 0.2,
-        sa: rand() * 0.7 + 0.3,
+        sx:     rand() * W,
+        sy:     rand() * H * 0.9,
+        sr:     rand() * 1.2 + 0.2,
+        sa:     rand() * 0.7 + 0.3,
         purple: rand() < 0.12
       });
     }
 
-    // Cratères — positions fixes
+    // --- Cratères — positions fixes ---
     const sizes = isMobile
       ? [[5,60,100],[12,25,55],[25,10,22],[40,4,9],[60,1.5,3.5]]
       : [[3,40,70],[8,18,38],[15,7,16],[25,3,6],[35,1,2.5]];
@@ -64,7 +70,7 @@
           }
           if (ok) {
             const N = 120, erosionAmp = r * 0.04;
-            const freq = 6 + Math.floor(rand() * 3);
+            const freq   = 6 + Math.floor(rand() * 3);
             const phase1 = rand() * Math.PI * 2;
             const phase2 = rand() * Math.PI * 2;
             const offsets = [];
@@ -83,34 +89,34 @@
     });
   }
 
-  // ── Dessiner le canvas (appelé à chaque frame scroll) ────────────
+  // --------------------- Dessin du canvas ---------------------
+
   function draw(scrollY) {
     const W = canvas.width  = window.innerWidth;
     const H = canvas.height = window.innerHeight;
 
-    // Horizon monte avec le scroll
-    // Horizon adaptatif — plus bas sur petits écrans pour éviter que la lune coupe le contenu
+    // --- Horizon adaptatif ---
     const baseHorizon = H < 800
-      ? H * 0.20   // petits écrans (MacBook 900px, mobile)
+      ? H * 0.20   // petits écrans (mobile)
       : H * 0.25;  // grands écrans
     window._moonHorizonY = baseHorizon;
-    const horizonY    = Math.max(-H, baseHorizon - scrollY * 1.5);
-    const curveDrop   = H * 0.05;
+    const horizonY  = Math.max(-H, baseHorizon - scrollY * 1.5);
+    const curveDrop = H * 0.05;
 
-    // Fond noir
+    // --- Fond noir ---
     ctx.fillStyle = '#07071a';
     ctx.fillRect(0, 0, W, H);
 
-    // Étoiles fixes dans le ciel
+    // --- Étoiles dans le ciel ---
     stars.forEach(({ sx, sy, sr, sa, purple }) => {
-      if (sy > horizonY - 20) return; // cacher si sous l'horizon
+      if (sy > horizonY - 20) return;
       ctx.beginPath();
       ctx.arc(sx, sy, sr, 0, Math.PI * 2);
       ctx.fillStyle = purple ? `rgba(168,85,247,${sa})` : `rgba(255,255,255,${sa})`;
       ctx.fill();
     });
 
-    // Surface lunaire
+    // --- Surface lunaire ---
     ctx.save();
     ctx.beginPath();
     ctx.moveTo(0, horizonY + curveDrop);
@@ -122,7 +128,7 @@
     ctx.fill();
     ctx.restore();
 
-    // Ligne d'horizon
+    // --- Ligne d'horizon ---
     ctx.save();
     ctx.beginPath();
     ctx.moveTo(0, horizonY + curveDrop);
@@ -132,7 +138,7 @@
     ctx.stroke();
     ctx.restore();
 
-    // Clip cratères sous l'horizon
+    // --- Cratères (clippés sous l'horizon) ---
     ctx.save();
     ctx.beginPath();
     ctx.moveTo(0, horizonY + curveDrop);
@@ -162,15 +168,15 @@
 
     ctx.restore();
 
-    // ── Drapeau suisse — ancré sur la surface ────────────
+    // --- Drapeau suisse — ancré sur la surface ---
     const fw  = isMobile ? 28 : 40;
     const fh  = fw;
     const fpx = W * 0.82;
     const ph  = isMobile ? 60 : 85;
-    // Ancré à une position fixe sur la surface, pas à l'horizon
     const flagSurfaceY = horizonY + 80;
     const fpy = flagSurfaceY - ph - fh;
 
+    // Mât
     ctx.save();
     ctx.beginPath();
     ctx.moveTo(fpx, fpy);
@@ -180,28 +186,29 @@
     ctx.stroke();
     ctx.restore();
 
+    // Tissu ondulé
     const wave = fw * 0.08;
     ctx.save();
     ctx.beginPath();
     ctx.moveTo(fpx, fpy);
-    ctx.bezierCurveTo(fpx+fw*0.33,fpy-wave,      fpx+fw*0.66,fpy+wave*0.5, fpx+fw,     fpy);
-    ctx.bezierCurveTo(fpx+fw+wave,fpy+fh*0.33,   fpx+fw+wave*0.5,fpy+fh*0.66, fpx+fw,  fpy+fh);
-    ctx.bezierCurveTo(fpx+fw*0.66,fpy+fh+wave*0.5, fpx+fw*0.33,fpy+fh-wave, fpx,       fpy+fh);
+    ctx.bezierCurveTo(fpx+fw*0.33, fpy-wave,       fpx+fw*0.66, fpy+wave*0.5,  fpx+fw,  fpy);
+    ctx.bezierCurveTo(fpx+fw+wave, fpy+fh*0.33,    fpx+fw+wave*0.5, fpy+fh*0.66, fpx+fw, fpy+fh);
+    ctx.bezierCurveTo(fpx+fw*0.66, fpy+fh+wave*0.5, fpx+fw*0.33, fpy+fh-wave,  fpx,     fpy+fh);
     ctx.closePath();
     ctx.fillStyle = '#E8001C';
     ctx.fill();
 
+    // Croix blanche
     const armW = fw*0.58, armH = fw*0.18;
     const fcx = fpx+fw*0.48, fcy = fpy+fh*0.50;
     ctx.fillStyle = 'white';
     ctx.fillRect(fcx-armW/2, fcy-armH/2, armW, armH);
     ctx.fillRect(fcx-armH/2, fcy-armW/2, armH, armW);
     ctx.restore();
-
-
   }
 
-  // ── Init ─────────────────────────────────────────────
+  // --------------------- Initialisation ---------------------
+
   generateData();
 
   let lastScroll = -1;
@@ -222,4 +229,5 @@
   loop();
 
 })();
-// ===========================================================
+
+// ================================================= //

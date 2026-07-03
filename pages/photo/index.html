@@ -9,6 +9,24 @@
   <link rel="icon" type="image/png" href="../../images/KLG-Digital-blanc.png">
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- ======================== FAVICON ======================== -->
+  <script>
+    (function() {
+      // Favicon dynamique selon le thème système
+      const favicon = document.querySelector('link[rel="icon"]');
+      if (!favicon) return;
+      const isPages = window.location.pathname.includes('/pages/');
+      const base = isPages ? '../../images/' : 'images/';
+      const update = (dark) => favicon.href = base + (dark ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png');
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      update(mq.matches);
+      mq.addEventListener('change', e => update(e.matches));
+    })();
+  </script>
+  <!-- ================================================= -->
+
+  <!-- ======================== STYLES ======================== -->
   <style>
 
     /* ─── LAYOUT ─── */
@@ -20,6 +38,7 @@
       padding: 4px 24px 120px;
     }
 
+    /* ─── EN-TÊTE ─── */
     .heading-tag {
       font-size: 0.75em;
       letter-spacing: 0.2em;
@@ -45,151 +64,7 @@
       margin-bottom: 40px;
     }
 
-    /* ─── GRILLE SERVICES ─── */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
-      margin-bottom: 64px;
-    }
-
-    /* ─── CARTE SERVICE ─── */
-    .service-card {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(168,85,247,0.15);
-      border-radius: 16px;
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      cursor: pointer;
-      color: inherit;
-      transition: border-color 0.3s, background 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .service-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(168,85,247,0.6), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .service-card:hover,
-    .service-card.open {
-      border-color: rgba(168,85,247,0.4);
-      background: rgba(168,85,247,0.04);
-    }
-
-    .service-card:hover::before,
-    .service-card.open::before { opacity: 1; }
-
-    .service-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-    }
-
-    .service-icon  { font-size: 1.5em; }
-    .service-price {
-      font-size: 0.75em;
-      font-weight: 700;
-      color: #c4b5fd;
-      background: rgba(168,85,247,0.1);
-      border: 1px solid rgba(168,85,247,0.2);
-      border-radius: 20px;
-      padding: 3px 10px;
-    }
-    .service-name  { font-size: 0.98em; font-weight: 700; color: white; }
-    .service-desc  { font-size: 0.83em; color: #9d9db5; line-height: 1.6; }
-
-    /* ─── TOGGLE ─── */
-    .service-toggle {
-      font-size: 0.78em;
-      color: #a855f7;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .service-toggle i {
-      transition: transform 0.3s;
-      font-size: 0.9em;
-    }
-
-    .service-card.open .service-toggle i { transform: rotate(180deg); }
-
-    /* ─── DÉTAILS ACCORDION ─── */
-    .service-details {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 0.35s ease, opacity 0.3s ease, padding-top 0.3s ease, border-color 0.3s;
-      opacity: 0;
-      overflow: hidden;
-      border-top: 1px solid transparent;
-    }
-
-    .service-details-inner {
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .service-card.open .service-details {
-      grid-template-rows: 1fr;
-      opacity: 1;
-      padding-top: 12px;
-      border-top-color: rgba(168,85,247,0.15);
-    }
-
-    .service-details-title {
-      font-size: 0.72em;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #a855f7;
-      margin-bottom: 4px;
-    }
-
-    .service-details ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .service-details ul li {
-      font-size: 0.82em;
-      color: #9d9db5;
-      line-height: 1.5;
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-    }
-
-    .service-details ul li::before {
-      content: '✦';
-      color: #a855f7;
-      font-size: 0.7em;
-      margin-top: 2px;
-      flex-shrink: 0;
-    }
-
-    .service-note {
-      font-size: 0.78em;
-      color: #6b6b8a;
-      font-style: italic;
-      padding: 8px 12px;
-      background: rgba(168,85,247,0.05);
-      border-radius: 8px;
-      border-left: 2px solid rgba(168,85,247,0.3);
-    }
-
-    /* ─── GALERIE ─── */
+    /* ─── GALERIE / VIDÉO ─── */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -218,27 +93,25 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 600px) {
       main { padding: 48px 16px 80px; }
-      .services-grid,
-      .gallery-grid { grid-template-columns: 1fr; }
-      .cta-contact  { flex-direction: column; align-items: flex-start; }
+      .services-grid { grid-template-columns: 1fr; }
+      .gallery-grid   { grid-template-columns: 1fr; }
+      .cta-contact { flex-direction: column; align-items: flex-start; }
     }
 
     /* ── MODE CLAIR ── */
-    [data-theme="light"] .service-card {
-      background: rgba(255,255,255,0.7);
-      border-color: rgba(124,58,237,0.2);
-    }
-    [data-theme="light"] .service-card:hover,
-    [data-theme="light"] .service-card.open {
-      background: rgba(255,255,255,0.9);
-      border-color: rgba(124,58,237,0.4);
-    }
-    [data-theme="light"] .service-card.open .service-details {
-      border-top-color: rgba(124,58,237,0.2);
-    }
     [data-theme="light"] .gallery-item {
       background: rgba(255,255,255,0.5);
       color: rgba(124,58,237,0.4);
+    }
+
+    [data-theme="light"] .video-item {
+      background: rgba(255,255,255,0.5);
+      color: rgba(124,58,237,0.4);
+    }
+
+    [data-theme="light"] .cta-contact {
+      background: rgba(255,255,255,0.4);
+      border-color: rgba(124,58,237,0.25);
     }
 
     /* ── BOUTON RETOUR ── */
@@ -256,26 +129,27 @@
     [data-theme="light"] .back-link:hover { color: #7c3aed; }
 
   </style>
-  <script>
-    (function() {
-      const favicon = document.querySelector('link[rel="icon"]');
-      if (!favicon) return;
-      const isPages = window.location.pathname.includes('/pages/');
-      const base = isPages ? '../../images/' : 'images/';
-      const update = (dark) => favicon.href = base + (dark ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png');
-      const mq = window.matchMedia('(prefers-color-scheme: dark)');
-      update(mq.matches);
-      mq.addEventListener('change', e => update(e.matches));
-    })();
-  </script>
+  <!-- ================================================= -->
+
 </head>
 <body>
 
+  <!-- ======================== SCRIPTS GLOBAUX ======================== -->
+
+  <!-- --- Thème sombre / clair --- -->
   <script src="../../js/theme.js"></script>
+
+  <!-- --- Navbar --- -->
   <script src="../../js/navbar.js"></script>
+
+  <!-- --- Fond (lune / étoiles) --- -->
   <script src="../../js/moon.js"></script>
   <script src="../../js/stars.js"></script>
 
+  <!-- ================================================= -->
+
+
+  <!-- ======================== CONTENU PRINCIPAL ======================== -->
   <main>
     <a href="../../index.html" class="back-link">← Accueil</a>
     <p class="heading-tag"><i class="fa-solid fa-camera"></i> Spécialité</p>
@@ -283,84 +157,7 @@
     <p class="subtitle">Retouche, correction colorimétrique et traitement d'images — des résultats soignés pour vos projets personnels ou professionnels.</p>
 
     <div class="section-title">Services</div>
-    <div class="services-grid">
-
-      <div class="service-card">
-        <div class="service-header">
-          <span class="service-icon"><i class="fa-solid fa-palette"></i></span>
-          <span class="service-price">Sur demande</span>
-        </div>
-        <div class="service-name">Retouche photo</div>
-        <p class="service-desc">Correction colorimétrique, suppression d'éléments, traitement de lots.</p>
-        <div class="service-toggle"><i class="fa-solid fa-chevron-down"></i> Voir le détail</div>
-        <div class="service-details">
-          <div class="service-details-inner">
-            <div>
-              <div class="service-details-title">Ce qui est inclus</div>
-              <ul>
-                <li>Retouche et correction colorimétrique</li>
-                <li>Suppression d'éléments indésirables</li>
-                <li>Traitement de lots d'images</li>
-                <li>Export dans les formats souhaités</li>
-                <li>Livrables en haute résolution</li>
-              </ul>
-            </div>
-            <div class="service-note">Tarif selon volume et complexité. Devis gratuit sur demande.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-header">
-          <span class="service-icon"><i class="fa-solid fa-pen-nib"></i></span>
-          <span class="service-price">Sur demande</span>
-        </div>
-        <div class="service-name">Création logo</div>
-        <p class="service-desc">Identité visuelle adaptée à votre image et vos supports.</p>
-        <div class="service-toggle"><i class="fa-solid fa-chevron-down"></i> Voir le détail</div>
-        <div class="service-details">
-          <div class="service-details-inner">
-            <div>
-              <div class="service-details-title">Ce qui est inclus</div>
-              <ul>
-                <li>Brief et analyse de vos besoins</li>
-                <li>Propositions de concepts</li>
-                <li>Révisions jusqu'à validation</li>
-                <li>Livraison en formats vectoriels et PNG</li>
-                <li>Charte graphique simplifiée sur demande</li>
-              </ul>
-            </div>
-            <div class="service-note">Devis personnalisé selon la complexité du projet.</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-header">
-          <span class="service-icon"><i class="fa-solid fa-image"></i></span>
-          <span class="service-price">Sur demande</span>
-        </div>
-        <div class="service-name">Création média</div>
-        <p class="service-desc">Affiches, visuels réseaux sociaux, bannières selon vos besoins.</p>
-        <div class="service-toggle"><i class="fa-solid fa-chevron-down"></i> Voir le détail</div>
-        <div class="service-details">
-          <div class="service-details-inner">
-            <div>
-              <div class="service-details-title">Ce qui est inclus</div>
-              <ul>
-                <li>Affiches et flyers</li>
-                <li>Visuels pour réseaux sociaux</li>
-                <li>Bannières web</li>
-                <li>Supports de présentation</li>
-                <li>Tout autre support graphique sur demande</li>
-              </ul>
-            </div>
-            <div class="service-note">Tarif selon le nombre de visuels et la complexité. Devis gratuit.</div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <div class="services-grid" id="photo-services-grid"></div>
 
     <div class="section-title">Réalisations</div>
     <div class="gallery-grid">
@@ -377,12 +174,18 @@
       <a href="../contact/" class="btn-cta">Me contacter →</a>
     </div>
   </main>
+  <!-- ================================================= -->
 
+
+  <!-- ======================== FOOTER ======================== -->
   <script src="../../js/footer.js"></script>
+  <!-- ================================================= -->
+
+  <!-- ======================== SCRIPTS ======================== -->
+  <script src="../../js/services.js"></script>
   <script>
-    document.querySelectorAll('.service-card').forEach(card => {
-      card.addEventListener('click', () => card.classList.toggle('open'));
-    });
+    renderServicesGrid('photo-services-grid', 'photo');
   </script>
+    <!-- ================================================= -->
 </body>
 </html>

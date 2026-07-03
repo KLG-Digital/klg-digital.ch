@@ -10,8 +10,25 @@
   <link rel="stylesheet" href="../../style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
+  <!-- ======================== FAVICON ======================== -->
+  <script>
+    (function() {
+      // Favicon dynamique selon le thème système
+      const favicon = document.querySelector('link[rel="icon"]');
+      if (!favicon) return;
+      const isPages = window.location.pathname.includes('/pages/');
+      const base = isPages ? '../../images/' : 'images/';
+      const update = (dark) => favicon.href = base + (dark ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png');
+      const mq = window.matchMedia('(prefers-color-scheme: dark)');
+      update(mq.matches);
+      mq.addEventListener('change', e => update(e.matches));
+    })();
+  </script>
+  <!-- ================================================= -->
+
+  <!-- ======================== STYLES ======================== -->
   <style>
-    /* ================= CONTENU PRINCIPAL ================= */
+    /* --------------------- LAYOUT --------------------- */
     main {
       position: relative;
       z-index: 1;
@@ -32,7 +49,7 @@
       font-size: clamp(2em, 5vw, 3.2em);
       font-weight: 800;
       line-height: 1.1;
-      margin-bottom: 16px;
+      margin-bottom: 0;
       color: white;
     }
 
@@ -45,14 +62,14 @@
       margin-bottom: 40px;
     }
 
-    /* ================= GRILLE CARTES ================= */
+    /* --------------------- GRILLE CARTES --------------------- */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 28px;
     }
 
-    /* ================= CARTE ================= */
+    /* --------------------- CARTE --------------------- */
     .card {
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(168,85,247,0.2);
@@ -66,7 +83,7 @@
       gap: 20px;
     }
 
-    /* Ligne lumineuse en haut */
+    /* --- Ligne lumineuse --- */
     .card::before {
       content: '';
       position: absolute;
@@ -85,7 +102,7 @@
 
     .card:hover::before { opacity: 1; }
 
-    /* Header de la carte */
+    /* --- Header --- */
     .card-header {
       display: flex;
       align-items: center;
@@ -117,7 +134,7 @@
       margin-bottom: 4px;
     }
 
-    /* Badge langage */
+    /* --- Badge langage --- */
     .card-lang {
       display: inline-block;
       font-size: 0.7em;
@@ -137,7 +154,7 @@
       flex: 1;
     }
 
-    /* ================= BOUTONS ================= */
+    /* --------------------- BOUTONS --------------------- */
     .card-actions {
       display: flex;
       gap: 12px;
@@ -158,7 +175,7 @@
 
     .btn:hover { transform: translateY(-2px); }
 
-    /* Bouton GitHub */
+    /* --- Bouton GitHub --- */
     .btn-github {
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.12);
@@ -169,7 +186,7 @@
       box-shadow: 0 4px 16px rgba(0,0,0,0.3);
     }
 
-    /* Bouton téléchargement */
+    /* --- Bouton téléchargement --- */
     .btn-download {
       background: linear-gradient(135deg, #7c3aed, #a855f7);
       border: none;
@@ -179,66 +196,54 @@
       box-shadow: 0 4px 20px rgba(168,85,247,0.4);
     }
 
-    /* Icônes SVG inline */
+    /* --- Icônes SVG --- */
     .btn svg {
       width: 15px;
       height: 15px;
       fill: currentColor;
     }
 
-    /* ================= MOBILE ================= */
+    /* --------------------- RESPONSIVE --------------------- */
     @media (max-width: 600px) {
       main { padding: 48px 16px 80px; }
       .cards-grid { grid-template-columns: 1fr; }
     }
 
-    /* ── MODE CLAIR — fonds/bordures cartes (pas géré par theme.js) ── */
+    /* --------------------- MODE CLAIR --------------------- */
     [data-theme="light"] .card       { background: rgba(255,255,255,0.6); border-color: rgba(124,58,237,0.2); }
     [data-theme="light"] .btn-github { background: rgba(0,0,0,0.08); border-color: rgba(0,0,0,0.15); color: #1a1a2e; }
 
-</style>
-  <script>
-    (function() {
-      const favicon = document.querySelector('link[rel="icon"]');
-      if (!favicon) return;
-      const isPages = window.location.pathname.includes('/pages/');
-      const base = isPages ? '../../images/' : 'images/';
-      const update = (dark) => favicon.href = base + (dark ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png');
-      const mq = window.matchMedia('(prefers-color-scheme: dark)');
-      update(mq.matches);
-      mq.addEventListener('change', e => update(e.matches));
-    })();
-  </script>
+  </style>
+  <!-- ================================================= -->
+
 </head>
 <body>
 
-  <!-- ===================== THEME JS ===================== -->
+  <!-- ======================== SCRIPTS GLOBAUX ======================== -->
+
+  <!-- --- Thème sombre / clair --- -->
   <script src="../../js/theme.js"></script>
-  <!-- ================================================= -->
 
-  <!-- ===================== NAVBAR JS ===================== -->
+  <!-- --- Navbar --- -->
   <script src="../../js/navbar.js"></script>
-  <!-- ================================================= -->
 
-  <!-- ===================== STARS JS ===================== -->
-    <!-- ===================== MOON JS ================== -->
+  <!-- --- Fond (lune / étoiles) --- -->
   <script src="../../js/moon.js"></script>
-  <!-- ================================================= -->
-
   <script src="../../js/stars.js"></script>
+
   <!-- ================================================= -->
 
-  
-  <!-- ===================== CONTENU ===================== -->
+
+  <!-- ======================== CONTENU PRINCIPAL ======================== -->
   <main>
     <p class="heading-tag">✦ Open source</p>
     <h1>Programmes</h1>
     <p class="subtitle">Des outils pensés pour simplifier le quotidien. Libres, gratuits, directement utilisables.</p>
 
-    <!-- GRILLE DE CARTES -->
+    <!-- --- Grille de cartes --- -->
     <div class="cards-grid">
 
-      <!-- CARTE : DockerEase -->
+      <!-- --- DockerEase --- -->
       <div class="card">
         <div class="card-header">
           <div class="card-icon">
@@ -262,7 +267,7 @@
         </div>
       </div>
 
-      <!-- CARTE : QuickCopyMouse -->
+      <!-- --- QuickCopyMouse --- -->
       <div class="card">
         <div class="card-header">
           <div class="card-icon">
@@ -290,11 +295,11 @@
         </div>
       </div>
 
-      <!-- CARTE : BifröstIP -->
+      <!-- --- BifröstIP --- -->
       <div class="card">
         <div class="card-header">
           <div class="card-icon">
-            <img src="https://github.com/KLG-Digital/BifrostIP/blob/main/images/BifrostIP.png?raw=true"
+            <img src="https://raw.githubusercontent.com/KLG-Digital/BifrostIP/main/images/BifrostIP.png"
                  alt="BifröstIP"
                  onerror="this.style.display='none'; this.parentNode.innerHTML='🔍';">
           </div>
@@ -323,8 +328,7 @@
   <!-- ================================================= -->
 
 
-  
-  <!-- ===================== FOOTER JS ===================== -->
+  <!-- ======================== FOOTER ======================== -->
   <script src="../../js/footer.js"></script>
   <!-- ================================================= -->
 

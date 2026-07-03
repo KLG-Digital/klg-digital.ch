@@ -1,7 +1,8 @@
-// ===================== FOOTER PARTAGÉ =====================
+// ======================== FOOTER PARTAGÉ ========================
 
 (function () {
 
+  // --- Détection de la racine selon la page ---
   const path    = window.location.pathname;
   const inPages = path.includes('/pages/');
   const root    = inPages
@@ -10,6 +11,7 @@
 
   const year = new Date().getFullYear();
 
+  // --- Template HTML du footer ---
   const footerHTML = `
     <footer class="site-footer">
       <div class="footer-inner">
@@ -29,4 +31,5 @@
   document.body.insertAdjacentHTML('beforeend', footerHTML);
 
 })();
-// ==========================================================
+
+// ================================================= //

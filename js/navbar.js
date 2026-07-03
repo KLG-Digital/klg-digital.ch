@@ -1,30 +1,27 @@
-// ===================== NAVBAR PARTAGÉE =====================
+// ======================== NAVBAR PARTAGÉE ========================
 // Modifier ce fichier met à jour la navbar sur toutes les pages.
 // Compatible Live Server, file://, et GitHub Pages.
 
 (function () {
 
-  // ── Calculer la racine du site ────────────────────────────
-  // On remonte jusqu'au dossier qui contient index.html
-  // Fonctionne depuis racine ET depuis pages/
+  // --------------------- Racine du site ---------------------
+  // Remonte jusqu'au dossier qui contient index.html
+  // Fonctionne depuis racine ET depuis pages/nom/
+
   const path    = window.location.pathname;
   const inPages = path.includes('/pages/');
-  // Nouvelle structure : pages/nom/index.html — remonter de 2 niveaux
-  // Depuis pages/nom/ on remonte 2 niveaux pour trouver la racine
   const root    = inPages
     ? path.substring(0, path.indexOf('/pages/')) + '/'
     : path.substring(0, path.lastIndexOf('/') + 1);
 
-  // Vérification : si on est dans pages/nom/, root doit finir par /
-  // ex: /klg-digital.ch/pages/parcours/ → root = /klg-digital.ch/
+  // --------------------- Page courante ---------------------
+  // /pages/it/ → currentPage = 'it'
 
-  // ── Détecter la page courante ─────────────────────────────
-  // Nouvelle structure : /pages/it/ → currentPage = 'it'
-  // Ancienne structure : /pages/it.html → currentPage = 'it.html'
   const pathParts   = path.split('/').filter(Boolean);
   const currentPage = pathParts[pathParts.length - 1] || 'index';
 
-  // ── Liens de navigation ───────────────────────────────────
+  // --------------------- Liens de navigation ---------------------
+
   const links = [
     { label: 'Accueil',      href: root + 'index.html' },
     { label: 'Mon parcours', href: root + 'pages/parcours/' },
@@ -34,12 +31,15 @@
     { label: 'Contact',      href: root + 'pages/contact/' },
   ];
 
-  // ── Logo : suit le thème actuel (data-theme) ──────────────
+  // --------------------- Logo ---------------------
+  // Suit le thème actuel (data-theme)
+
   const imgRoot  = inPages ? '../../' : '';
   const isDark   = document.documentElement.getAttribute('data-theme') !== 'light';
   const logoFile = isDark ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png';
 
-  // ── Générer le HTML de la navbar ──────────────────────────
+  // --------------------- HTML de la navbar ---------------------
+
   const navHTML = `
     <nav class="navbar" role="navigation" aria-label="Navigation principale">
       <a href="${root}index.html" class="logo" aria-label="KLG Digital — Accueil">
@@ -59,10 +59,12 @@
     </nav>
   `;
 
-  // ── Injecter la navbar au début du body ───────────────────
+  // --------------------- Injection ---------------------
+
   document.body.insertAdjacentHTML('afterbegin', navHTML);
 
-  // ── Hamburger mobile ──────────────────────────────────────
+  // --------------------- Hamburger mobile ---------------------
+
   const toggle   = document.querySelector('.menu-toggle');
   const navLinks = document.querySelector('.nav-links');
 
@@ -80,10 +82,11 @@
     });
   });
 
-  // ── Logo dynamique selon couleur système ──────────────────
-  // Si pas de thème sauvegardé, on suit la préférence système en temps réel
+  // --------------------- Logo dynamique ---------------------
+  // Si pas de thème sauvegardé, suit la préférence système en temps réel
+
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    if (localStorage.getItem('klg-theme')) return; // thème manuel → ignorer
+    if (localStorage.getItem('klg-theme')) return;
     const logoImg = document.querySelector('.logo-img');
     if (logoImg) {
       logoImg.src = imgRoot + 'images/' + (e.matches ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png');
@@ -91,4 +94,5 @@
   });
 
 })();
-// ===========================================================
+
+// ================================================= //

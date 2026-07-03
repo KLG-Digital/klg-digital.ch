@@ -1,4 +1,4 @@
-// ===================== THÈME SOMBRE / CLAIR =====================
+// ======================== THÈME SOMBRE / CLAIR ========================
 // Mode sombre : étoiles animées (stars.js)
 // Mode clair  : surface lunaire réaliste (moon.js)
 // Bouton thème : fin des liens navbar desktop + dernier item menu mobile
@@ -7,7 +7,8 @@
 
   const STORAGE_KEY = 'klg-theme';
 
-  // ── Préférence système ou sauvegardée ──────────────────────
+  // --------------------- Thème préféré ---------------------
+
   function getPreferredTheme() {
     // 404 toujours en mode sombre
     if (window.location.pathname.includes('404')) return 'dark';
@@ -16,20 +17,19 @@
     return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
   }
 
-  // ── Appliquer le thème sur <html> ──────────────────────────
   function applyTheme(theme) {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem(STORAGE_KEY, theme);
   }
 
-  // ── Chemin vers moon.js selon la page courante ─────────────
+  // --------------------- Moon canvas ---------------------
+
   function moonScriptPath() {
     return window.location.pathname.includes('/pages/')
-      ? '../js/moon.js'
+      ? '../../js/moon.js'
       : 'js/moon.js';
   }
 
-  // ── Créer le canvas et charger moon.js dynamiquement ───────
   function createMoonCanvas() {
     let canvas = document.getElementById('starCanvas');
     if (!canvas) {
@@ -49,14 +49,15 @@
     document.head.appendChild(script);
   }
 
-  // ── Bouton thème dans la navbar ────────────────────────────
+  // --------------------- Bouton thème ---------------------
+
   function injectToggleButton() {
     const navbar = document.querySelector('.navbar');
     if (!navbar) return;
 
     const theme = getPreferredTheme();
 
-    // Bouton desktop — après les nav-links
+    // --- Bouton desktop ---
     const btn = document.createElement('button');
     btn.className = 'theme-toggle';
     btn.setAttribute('aria-label', 'Changer de thème');
@@ -78,7 +79,7 @@
       navbar.insertBefore(btn, menuToggle);
     }
 
-    // Bouton mobile — dernier item du menu
+    // --- Bouton mobile ---
     if (navLinks) {
       const li = document.createElement('li');
       li.className = 'theme-toggle-mobile';
@@ -100,18 +101,8 @@
     }
   }
 
-  // ── Point d'entrée ─────────────────────────────────────────
-  const theme = getPreferredTheme();
-  applyTheme(theme);
+  // --------------------- Scroll navbar (mode clair) ---------------------
 
-  document.addEventListener('DOMContentLoaded', () => {
-    injectToggleButton();
-    if (theme === 'light') {
-      createMoonCanvas();
-      initNavScroll();
-    }
-  });
-  // ── Transition couleur navbar au scroll (mode clair) ───────
   function initNavScroll() {
     if (getPreferredTheme() !== 'light') return;
 
@@ -119,21 +110,19 @@
     const navLinks = document.querySelectorAll('.nav-links a, .navbar .logo');
     if (!navbar || !navLinks.length) return;
 
-    // Hauteur de l'horizon : 25% de la fenêtre (comme dans moon.js)
+    // --- Calcul de l'horizon ---
     function getHorizonY() {
       const H    = window.innerHeight;
       const base = H < 800 ? H * 0.20 : H * 0.25;
       return Math.max(-H, base - window.scrollY * 1.5);
     }
 
+    // --- Mise à jour des couleurs selon la position ---
     function updateNavColor() {
       const scrollY  = window.scrollY;
       const horizonY = getHorizonY();
       const navH     = navbar.offsetHeight;
-
-      // La navbar est dans le ciel si son bas est au-dessus de l'horizon
-      const navBottom = scrollY + navH;
-      const onSurface = navBottom > horizonY;
+      const onSurface = (scrollY + navH) > horizonY;
 
       const textColor = onSurface ? '#1a1a2e' : 'white';
       const navBg     = onSurface
@@ -143,7 +132,7 @@
       navbar.style.background     = navBg;
       navbar.style.backdropFilter = 'blur(10px)';
 
-      // Liens navbar — sur mobile toujours blanc (menu fond sombre)
+      // Liens — sur mobile toujours blanc (menu fond sombre)
       const isMobile = window.innerWidth <= 768;
       navLinks.forEach(a => {
         if (a.classList && a.classList.contains('active')) return;
@@ -168,7 +157,7 @@
           : base + 'KLG-Digital-blanc.png';
       }
 
-      // Titres et textes — blanc dans le ciel, foncé sur la surface
+      // Titres et textes
       document.querySelectorAll('h1, h2, .subtitle, .profile-name, .profile-bio, .timeline-title, .timeline-desc, .service-name, .service-desc, .card-title, .card-desc, .cta-text, .cta-sub, .award-title, .lang-name, .skill-group-title, .hero-h1, .hero-desc, .profile-title, .last-updated, .privacy-section p, .privacy-section li, .privacy-section h2').forEach(el => {
         if (el.closest('.planet') || el.closest('.heading-tag')) return;
         const rect    = el.getBoundingClientRect();
@@ -177,7 +166,7 @@
         el.style.color = onLunar ? '#1a1a2e' : 'white';
       });
 
-      // Icônes FA — même logique mais avec exclusions
+      // Icônes FA
       document.querySelectorAll('.fa-solid, .fa-regular, .fa-brands').forEach(el => {
         if (el.closest('.planet') || el.closest('.heading-tag')) return;
         const rect    = el.getBoundingClientRect();
@@ -187,26 +176,28 @@
       });
     }
 
-    // Forcer les icônes en noir au chargement en mode clair
-    // Exclure : icônes dans .planet (blanches) et dans .heading-tag (violettes)
+    // --- Forcer icônes en noir au chargement ---
+    // Exclure : icônes dans .planet (blanches) et .heading-tag (violettes)
     document.querySelectorAll('.fa-solid, .fa-regular, .fa-brands').forEach(el => {
       if (el.closest('.planet') || el.closest('.heading-tag')) return;
       el.style.color = '#1a1a2e';
     });
 
-    // Labels des planètes en noir en mode clair
+    // --- Labels planètes en noir ---
     document.querySelectorAll('.planet-label').forEach(el => {
       el.style.color = '#1a1a2e';
     });
 
-    // Ajuster padding-top de main pour que le titre reste dans le ciel
+    // --- Padding main ---
     function adjustMainPadding() {
       const main = document.querySelector('main');
       const nav  = document.querySelector('.navbar');
       if (!main || !nav) return;
-      const navH = nav.offsetHeight;
+      const navH     = nav.offsetHeight;
       const isMobile = window.innerWidth <= 768;
-      main.style.paddingTop = isMobile ? Math.max(4, navH + 16) + 'px' : Math.max(4, navH - 48) + 'px';
+      main.style.paddingTop = isMobile
+        ? Math.max(4, navH + 16) + 'px'
+        : Math.max(4, navH - 48) + 'px';
     }
 
     adjustMainPadding();
@@ -215,11 +206,22 @@
     updateNavColor();
     window.addEventListener('scroll', updateNavColor, { passive: true });
     window.addEventListener('resize', updateNavColor, { passive: true });
-
   }
 
+  // --------------------- Point d'entrée ---------------------
 
-  // Changement système sans override manuel
+  const theme = getPreferredTheme();
+  applyTheme(theme);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    injectToggleButton();
+    if (theme === 'light') {
+      createMoonCanvas();
+      initNavScroll();
+    }
+  });
+
+  // --- Changement système sans override manuel ---
   window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', e => {
     if (!localStorage.getItem(STORAGE_KEY)) {
       applyTheme(e.matches ? 'light' : 'dark');
@@ -228,4 +230,5 @@
   });
 
 })();
-// ===============================================================
+
+// ================================================= //

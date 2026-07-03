@@ -1,4 +1,4 @@
-// ===================== CANVAS ÉTOILES =====================
+// ======================== CANVAS ÉTOILES ========================
 // Mode sombre uniquement — étoiles animées.
 // En mode clair, moon.js prend le relais.
 
@@ -6,11 +6,13 @@
 
   if (document.documentElement.getAttribute('data-theme') === 'light') return;
 
+  // --- Création du canvas ---
   const canvas = document.createElement('canvas');
   canvas.id = 'starCanvas';
   document.body.insertAdjacentElement('afterbegin', canvas);
   const ctx = canvas.getContext('2d');
 
+  // --- Redimensionnement ---
   function resizeCanvas() {
     canvas.width  = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -18,6 +20,7 @@
   resizeCanvas();
   window.addEventListener('resize', resizeCanvas);
 
+  // --- Génération des étoiles ---
   const STAR_COUNT = 180;
   const stars = Array.from({ length: STAR_COUNT }, () => ({
     x:      Math.random() * window.innerWidth,
@@ -29,6 +32,7 @@
     purple: Math.random() < 0.15,
   }));
 
+  // --- Animation ---
   function drawStars() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     stars.forEach(s => {
@@ -49,4 +53,5 @@
   drawStars();
 
 })();
-// ==================================================================
+
+// ================================================= //

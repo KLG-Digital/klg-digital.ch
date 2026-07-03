@@ -9,11 +9,15 @@
   <meta name="author" content="Kevin Lemos Graça">
   <meta property="og:title" content="KLG Digital — Un souci ? Me voici.">
   <meta property="og:description" content="Informaticien infrastructure, créateur de contenu et développeur basé dans le Chablais vaudois.">
-  <meta property="og:url" content="https://klg-digital.github.io/">
+  <meta property="og:url" content="https://klg-digital.ch/">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="images/KLG-Digital-blanc.png" id="favicon">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- ======================== FAVICON ======================== -->
   <script>
-    // Favicon selon préférence système
+    // Favicon dynamique selon le thème système
     (function() {
       const favicon = document.getElementById('favicon');
       const update = (dark) => favicon.href = dark
@@ -24,19 +28,21 @@
       mq.addEventListener('change', e => update(e.matches));
     })();
   </script>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- ================================================= -->
 
+  <!-- ======================== STYLES ======================== -->
   <style>
 
-    /* ── PLANÈTES EN CERCLE — spécifique à cette page ── */
+    /* --------------------- VARIABLES PLANÈTES --------------------- */
+    /* Spécifique à cette page — cercle orbital */
     :root {
       --radius:        clamp(120px, 28vmin, 200px);
       --planet-size:   clamp(70px, 16vmin, 110px);
       --planet-offset: calc(var(--planet-size) / 2);
     }
 
-    /* Body en flex column 100vh — navbar + hero + footer tiennent sans scroll */
+    /* --------------------- LAYOUT --------------------- */
+    /* Body en flex column 100vh — navbar + hero + footer sans scroll */
     body {
       height: 100vh;
       overflow: hidden;
@@ -44,9 +50,10 @@
       flex-direction: column;
     }
 
-    .navbar { flex-shrink: 0; }
+    .navbar      { flex-shrink: 0; }
     .site-footer { flex-shrink: 0; }
 
+    /* --------------------- HERO --------------------- */
     /* Hero flex : texte en haut, planètes centrées dans l'espace restant */
     .hero {
       flex: 1;
@@ -58,7 +65,7 @@
       min-height: 0;
     }
 
-    /* Texte d'accroche — haut de page */
+    /* --- Texte d'accroche --- */
     .hero-content {
       position: relative;
       z-index: 1;
@@ -92,13 +99,7 @@
       line-height: 1.7;
     }
 
-    /* Mode clair — texte foncé + animation arrêtée */
-    [data-theme="light"] .hero-h1      { color: #1a1a2e; }
-    [data-theme="light"] .hero-desc    { color: #5a5a7a; }
-    [data-theme="light"] .planet       { animation: none; }
-    [data-theme="light"] .planet-label { color: #1a1a2e; }
-
-    /* Wrapper planètes — prend l'espace restant et centre */
+    /* --- Planètes — wrapper orbital --- */
     .orbit-wrapper {
       flex: 1;
       display: flex;
@@ -107,13 +108,13 @@
       width: 100%;
     }
 
-    /* Conteneur du cercle — taille fixe calculée */
     .orbit-container {
       position: relative;
       width:  calc(var(--radius) * 2 + var(--planet-size));
       height: calc(var(--radius) * 2 + var(--planet-size));
     }
 
+    /* --- Planète de base --- */
     .planet {
       position: absolute;
       width:  var(--planet-size);
@@ -134,12 +135,17 @@
       animation: float 6s ease-in-out infinite;
       animation-delay: calc(var(--i) * 1.5s);
       transition: box-shadow 0.3s, filter 0.3s;
-      /* Position calculée par JS ci-dessous */
+      /* Position calculée par JS */
     }
 
     .planet i { font-size: 1.3em; }
 
-    /* Planète avec illustration — remplace le cercle violet */
+    .planet:hover {
+      box-shadow: 0 0 25px #9333ea;
+      filter: brightness(1.15);
+    }
+
+    /* --- Planète avec illustration --- */
     .planet-img {
       background: none;
       border-radius: 0;
@@ -173,61 +179,64 @@
       color: white;
     }
 
-    .planet:hover {
-      box-shadow: 0 0 25px #9333ea;
-      filter: brightness(1.15);
-    }
-
+    /* --- Animation float --- */
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
       50%       { transform: translateY(clamp(-6px, -2vmin, -12px)); }
     }
 
-    /* Petits écrans (iPhone SE/4/5, etc.) — réduire pour que tout rentre */
+    /* --------------------- MODE CLAIR --------------------- */
+    [data-theme="light"] .hero-h1      { color: #1a1a2e; }
+    [data-theme="light"] .hero-desc    { color: #5a5a7a; }
+    [data-theme="light"] .planet       { animation: none; }
+    [data-theme="light"] .planet-label { color: #1a1a2e; }
+
+    /* --------------------- RESPONSIVE --------------------- */
+    /* Petits écrans (iPhone SE/4/5) — réduire pour que tout rentre */
     @media (max-width: 500px), (max-height: 780px) {
       :root {
-        --radius:        clamp(75px, 24vmin, 120px);
-        --planet-size:   clamp(55px, 18vmin, 80px);
+        --radius:      clamp(75px, 24vmin, 120px);
+        --planet-size: clamp(55px, 18vmin, 80px);
       }
       .hero-content { padding-top: 4px; }
-      .hero-h1   { font-size: clamp(1em, 4vw, 1.5em); margin-bottom: 4px; }
-      .hero-desc { font-size: clamp(0.65em, 1.8vw, 0.78em); line-height: 1.35; max-width: 320px; }
-      .hero-slogan { margin-bottom: 2px; font-size: clamp(0.6em, 1.6vw, 0.8em); }
-      .planet-img { height: calc(var(--planet-size) * 1.2); width: calc(var(--planet-size) * 1.2); }
+      .hero-h1      { font-size: clamp(1em, 4vw, 1.5em); margin-bottom: 4px; }
+      .hero-desc    { font-size: clamp(0.65em, 1.8vw, 0.78em); line-height: 1.35; max-width: 320px; }
+      .hero-slogan  { margin-bottom: 2px; font-size: clamp(0.6em, 1.6vw, 0.8em); }
+      .planet-img   { height: calc(var(--planet-size) * 1.2); width: calc(var(--planet-size) * 1.2); }
     }
 
   </style>
+  <!-- ================================================= -->
+
 </head>
 <body>
 
-  <!-- ===================== THEME JS ===================== -->
+  <!-- ======================== SCRIPTS GLOBAUX ======================== -->
+
+  <!-- --- Thème sombre / clair --- -->
   <script src="js/theme.js"></script>
-  <!-- ================================================= -->
 
-  <!-- ===================== NAVBAR JS ===================== -->
+  <!-- --- Navbar --- -->
   <script src="js/navbar.js"></script>
-  <!-- ================================================= -->
 
-  <!-- ===================== STARS JS ===================== -->
-    <!-- ===================== MOON JS ================== -->
+  <!-- --- Fond (lune / étoiles) --- -->
   <script src="js/moon.js"></script>
-  <!-- ================================================= -->
-
   <script src="js/stars.js"></script>
+
   <!-- ================================================= -->
 
 
-  <!-- ===================== HERO ===================== -->
+  <!-- ======================== HERO ======================== -->
   <header class="hero">
 
-    <!-- TEXTE D'ACCROCHE -->
+    <!-- --- Texte d'accroche --- -->
     <div class="hero-content">
       <p class="hero-slogan">✦ Un souci ? Me voici.</p>
       <h1 class="hero-h1">Kevin Lemos Graça</h1>
       <p class="hero-desc">IT, vidéo, photo et acting. Basé dans le Chablais vaudois, disponible pour vos projets en Suisse romande.</p>
     </div>
 
-    <!-- PLANÈTES EN CERCLE FIXE -->
+    <!-- --- Planètes en cercle --- -->
     <div class="orbit-wrapper">
       <div class="orbit-container">
         <a href="pages/it/" class="planet planet-img" style="--i:0; --bg-img: url('images/planete/IT-sombre.png')" data-img-dark="images/planete/IT-sombre.png" data-img-light="images/planete/IT-clair.png">
@@ -249,23 +258,25 @@
   <!-- ================================================= -->
 
 
-  <!-- ===================== FOOTER JS ===================== -->
+  <!-- ======================== FOOTER ======================== -->
   <script src="js/footer.js"></script>
   <!-- ================================================= -->
 
-  <!-- ===================== SCRIPT ===================== -->
+
+  <!-- ======================== SCRIPTS ======================== -->
   <script>
-    // Positionner les planètes en cercle via JS (plus compatible que CSS cos/sin)
+
+    // --------------------- Positionnement des planètes ---------------------
+    // Calcul via JS car CSS cos/sin() n'est pas universellement supporté
     function positionPlanets() {
       const planets   = document.querySelectorAll('.planet');
       const container = document.querySelector('.orbit-container');
       if (!container || !planets.length) return;
 
-      // Tailles réellement rendues — getComputedStyle ne résout pas clamp()
-      // sur les custom properties, donc on lit le DOM directement.
-      const size      = planets[0].offsetWidth;
-      const radius    = (container.offsetWidth - size) / 2;
-      const offset    = size / 2;
+      // Lire les tailles réelles depuis le DOM (clamp() non résolu par getComputedStyle)
+      const size   = planets[0].offsetWidth;
+      const radius = (container.offsetWidth - size) / 2;
+      const offset = size / 2;
 
       planets.forEach((planet, i) => {
         const angle = (i * 90 - 90) * (Math.PI / 180);
@@ -274,7 +285,7 @@
       });
     }
 
-    // Mettre à jour les images des planètes selon le thème
+    // --------------------- Images selon le thème ---------------------
     function updatePlanetImages() {
       const theme = document.documentElement.getAttribute('data-theme') || 'dark';
       document.querySelectorAll('.planet-img').forEach(p => {
@@ -283,18 +294,20 @@
       });
     }
 
-    // Exécuter après chargement et au redimensionnement
+    // --------------------- Initialisation ---------------------
     document.addEventListener('DOMContentLoaded', () => {
       positionPlanets();
       updatePlanetImages();
     });
+
     window.addEventListener('resize', positionPlanets);
 
-    // Observer les changements de thème
+    // Observer les changements de thème pour mettre à jour les images
     new MutationObserver(updatePlanetImages).observe(
       document.documentElement,
       { attributes: true, attributeFilter: ['data-theme'] }
     );
+
   </script>
   <!-- ================================================= -->
 
