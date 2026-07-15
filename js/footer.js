@@ -2,12 +2,10 @@
 
 (function () {
 
-  // --- Détection de la racine selon la page ---
-  const path    = window.location.pathname;
-  const inPages = path.includes('/pages/');
-  const root    = inPages
-    ? path.substring(0, path.indexOf('/pages/')) + '/'
-    : path.substring(0, path.lastIndexOf('/') + 1);
+  // --- Racine du site (fonctionne depuis / et depuis /contact/, /it/, etc.) ---
+  const path  = window.location.pathname;
+  const depth = path.split('/').filter(Boolean).length;
+  const root  = depth >= 1 ? '../' : './';
 
   const year = new Date().getFullYear();
 
@@ -22,7 +20,7 @@
         <div class="footer-links">
           <a href="mailto:kevin@klg-digital.ch">kevin@klg-digital.ch</a>
           <span class="footer-sep">·</span>
-          <a href="${root}pages/privacy/">Politique de confidentialité</a>
+          <a href="${root}privacy/">Politique de confidentialité</a>
         </div>
       </div>
     </footer>

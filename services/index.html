@@ -6,8 +6,8 @@
   <title>Services — KLG Digital | IT, Vidéo, Photo, Chablais</title>
   <meta name="description" content="Services IT, montage vidéo, retouche photo et création média proposés par KLG Digital dans le Chablais vaudois. Devis gratuit.">
   <meta name="author" content="Kevin Lemos Graça">
-  <link rel="icon" type="image/png" href="../../images/KLG-Digital-blanc.png">
-  <link rel="stylesheet" href="../../style.css">
+  <link rel="icon" type="image/png" href="../images/KLG-Digital-blanc.png">
+  <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- ======================== FAVICON ======================== -->
@@ -16,8 +16,7 @@
       // Favicon dynamique selon le thème système
       const favicon = document.querySelector('link[rel="icon"]');
       if (!favicon) return;
-      const isPages = window.location.pathname.includes('/pages/');
-      const base = isPages ? '../../images/' : 'images/';
+      const base = '../images/';
       const update = (dark) => favicon.href = base + (dark ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png');
       const mq = window.matchMedia('(prefers-color-scheme: dark)');
       update(mq.matches);
@@ -121,27 +120,6 @@
 
   
     /* --------------------- MODE CLAIR --------------------- */
-    [data-theme="light"] h1,
-    [data-theme="light"] h2             { color: #1a1a2e; }
-    [data-theme="light"] .heading-tag   { color: #7c3aed; }
-    [data-theme="light"] .subtitle,
-    [data-theme="light"] .cta-sub       { color: #3a3a5a; }
-    [data-theme="light"] .cta-text      { color: #1a1a2e; }
-    [data-theme="light"] .service-name,
-    [data-theme="light"] .service-desc  { color: #1a1a2e; }
-    [data-theme="light"] .service-card  {
-      background: rgba(255,255,255,0.7);
-      border-color: rgba(124,58,237,0.2);
-    }
-    [data-theme="light"] .service-card:hover {
-      background: rgba(255,255,255,0.9);
-      border-color: rgba(124,58,237,0.4);
-    }
-    [data-theme="light"] .cta-contact {
-      background: rgba(255,255,255,0.4);
-      border-color: rgba(124,58,237,0.25);
-    }
-
     [data-theme="light"] .rate-banner        { background: rgba(255,255,255,0.5); color: #3a3a5a; }
     [data-theme="light"] .rate-banner strong { color: #1a1a2e; }
 
@@ -154,14 +132,14 @@
   <!-- ======================== SCRIPTS GLOBAUX ======================== -->
 
   <!-- --- Thème sombre / clair --- -->
-  <script src="../../js/theme.js"></script>
+  <script src="../js/theme.js"></script>
 
   <!-- --- Navbar --- -->
-  <script src="../../js/navbar.js"></script>
+  <script src="../js/navbar.js"></script>
 
   <!-- --- Fond (lune / étoiles) --- -->
-  <script src="../../js/moon.js"></script>
-  <script src="../../js/stars.js"></script>
+  <script src="../js/moon.js"></script>
+  <script src="../js/stars.js"></script>
 
   <!-- ================================================= -->
 
@@ -207,11 +185,11 @@
 
 
   <!-- ======================== FOOTER ======================== -->
-  <script src="../../js/footer.js"></script>
+  <script src="../js/footer.js"></script>
   <!-- ================================================= -->
 
   <!-- ======================== SCRIPTS ======================== -->
-  <script src="../../js/services.js"></script>
+  <script src="../js/services.js"></script>
   <script>
     renderServicesGrid('it-services-grid', 'it');
     renderServicesGrid('photo-services-grid', 'photo');

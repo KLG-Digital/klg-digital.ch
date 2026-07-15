@@ -6,8 +6,8 @@
   <title>IT & Infrastructure — KLG Digital | Chablais, Vaud</title>
   <meta name="description" content="Support informatique, maintenance PC, montage sur mesure et conseils IT dans le Chablais vaudois.">
   <meta name="author" content="Kevin Lemos Graça">
-  <link rel="icon" type="image/png" href="../../images/KLG-Digital-blanc.png">
-  <link rel="stylesheet" href="../../style.css">
+  <link rel="icon" type="image/png" href="../images/KLG-Digital-blanc.png">
+  <link rel="stylesheet" href="../style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <!-- ======================== FAVICON ======================== -->
@@ -16,8 +16,7 @@
       // Favicon dynamique selon le thème système
       const favicon = document.querySelector('link[rel="icon"]');
       if (!favicon) return;
-      const isPages = window.location.pathname.includes('/pages/');
-      const base = isPages ? '../../images/' : 'images/';
+      const base = '../images/';
       const update = (dark) => favicon.href = base + (dark ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png');
       const mq = window.matchMedia('(prefers-color-scheme: dark)');
       update(mq.matches);
@@ -145,14 +144,14 @@
   <!-- ======================== SCRIPTS GLOBAUX ======================== -->
 
   <!-- --- Thème sombre / clair --- -->
-  <script src="../../js/theme.js"></script>
+  <script src="../js/theme.js"></script>
 
   <!-- --- Navbar --- -->
-  <script src="../../js/navbar.js"></script>
+  <script src="../js/navbar.js"></script>
 
   <!-- --- Fond (lune / étoiles) --- -->
-  <script src="../../js/moon.js"></script>
-  <script src="../../js/stars.js"></script>
+  <script src="../js/moon.js"></script>
+  <script src="../js/stars.js"></script>
 
   <!-- ================================================= -->
 
@@ -161,7 +160,7 @@
   <main>
 
     <!-- --- En-tête --- -->
-    <a href="../../index.html" class="back-link">← Accueil</a>
+    <a href="../index.html" class="back-link">← Accueil</a>
     <p class="heading-tag"><i class="fa-solid fa-laptop-code"></i> Spécialité</p>
     <h1>IT & Infrastructure</h1>
     <p class="subtitle">Support, maintenance, montage et conseils — des prestations IT adaptées à vos besoins, par un technicien certifié CFC.</p>
@@ -191,11 +190,11 @@
 
 
   <!-- ======================== FOOTER ======================== -->
-  <script src="../../js/footer.js"></script>
+  <script src="../js/footer.js"></script>
   <!-- ================================================= -->
 
   <!-- ======================== SCRIPTS ======================== -->
-  <script src="../../js/services.js"></script>
+  <script src="../js/services.js"></script>
   <script>
     // Charger les cartes services IT depuis services.js
     renderServicesGrid('services-grid', 'it');

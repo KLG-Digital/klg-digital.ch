@@ -6,16 +6,14 @@
 
   // --------------------- Racine du site ---------------------
   // Remonte jusqu'au dossier qui contient index.html
-  // Fonctionne depuis racine ET depuis pages/nom/
+  // Fonctionne depuis la racine (/) et depuis les pages directes (/contact/, /it/, etc.)
 
-  const path    = window.location.pathname;
-  const inPages = path.includes('/pages/');
-  const root    = inPages
-    ? path.substring(0, path.indexOf('/pages/')) + '/'
-    : path.substring(0, path.lastIndexOf('/') + 1);
+  const path  = window.location.pathname;
+  const depth = path.split('/').filter(Boolean).length;
+  const root  = depth >= 1 ? '../' : './';
 
   // --------------------- Page courante ---------------------
-  // /pages/it/ → currentPage = 'it'
+  // /it/ → currentPage = 'it'
 
   const pathParts   = path.split('/').filter(Boolean);
   const currentPage = pathParts[pathParts.length - 1] || 'index';
@@ -24,17 +22,17 @@
 
   const links = [
     { label: 'Accueil',      href: root + 'index.html' },
-    { label: 'Mon parcours', href: root + 'pages/parcours/' },
-    { label: 'Programmes',   href: root + 'pages/programmes/' },
-    { label: 'Services',     href: root + 'pages/services/' },
-    { label: 'À propos',     href: root + 'pages/apropos/' },
-    { label: 'Contact',      href: root + 'pages/contact/' },
+    { label: 'Mon parcours', href: root + 'parcours/' },
+    { label: 'Programmes',   href: root + 'programmes/' },
+    { label: 'Services',     href: root + 'services/' },
+    { label: 'À propos',     href: root + 'apropos/' },
+    { label: 'Contact',      href: root + 'contact/' },
   ];
 
   // --------------------- Logo ---------------------
   // Suit le thème actuel (data-theme)
 
-  const imgRoot  = inPages ? '../../' : '';
+  const imgRoot = depth >= 1 ? '../' : '';
   const isDark   = document.documentElement.getAttribute('data-theme') !== 'light';
   const logoFile = isDark ? 'KLG-Digital-blanc.png' : 'KLG-Digital-noir.png';
 

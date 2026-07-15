@@ -1,5 +1,5 @@
 // ======================== SERVICES — SOURCE UNIQUE ========================
-// Utilisé par pages/it/, pages/photo/, pages/video/ et pages/services/
+// // Utilisé par it/, photo/, video/ et services/
 // Modifier ici suffit à mettre à jour toutes les pages qui l'utilisent.
 
 const SERVICES_DATA = {
@@ -126,6 +126,39 @@ const SERVICES_DATA = {
         "Conseils généraux sur la sécurité et les bonnes pratiques"
       ],
       note: "Première consultation de 30 minutes offerte pour évaluer votre besoin. Au-delà, facturation par tranche de 15 min (55.- CHF/h)."
+    },
+    {
+      icon: "fa-solid fa-globe",
+      price: "Sur demande",
+      priceClass: "price-demand",
+      name: "Création de site web",
+      desc: "Conception et développement de sites web sur mesure — vitrine, CV en ligne, portfolio ou site personnel.",
+      includes: [
+        "Analyse de vos besoins et de votre budget",
+        "Conception du design (maquette)",
+        "Développement HTML/CSS/JS sur mesure",
+        "Développement sur CMS (WordPress, etc.) sur demande",
+        "Responsive — adapté mobile et desktop",
+        "Mise en ligne et configuration"
+      ],
+      note: "Devis personnalisé selon la complexité et le type de site. Hébergement non inclus."
+    },
+    {
+      icon: "fa-solid fa-wrench",
+      price: "55.- / h",
+      priceClass: "price-fixed",
+      name: "Maintenance de site web",
+      desc: "Suivi, mises à jour et améliorations de votre site existant.",
+      includes: [
+        "Mise à jour du contenu (textes, images, prix, infos)",
+        "Ajout ou modification de pages/sections",
+        "Corrections de bugs et problèmes d'affichage",
+        "Améliorations visuelles et de performance",
+        "Vérification de la compatibilité mobile",
+        "Mise à jour des liens et ressources externes",
+        "Sauvegarde avant toute intervention"
+      ],
+      note: "Facturation au taux horaire (55.- CHF/h) pour les interventions ponctuelles. Forfait mensuel disponible sur demande pour les mises à jour régulières."
     },
     {
       icon: "fa-solid fa-book-open",

@@ -23,11 +23,10 @@
   }
 
   // --------------------- Moon canvas ---------------------
-
+  // Chemin vers moon.js selon la profondeur de la page
   function moonScriptPath() {
-    return window.location.pathname.includes('/pages/')
-      ? '../../js/moon.js'
-      : 'js/moon.js';
+    const depth = window.location.pathname.split('/').filter(Boolean).length;
+    return depth >= 1 ? '../js/moon.js' : 'js/moon.js';
   }
 
   function createMoonCanvas() {
@@ -150,8 +149,8 @@
       // Logo
       const logoImg = document.querySelector('.logo-img');
       if (logoImg) {
-        const isPages = window.location.pathname.includes('/pages/');
-        const base    = isPages ? '../../images/' : 'images/';
+        const depth = window.location.pathname.split('/').filter(Boolean).length;
+        const base  = depth >= 1 ? '../images/' : 'images/';
         logoImg.src   = onSurface
           ? base + 'KLG-Digital-noir.png'
           : base + 'KLG-Digital-blanc.png';
