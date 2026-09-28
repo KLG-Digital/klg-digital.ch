@@ -721,16 +721,17 @@ main, .navbar, .site-footer,
 
 /* --------------------- Texte dans les cartes --------------------- */
 
-[data-theme="light"] .service-card *,
+[data-theme="light"] .service-card :not(.price-fixed):not(.price-demand):not(.service-toggle):not(.service-details-title):not(.service-note),
 [data-theme="light"] .detail-card *,
-[data-theme="light"] .timeline-card *,
-[data-theme="light"] .skill-group *,
+[data-theme="light"] .timeline-card :not(.badge-formation):not(.badge-pro):not(.badge-autre):not(.badge-current),
+[data-theme="light"] .skill-group :not(.skill-tag),
 [data-theme="light"] .lang-item *,
 [data-theme="light"] .award-item *,
-[data-theme="light"] .card *,
-[data-theme="light"] .project-card *,
-[data-theme="light"] .cta-contact *,
-[data-theme="light"] .form-card * {
+[data-theme="light"] .card :not(.card-lang):not(.badge-formation):not(.badge-pro):not(.badge-autre):not(.badge-current):not(.btn-download):not(.btn-download *),
+[data-theme="light"] .project-card :not(.card-lang):not(.btn-download):not(.btn-download *),
+[data-theme="light"] .cta-contact :not(.btn-cta):not(.btn-cta *),
+[data-theme="light"] .form-card :not(.btn-submit):not(.btn-submit *),
+[data-theme="light"] .profile-card :not(.skill-tag):not(.interest-tag):not(.badge-formation):not(.badge-pro):not(.badge-autre):not(.badge-current) {
     color: #1a1a2e !important;
 }
 

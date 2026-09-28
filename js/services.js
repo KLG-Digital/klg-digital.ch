@@ -8,7 +8,7 @@ const SERVICES_DATA = {
   it: [
     {
       icon: "fa-solid fa-screwdriver-wrench",
-      price: "55.- / h",
+      price: "56.- / h",
       priceClass: "price-fixed",
       name: "Support informatique",
       desc: "Diagnostic et résolution de tous vos soucis informatiques — virus, lenteur, périphérique, panne matérielle, logicielle ou réseau.",
@@ -28,11 +28,11 @@ const SERVICES_DATA = {
         "Support à distance disponible",
         "Rapport d'intervention sur demande"
       ],
-      note: "Facturation par tranche de 15 min. Déplacement selon distance."
+      note: "Facturation par tranche de 15 min (14.- CHF / tranche). Déplacement selon distance."
     },
     {
       icon: "fa-solid fa-wrench",
-      price: "55.- / h",
+      price: "56.- / h",
       priceClass: "price-fixed",
       name: "Maintenance PC",
       desc: "Nettoyage système, mise à jour, optimisation des performances et vérification matérielle.",
@@ -50,7 +50,7 @@ const SERVICES_DATA = {
         "Vérification de la connectivité réseau et des périphériques",
         "Vérification thermique et nettoyage physique si nécessaire"
       ],
-      note: "Facturation par tranche de 15 min."
+      note: "Facturation par tranche de 15 min (14.- CHF / tranche)."
     },
     {
       icon: "fa-solid fa-desktop",
@@ -75,7 +75,7 @@ const SERVICES_DATA = {
     },
     {
       icon: "fa-solid fa-bolt",
-      price: "55.- / h + matériel",
+      price: "56.- / h + matériel",
       priceClass: "price-fixed",
       name: "Upgrade matériel",
       desc: "Ajout de RAM, remplacement de disque, installation de carte graphique ou autre composant.",
@@ -114,7 +114,7 @@ const SERVICES_DATA = {
     },
     {
       icon: "fa-solid fa-lightbulb",
-      price: "55.- / h",
+      price: "56.- / h",
       priceClass: "price-fixed",
       name: "Conseils & accompagnement",
       desc: "Aide à la décision avant un achat, comparaison d'offres et conseils personnalisés pour votre matériel.",
@@ -125,7 +125,7 @@ const SERVICES_DATA = {
         "Explications techniques pour vous aider à décider",
         "Conseils généraux sur la sécurité et les bonnes pratiques"
       ],
-      note: "Première consultation de 30 minutes offerte pour évaluer votre besoin. Au-delà, facturation par tranche de 15 min (55.- CHF/h)."
+      note: "Première consultation de 30 minutes offerte pour évaluer votre besoin. Au-delà, facturation par tranche de 15 min (14.- CHF / tranche)."
     },
     {
       icon: "fa-solid fa-globe",
@@ -145,7 +145,7 @@ const SERVICES_DATA = {
     },
     {
       icon: "fa-solid fa-wrench",
-      price: "55.- / h",
+      price: "56.- / h",
       priceClass: "price-fixed",
       name: "Maintenance de site web",
       desc: "Suivi, mises à jour et améliorations de votre site existant.",
@@ -158,7 +158,7 @@ const SERVICES_DATA = {
         "Mise à jour des liens et ressources externes",
         "Sauvegarde avant toute intervention"
       ],
-      note: "Facturation au taux horaire (55.- CHF/h) pour les interventions ponctuelles. Forfait mensuel disponible sur demande pour les mises à jour régulières."
+      note: "Facturation par tranche de 15 min (14.- CHF / tranche) pour les interventions ponctuelles. Forfait mensuel disponible sur demande pour les mises à jour régulières."
     },
     {
       icon: "fa-solid fa-book-open",
@@ -215,7 +215,7 @@ const SERVICES_DATA = {
         "Livraison en formats vectoriels (SVG, AI) et PNG",
         "Charte graphique simplifiée offerte (couleurs, polices)"
       ],
-      note: "Au-delà des 2 révisions incluses, chaque révision supplémentaire est facturée au taux horaire (55.- CHF/h). Devis personnalisé selon la complexité."
+      note: "Au-delà des 2 révisions incluses, chaque révision supplémentaire est facturée au taux horaire (56.- CHF/h). Devis personnalisé selon la complexité."
     },
     {
       icon: "fa-solid fa-image",

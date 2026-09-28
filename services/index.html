@@ -62,13 +62,43 @@
       margin-bottom: 40px;
     }
 
+
     /* --------------------- TAUX HORAIRE --------------------- */
+    .rate-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .rate-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+
+    .rate-slot {
+      background: rgba(60,20,140,0.5);
+      border-radius: 8px;
+      padding: 8px 10px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .rate-label { font-size: 0.7em; color: rgba(255,255,255,0.75); }
+    .rate-price  { font-size: 0.85em; font-weight: 700; color: white; }
+
+    @media (max-width: 480px) {
+      .rate-grid { grid-template-columns: repeat(2, 1fr); }
+    }
     .rate-banner {
       display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(168,85,247,0.1);
-      border: 1px solid rgba(168,85,247,0.3);
+      flex-direction: column;
+      gap: 12px;
+      background: rgba(168,85,247,0.08);
+      border: 1px solid rgba(168,85,247,0.25);
       border-radius: 12px;
       padding: 12px 20px;
       margin-bottom: 48px;
@@ -151,7 +181,18 @@
     <p class="subtitle">Un souci ? Me voici. Des prestations adaptées à vos besoins, du dépannage rapide aux projets sur mesure.</p>
 
     <div class="rate-banner">
-      <i class="fa-solid fa-clock"></i> Taux horaire IT : <strong>55.- CHF / heure</strong> · Facturation par tranche de 15 min · Déplacement selon distance
+      <div class="rate-top">
+        <i class="fa-solid fa-clock"></i>
+        Taux horaire : <strong>56.- CHF / heure</strong>
+        · Facturation par tranche de <strong>15 min</strong>
+        · Déplacement selon distance
+      </div>
+      <div class="rate-grid">
+        <div class="rate-slot"><span class="rate-label">1–15 min</span><span class="rate-price">14.00 CHF</span></div>
+        <div class="rate-slot"><span class="rate-label">16–30 min</span><span class="rate-price">28.00 CHF</span></div>
+        <div class="rate-slot"><span class="rate-label">31–45 min</span><span class="rate-price">42.00 CHF</span></div>
+        <div class="rate-slot"><span class="rate-label">46–60 min</span><span class="rate-price">56.00 CHF</span></div>
+      </div>
     </div>
 
     <!-- --- IT & Infrastructure --- -->
