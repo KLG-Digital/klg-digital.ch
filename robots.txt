@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://klg-digital.ch/sitemap.xml
