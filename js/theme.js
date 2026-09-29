@@ -194,9 +194,12 @@
       if (!main || !nav) return;
       const navH     = nav.offsetHeight;
       const isMobile = window.innerWidth <= 768;
-      main.style.paddingTop = isMobile
-        ? Math.max(4, navH + 16) + 'px'
-        : Math.max(4, navH - 48) + 'px';
+      // Horizon à ~20% de la hauteur d'écran
+      // On veut que le contenu commence juste avant l'horizon
+      const H        = window.innerHeight;
+      const horizonY = H < 800 ? H * 0.20 : H * 0.25;
+      const target   = Math.max(horizonY - navH - 24, 4);
+      main.style.paddingTop = target + 'px';
     }
 
     adjustMainPadding();
